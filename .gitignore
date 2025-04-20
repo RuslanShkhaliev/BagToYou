@@ -2,6 +2,31 @@
 
 # dependencies
 node_modules/
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# --- Env ---
+.env
+.env.*
+!.env.example
+
+# --- IDE ---
+.vscode/
+.idea/
+*.sw?
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Lint & Cache ---
+.eslintcache
+.cache/
+.prettier/
 
 # Expo
 .expo/
