@@ -1,10 +1,10 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import tseslint from 'typescript-eslint'
-import pluginReact from 'eslint-plugin-react'
-import prettier from 'eslint-config-prettier'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactNative from 'eslint-plugin-react-native'
+import js from '@eslint/js';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import pluginReact from 'eslint-plugin-react';
+import prettier from 'eslint-config-prettier';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactNative from 'eslint-plugin-react-native';
 
 export default tseslint.config([
 	{
@@ -15,6 +15,7 @@ export default tseslint.config([
 			'.expo',
 			'eslint.config.mjs',
 			'prettier.config.mjs',
+			'tamagui.config.ts',
 			'scripts',
 		],
 	},
@@ -29,6 +30,7 @@ export default tseslint.config([
 			'@typescript-eslint/no-require-imports': 'off',
 			'@typescript-eslint/no-floating-promises': 'off',
 			'@typescript-eslint/no-misused-promises': 'warn',
+			'@typescript-eslint/no-empty-object-type': 'off',
 		},
 	},
 	{
@@ -54,6 +56,7 @@ export default tseslint.config([
 			'react-native/no-raw-text': 'off',
 			'react-native/no-unused-styles': 'warn',
 			'react/no-unescaped-entities': 'off',
+			'react/display-name': 'off',
 		},
 		settings: {
 			react: {
@@ -73,4 +76,4 @@ export default tseslint.config([
 	},
 
 	prettier,
-])
+]);
