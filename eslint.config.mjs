@@ -23,7 +23,7 @@ export default tseslint.config([
 	tseslint.configs.recommendedTypeChecked,
 	tseslint.configs.stylisticTypeChecked,
 	{
-		files: ['**/*.ts', '**/*.tsx'],
+		files: ['./src/**/*.{ts,tsx}'],
 		rules: {
 			'@typescript-eslint/no-unsafe-assignment': 'off',
 			'@typescript-eslint/no-require-imports': 'off',
@@ -41,7 +41,7 @@ export default tseslint.config([
 	pluginReact.configs.flat.recommended,
 
 	{
-		files: ['**/*.{js,jsx,ts,tsx}'],
+		files: ['./src/**/*.{js,jsx,ts,tsx}'],
 		plugins: {
 			'react-hooks': reactHooks,
 			'react-native': reactNative,
