@@ -1,6 +1,12 @@
 {
 	"extends": "expo/tsconfig.base",
-	"include": ["./src/**/*.ts", "./src/**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
+	"include": [
+		"./src/**/*.ts",
+		"./src/**/*.tsx",
+		".expo/types/**/*.ts",
+		"expo-env.d.ts",
+		"tamagui.config.ts"
+	],
 	"compilerOptions": {
 		"strict": true,
 		"baseUrl": ".",
