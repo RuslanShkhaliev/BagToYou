@@ -2742,7 +2742,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.30.1, @typescript-eslint/eslint-plugin@npm:^8.30.1, @typescript-eslint/eslint-plugin@npm:^8.9.0":
+"@typescript-eslint/eslint-plugin@npm:8.30.1, @typescript-eslint/eslint-plugin@npm:^8.9.0":
   version: 8.30.1
   resolution: "@typescript-eslint/eslint-plugin@npm:8.30.1"
   dependencies:
@@ -2763,7 +2763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.30.1, @typescript-eslint/parser@npm:^8.30.1, @typescript-eslint/parser@npm:^8.9.0":
+"@typescript-eslint/parser@npm:8.30.1, @typescript-eslint/parser@npm:^8.9.0":
   version: 8.30.1
   resolution: "@typescript-eslint/parser@npm:8.30.1"
   dependencies:
@@ -3634,8 +3634,6 @@ __metadata:
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
     "@types/react-test-renderer": "npm:^18.3.0"
-    "@typescript-eslint/eslint-plugin": "npm:^8.30.1"
-    "@typescript-eslint/parser": "npm:^8.30.1"
     eslint: "npm:^9.25.0"
     eslint-config-expo: "npm:~8.0.1"
     eslint-config-prettier: "npm:^10.1.2"
@@ -3658,6 +3656,7 @@ __metadata:
     expo-system-ui: "npm:~4.0.9"
     expo-web-browser: "npm:~14.0.2"
     globals: "npm:^16.0.0"
+    husky: "npm:^9.1.7"
     jest: "npm:^29.2.1"
     jest-expo: "npm:~52.0.6"
     prettier: "npm:^3.5.3"
@@ -6510,6 +6509,15 @@ __metadata:
   version: 2.1.0
   resolution: "human-signals@npm:2.1.0"
   checksum: 10c0/695edb3edfcfe9c8b52a76926cd31b36978782062c0ed9b1192b36bebc75c4c87c82e178dfcb0ed0fc27ca59d434198aac0bd0be18f5781ded775604db22304a
+  languageName: node
+  linkType: hard
+
+"husky@npm:^9.1.7":
+  version: 9.1.7
+  resolution: "husky@npm:9.1.7"
+  bin:
+    husky: bin.js
+  checksum: 10c0/35bb110a71086c48906aa7cd3ed4913fb913823715359d65e32e0b964cb1e255593b0ae8014a5005c66a68e6fa66c38dcfa8056dbbdfb8b0187c0ffe7ee3a58f
   languageName: node
   linkType: hard
 

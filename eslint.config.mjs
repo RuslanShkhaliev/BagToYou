@@ -5,10 +5,18 @@ import pluginReact from 'eslint-plugin-react'
 import prettier from 'eslint-config-prettier'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactNative from 'eslint-plugin-react-native'
-//
+
 export default tseslint.config([
 	{
-		ignores: ['node_modules', 'dist', '.yarn', '.expo', 'eslint.config.mjs', 'prettier.config.mjs'],
+		ignores: [
+			'node_modules',
+			'dist',
+			'.yarn',
+			'.expo',
+			'eslint.config.mjs',
+			'prettier.config.mjs',
+			'scripts',
+		],
 	},
 
 	js.configs.recommended,
@@ -20,13 +28,13 @@ export default tseslint.config([
 			'@typescript-eslint/no-unsafe-assignment': 'off',
 			'@typescript-eslint/no-require-imports': 'off',
 			'@typescript-eslint/no-floating-promises': 'off',
+			'@typescript-eslint/no-misused-promises': 'warn',
 		},
 	},
 	{
 		languageOptions: {
 			parserOptions: {
 				project: './tsconfig.json',
-				tsconfigRootDir: import.meta.dirname,
 			},
 		},
 	},
