@@ -1,4 +1,5 @@
 import { StyleSheet, Image, Platform } from 'react-native';
+import { Button } from 'tamagui';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
@@ -20,6 +21,7 @@ export default function TabTwoScreen() {
 				/>
 			}
 		>
+			<Button>Войти</Button>
 			<ThemedView style={styles.titleContainer}>
 				<ThemedText type="title">Explore</ThemedText>
 			</ThemedView>
