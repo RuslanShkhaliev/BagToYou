@@ -1,1 +1,1 @@
-export { ProfileScreen } from './ProfileScreen';
+export { ProfileScreen } from 'src/modules/profile/screens/ProfileScreen';

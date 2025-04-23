@@ -1,4 +1,4 @@
-import { AuthProvider, useAuth } from '@/context/AuthContext';
+import { AuthProvider } from '@/context/AuthContext';
 import TamaguiProvider from '@/providers/TamaguiProvider';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Header, Text } from 'tamagui';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -17,11 +18,6 @@ export default function RootLayout() {
 	const [loaded] = useFonts({
 		SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
 	});
-
-	const { loading } = useAuth();
-	useEffect(() => {
-		console.log(loading);
-	}, [loading]);
 
 	useEffect(() => {
 		if (loaded) {
@@ -35,15 +31,19 @@ export default function RootLayout() {
 
 	return (
 		<AuthProvider>
-			<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-				<TamaguiProvider>
-					<Stack>
-						<Stack.Screen name="auth" />
-						<Stack.Screen name="+not-found" />
+			<TamaguiProvider>
+				<ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
+					<Header>
+						<Text>Header</Text>
+					</Header>
+					<Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
+						<Stack.Screen name="(auth)" />
+						<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+						<Stack.Screen name="+not-found" options={{ headerShown: false }} />
 					</Stack>
 					<StatusBar style="auto" />
-				</TamaguiProvider>
-			</ThemeProvider>
+				</ThemeProvider>
+			</TamaguiProvider>
 		</AuthProvider>
 	);
 }

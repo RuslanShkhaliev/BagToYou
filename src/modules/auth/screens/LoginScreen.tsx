@@ -15,7 +15,7 @@ export const LoginScreen = () => {
 	};
 	return (
 		<View>
-			<Text>Registration</Text>
+			<Text>Login</Text>
 			<TextInput placeholder="Email" value={email} onChangeText={setEmail} />
 			<TextInput
 				placeholder="Password"

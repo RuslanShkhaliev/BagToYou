@@ -1,5 +1,4 @@
 import { defaultConfig } from '@tamagui/config/v4';
-import { getConfig } from '@tamagui/core';
 import { createTamagui } from 'tamagui';
 
 export const light = {
@@ -28,23 +27,6 @@ export const dark = {
 	textSecondary: '$gray4',
 };
 
-export const config = createTamagui({
-	...defaultConfig,
-	tokens: {
-		...defaultConfig.tokens,
-		radius: {
-			...defaultConfig.tokens.radius,
-			7.5: 20,
-		},
-	},
-	themes: {
-		dark,
-		light,
-	},
-});
+export const config = createTamagui(defaultConfig);
 
 type CustomConfig = typeof config;
-
-declare module 'tamagui' {
-	interface TamaguiCustomConfig extends CustomConfig {}
-}
