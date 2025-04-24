@@ -29,3 +29,12 @@ export enum MessagePlatform {
 	Ig,
 	Fb,
 }
+
+export enum Direction {
+	From = 'from',
+	To = 'to',
+}
+export enum DateRange {
+	Start = 'start',
+	End = 'end',
+}
