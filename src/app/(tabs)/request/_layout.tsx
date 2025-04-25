@@ -5,7 +5,7 @@ export default function RequestLayout() {
 		<Stack screenOptions={{ headerShown: false }}>
 			<Stack.Screen name="index" />
 			<Stack.Screen name="sender" />
-			<Stack.Screen name="carrier" />
+			<Stack.Screen name="receiver" />
 		</Stack>
 	);
 }
