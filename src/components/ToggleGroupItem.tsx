@@ -1,12 +1,16 @@
 import { styled, ToggleGroup } from 'tamagui';
 
 export const ToggleGroupItem = styled(ToggleGroup.Item, {
-	color: '$color10',
+	color: '$white',
+	backgroundColor: 'transparent',
+	borderWidth: 0,
+	borderColor: 'transparent',
+	height: 32,
 	variants: {
 		active: {
 			true: {
-				backgroundColor: '#333',
-				color: 'white',
+				backgroundColor: '$tabBgActive',
+				color: '$tabText',
 			},
 		},
 	},

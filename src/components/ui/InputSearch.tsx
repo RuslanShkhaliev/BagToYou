@@ -1,5 +1,5 @@
-import { Search, XCircle } from '@tamagui/lucide-icons';
-import { Input, InputProps, XStack } from 'tamagui';
+import { Search, X } from '@tamagui/lucide-icons';
+import { Button, Input, InputProps, XStack } from 'tamagui';
 
 interface Props extends InputProps {
 	clearable?: boolean;
@@ -10,17 +10,44 @@ export const InputSearch = ({ clearable = true, onChangeText, ...props }: Props)
 		onChangeText('');
 	};
 	return (
-		<XStack alignItems="center">
-			<Search position="absolute" left={10} size={20} color="$white" />
+		<XStack alignItems="center" group>
+			<Search
+				position="absolute"
+				left={10}
+				size={20}
+				color="$graphite300"
+				$group-focusWithin={{
+					color: '$textPrimary',
+				}}
+			/>
 			<Input
-				{...props}
-				paddingLeft={40}
+				paddingLeft={52}
+				paddingVertical={14}
+				paddingRight={54}
 				onChangeText={onChangeText}
 				backgroundColor="$inputBg"
 				color="$textPrimary"
+				borderWidth={0}
+				$group-focus={{
+					color: 'red',
+				}}
+				{...props}
 			/>
-			{clearable && props.value && (
-				<XCircle color="$white" size={18} position="absolute" right={8} onPress={clear} />
+			{clearable && Boolean(props.value?.length) && (
+				<Button
+					position="absolute"
+					right={14}
+					borderRadius="50%"
+					width={20}
+					height={20}
+					padding={0}
+					alignItems="center"
+					justifyContent="center"
+					backgroundColor="$graphite500"
+					onPress={clear}
+				>
+					<X color="$white" size={12} />
+				</Button>
 			)}
 		</XStack>
 	);

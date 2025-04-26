@@ -1,10 +1,10 @@
 import js from '@eslint/js';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
 import prettier from 'eslint-config-prettier';
+import pluginReact from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactNative from 'eslint-plugin-react-native';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config([
 	{
@@ -57,6 +57,13 @@ export default tseslint.config([
 			'react-native/no-unused-styles': 'warn',
 			'react/no-unescaped-entities': 'off',
 			'react/display-name': 'off',
+			'react/jsx-max-props-per-line': [
+				'error',
+				{
+					maximum: 2,
+					when: 'multiline',
+				},
+			],
 		},
 		settings: {
 			react: {

@@ -5,7 +5,10 @@ import { createTamagui } from 'tamagui';
 
 export const config = createTamagui({
 	...defaultConfig,
-	tokens,
+	tokens: {
+		...defaultConfig.tokens,
+		...tokens,
+	},
 	themes: {
 		...defaultConfig.themes,
 		dark,

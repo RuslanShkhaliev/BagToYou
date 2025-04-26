@@ -1,4 +1,5 @@
-import { Input, Label, Separator, styled, YStack } from 'tamagui';
+import { Divider } from '@/components/ui/Divider';
+import { Input, Label, styled, YStack } from 'tamagui';
 
 interface Props {
 	from?: string;
@@ -12,13 +13,11 @@ const InputRoute = styled(Input, {
 	height: 30,
 	cursor: 'pointer',
 	outlineStyle: 'none',
-	focusWithinStyle: 'none',
-	focusVisibleStyle: 'none',
-	fontWeight: 600,
 	fontSize: 16,
 	paddingVertical: 6,
 	unstyled: true,
-	placeholderTextColor: 'black',
+	placeholderTextColor: '$graphite400',
+	color: '$textPrimary',
 });
 const LabelStyled = styled(Label, {
 	unstyled: true,
@@ -27,25 +26,25 @@ const LabelStyled = styled(Label, {
 });
 export const RoutesInputGroup = ({ from = '', to = '', onFromSelect, onToSelect }: Props) => {
 	return (
-		<YStack width="100%" backgroundColor={'white'} borderRadius="15px">
+		<YStack width="100%" backgroundColor="$bgContent" borderRadius="15px">
 			<YStack padding="10px">
 				<LabelStyled htmlFor="route-from">Откуда</LabelStyled>
 				<InputRoute
 					id="route-from"
-					placeholder="Краснодар"
+					placeholder="Например: Краснодар"
 					readOnly
 					value={from}
 					onPress={onFromSelect}
 				/>
 			</YStack>
-			<Separator />
+			<Divider />
 			<YStack>
 				<YStack padding="10px">
 					<LabelStyled htmlFor="route-to">Куда</LabelStyled>
 					<InputRoute
 						id="route-to"
 						readOnly
-						placeholder="Сингапур"
+						placeholder="Например: Сингапур"
 						value={to}
 						onPress={onToSelect}
 					/>

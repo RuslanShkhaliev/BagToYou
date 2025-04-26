@@ -8,6 +8,8 @@ export enum TransportType {
 	Plane,
 	Bike,
 	Ship,
+	Train,
+	Bus,
 }
 
 export enum RequestStatus {

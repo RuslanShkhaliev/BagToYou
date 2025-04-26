@@ -29,14 +29,14 @@ export default function RootLayout() {
 	return (
 		<AuthProvider>
 			<TamaguiProvider>
-				<View flex={1} backgroundColor="$bg.main">
-					<AppHeader></AppHeader>
+				<AppHeader />
+
+				<View flex={1} backgroundColor="$bgMain">
 					<Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
 						<Stack.Screen name="(auth)" />
 						<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 						<Stack.Screen name="+not-found" options={{ headerShown: false }} />
 					</Stack>
-
 					<StatusBar style="auto" />
 				</View>
 			</TamaguiProvider>

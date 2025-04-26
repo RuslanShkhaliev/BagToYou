@@ -6,6 +6,7 @@ export const dark = {
 	bgCard: tokens.color.graphite800,
 
 	textPrimary: tokens.color.graphite50,
+	textSecondary: tokens.color.graphite300,
 
 	btnBgSecondary: tokens.color.white12,
 	btnBgFocusSecondary: tokens.color.white8,
@@ -31,6 +32,7 @@ export const light = {
 	bgContent: tokens.color.graphite700,
 
 	textPrimary: tokens.color.graphite50,
+	textSecondary: tokens.color.graphite300,
 
 	btnBgSecondary: tokens.color.white12,
 	btnBgFocusSecondary: tokens.color.white8,

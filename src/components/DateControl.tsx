@@ -1,4 +1,4 @@
-import { DateValue } from '@/components/DateSelector/interfaces';
+import { DateValue } from '@/components/interfaces';
 import { format } from 'date-fns';
 import { useMemo } from 'react';
 import { Input, InputProps, styled } from 'tamagui';
@@ -12,8 +12,8 @@ export const InputStyled = styled(Input, {
 	paddingVertical: 16,
 	paddingLeft: 36,
 	paddingRight: 12,
-	backgroundColor: '#fff',
-	color: '#2D3745',
+	backgroundColor: '$inputBg',
+	color: '$textPrimary',
 	outline: 'none',
 	outlineStyle: 'none',
 });

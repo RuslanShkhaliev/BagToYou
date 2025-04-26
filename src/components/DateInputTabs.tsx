@@ -1,6 +1,6 @@
 import { Direction } from '@/common';
-import { DateControl } from '@/components/DateSelector/DateControl';
-import { DateValue } from '@/components/DateSelector/interfaces';
+import { DateControl } from '@/components/DateControl';
+import { DateValue } from '@/components/interfaces';
 import { ToggleGroupItem } from '@/components/ToggleGroupItem';
 import { Separator, ToggleGroup } from 'tamagui';
 

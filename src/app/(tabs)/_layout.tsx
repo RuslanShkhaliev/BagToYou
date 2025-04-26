@@ -1,12 +1,10 @@
+import { HapticTab } from '@/components/HapticTab';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { tokens } from '@/styles/tokens';
+import { ClipboardPenLine, Search, UserCog } from '@tamagui/lucide-icons';
+import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
 	const colorScheme = useColorScheme();
@@ -14,41 +12,52 @@ export default function TabLayout() {
 		<Tabs
 			screenOptions={{
 				headerShown: false,
-				tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
 				tabBarButton: HapticTab,
-				tabBarBackground: TabBarBackground,
-				tabBarStyle: Platform.select({
-					ios: {
-						// Use a transparent background on iOS to show the blur effect
-						position: 'absolute',
-					},
-					default: {},
-				}),
+				tabBarStyle: {
+					position: 'absolute',
+					left: 0,
+					right: 0,
+					bottom: 0,
+					height: 38,
+					backgroundColor: 'transparent', // обязательно прозрачный для BlurView
+					overflow: 'hidden', // чтобы блюр обрезался
+					borderTopWidth: 0,
+				},
+				tabBarBackground: () => (
+					<BlurView
+						intensity={80}
+						tint={colorScheme === 'dark' ? 'dark' : 'light'}
+						style={{ flex: 1, backgroundColor: tokens.color.white.val }}
+					/>
+				),
+				tabBarActiveTintColor: tokens.color.white.val,
+				tabBarInactiveTintColor: tokens.color.graphite300.val,
+
+				tabBarLabelStyle: {
+					fontSize: 12,
+					paddingVertical: 4,
+				},
 			}}
 		>
 			<Tabs.Screen
 				name="index"
 				options={{
 					title: 'search',
-					tabBarIcon: ({ color }) => <IconSymbol size={22} name="house.fill" color={color} />,
+					tabBarIcon: ({ color }) => <Search size={12} color={color} />,
 				}}
 			/>
 			<Tabs.Screen
 				name="request"
 				options={{
 					title: 'request',
-					tabBarIcon: ({ color }) => (
-						<IconSymbol size={22} name="brain.head.profile.fill" color={color} />
-					),
+					tabBarIcon: ({ color }) => <ClipboardPenLine size={12} color={color} />,
 				}}
 			/>
 			<Tabs.Screen
 				name="profile"
 				options={{
 					title: 'profile',
-					tabBarIcon: ({ color }) => (
-						<IconSymbol size={22} name="brain.head.profile.fill" color={color} />
-					),
+					tabBarIcon: ({ color }) => <UserCog size={12} color={color} />,
 				}}
 			/>
 		</Tabs>

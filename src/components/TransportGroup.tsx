@@ -1,4 +1,5 @@
 import { TransportType } from '@/common';
+import { ToggleGroupItem } from '@/components/ToggleGroupItem';
 import { Text, ToggleGroup } from 'tamagui';
 
 interface Props {
@@ -33,25 +34,23 @@ export const TransportGroup = ({ value, onChange }: Props) => {
 		<ToggleGroup
 			justifyContent="space-between"
 			type="single"
-			padding="4px"
-			gap="4px"
 			value={String(value)}
 			disableDeactivation
 			onValueChange={handleChange}
+			backgroundColor="$bgContent"
 		>
 			{items.map((item) => (
-				<ToggleGroup.Item
-					height="28px"
-					padding={0}
+				<ToggleGroupItem
 					flexGrow={1}
 					alignItems="center"
 					key={item.name}
+					padding="2px"
+					backgroundColor="$tabBg"
+					active={item.value === value}
 					value={String(item.value)}
-					backgroundColor={item.value === value && '#333'}
-					color={item.value === value && '#fff'}
 				>
 					<Text>{item.name}</Text>
-				</ToggleGroup.Item>
+				</ToggleGroupItem>
 			))}
 		</ToggleGroup>
 	);

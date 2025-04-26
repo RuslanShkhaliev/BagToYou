@@ -10,19 +10,16 @@ export const RoleToggleGroup = ({ onChange, role }: Props) => {
 	return (
 		<ToggleGroup
 			type="single"
+			backgroundColor="$tabBg"
 			value={String(role)}
-			onValueChange={(val) => onChange(Number(val))}
+			onValueChange={(val: string) => onChange(Number(val))}
 			disableDeactivation
-			animation="superBouncy"
-			backgroundColor="none"
 			width="100%"
-			height={28}
 		>
 			<ToggleGroupItem
 				value={String(RequestRole.Receiver)}
 				aria-label="carrier"
 				width="50%"
-				height="100%"
 				active={role === RequestRole.Receiver}
 			>
 				<Text>Перевозчик</Text>
@@ -32,7 +29,6 @@ export const RoleToggleGroup = ({ onChange, role }: Props) => {
 				value={String(RequestRole.Sender)}
 				aria-label="sender"
 				width="50%"
-				height="100%"
 				active={role === RequestRole.Sender}
 			>
 				<Text>Отправитель</Text>
