@@ -4,7 +4,7 @@ import { IconBaggage, IconKg, IconTransport } from '@/components/icons';
 import { DateSelection, Profile } from '@/components/interfaces';
 import { Divider } from '@/components/ui/Divider';
 import { Surface } from '@/components/ui/Surface';
-import { PackageInfo } from '@/modules/request/schema';
+import { ParcelInfo } from '@/modules/request/schema';
 import { ChevronDown, MapPin, MoveRight, SquareArrowUpRight } from '@tamagui/lucide-icons';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
@@ -16,7 +16,7 @@ interface Props {
 		to: string;
 	}[];
 	rewards: number;
-	packageInfo: Omit<PackageInfo, 'photos' | 'description'>;
+	packageInfo: Omit<ParcelInfo, 'photos' | 'description'>;
 	dates: DateSelection;
 	author: Profile;
 	transportType: TransportType;

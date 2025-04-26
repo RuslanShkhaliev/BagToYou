@@ -1,21 +1,27 @@
 import { z } from 'zod';
 
-export const locationSchema = z.object({
-	city: z.string().default(''),
-	country: z.string().optional().default(''),
-	lat: z.number().optional(),
-	lng: z.number().optional(),
-});
-export type Location = z.infer<typeof locationSchema>;
-
 export const dateRangeSchema = z.object({
 	from: z.string().datetime().default(''),
 	to: z.string().datetime().default(''),
 });
 export type DateRange = z.infer<typeof dateRangeSchema>;
 
-export const routePointSchema = z.object({
-	location: locationSchema.default({}),
-	date: dateRangeSchema.default({}),
+export const locationSchema = z.object({
+	city: z.string(),
+	country: z.string().optional(),
+	lat: z.number(),
+	lng: z.number(),
 });
-export type RoutePoint = z.infer<typeof routePointSchema>;
+export type Location = z.infer<typeof locationSchema>;
+
+export const routeSchema = z
+	.object({
+		from: locationSchema,
+		to: locationSchema,
+	})
+	.refine((data) => data.from.city !== data.to.city, {
+		message: 'Пункты отправления и назначения не должны совпадать',
+		path: ['to.location'],
+	});
+
+export type RouteSchema = z.infer<typeof routeSchema>;

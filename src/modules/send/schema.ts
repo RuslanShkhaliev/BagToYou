@@ -1,11 +1,12 @@
-import { MessagePlatform, RequestRole, RequestStatus } from '@/common';
+import { MessagePlatform } from '@/common';
+import { locationSchema } from '@/common/schema';
+import { baseRequestSchema } from '@/modules/request/schema';
 import { z } from 'zod';
 
-export const baseRequestSchema = z.object({
-	role: z.nativeEnum(RequestRole).default(RequestRole.Sender),
-	status: z.nativeEnum(RequestStatus).default(RequestStatus.Draft),
+export const senderRoute = z.object({
+	from: locationSchema,
+	to: locationSchema,
 });
-export type RequestBase = z.infer<typeof baseRequestSchema>;
 
 export const parcelInfoSchema = z.object({
 	description: z.string().default(''),
@@ -24,3 +25,11 @@ export const recipientInfoSchema = z.object({
 });
 
 export type RecipientInfo = z.infer<typeof recipientInfoSchema>;
+
+export const senderRequestSchema = baseRequestSchema.extend({
+	package: parcelInfoSchema,
+	recipient: recipientInfoSchema,
+	route: senderRoute,
+	rewards: z.string().default(''),
+});
+export type SenderRequest = z.infer<typeof senderRequestSchema>;

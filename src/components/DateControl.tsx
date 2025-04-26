@@ -1,22 +1,8 @@
 import { DateValue } from '@/components/interfaces';
+import { InputThemed } from '@/components/ui/InputThemed';
 import { format } from 'date-fns';
 import { useMemo } from 'react';
-import { Input, InputProps, styled } from 'tamagui';
-
-export const InputStyled = styled(Input, {
-	cursor: 'pointer',
-	fontWeight: 600,
-	fontSize: 12,
-	unstyled: true,
-	readOnly: true,
-	paddingVertical: 16,
-	paddingLeft: 36,
-	paddingRight: 12,
-	backgroundColor: '$inputBg',
-	color: '$textPrimary',
-	outline: 'none',
-	outlineStyle: 'none',
-});
+import { InputProps } from 'tamagui';
 
 interface Props extends Omit<InputProps, 'value'> {
 	value: DateValue | undefined;
@@ -27,5 +13,16 @@ export const DateControl = ({ value, ...props }: Props) => {
 
 		return format(new Date(value), 'dd MMM');
 	}, [value]);
-	return <InputStyled value={val} readOnly {...props} />;
+	return (
+		<InputThemed
+			paddingVertical={16}
+			paddingLeft={36}
+			paddingRight={12}
+			fontWeight={600}
+			fontSize={12}
+			value={val}
+			readOnly
+			{...props}
+		/>
+	);
 };

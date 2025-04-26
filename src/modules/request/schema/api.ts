@@ -2,7 +2,7 @@ import { TransportType } from '@/common';
 import { dateRangeSchema, locationSchema, routePointSchema } from '@/common/schema';
 import {
 	baseRequestSchema,
-	packageInfoSchema,
+	parcelInfoSchema,
 	recipientInfoSchema,
 } from '@/modules/request/schema/base';
 import { z } from 'zod';
@@ -14,7 +14,7 @@ export const senderRoute = z.object({
 	date: dateRangeSchema.optional(),
 });
 export const senderRequestSchema = baseRequestSchema.extend({
-	package: packageInfoSchema,
+	package: parcelInfoSchema,
 	recipient: recipientInfoSchema,
 	route: senderRoute,
 	rewards: z.string().default(''),
@@ -31,10 +31,10 @@ export const routeRequestSchema = z
 		path: ['to.location'],
 	});
 
-export const receiverRequestSchema = baseRequestSchema.extend({
+export const deliveryRequestSchema = baseRequestSchema.extend({
 	route: z.array(routeRequestSchema).nonempty(),
 	transport: z.nativeEnum(TransportType).default(TransportType.Plane),
 	conditions: z.string().optional().default(''),
 	rewards: z.string().default(''),
 });
-export type ReceiverRequest = z.infer<typeof receiverRequestSchema>;
+export type ReceiverRequest = z.infer<typeof deliveryRequestSchema>;

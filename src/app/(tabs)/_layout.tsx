@@ -1,7 +1,7 @@
 import { HapticTab } from '@/components/HapticTab';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { tokens } from '@/styles/tokens';
-import { ClipboardPenLine, Search, UserCog } from '@tamagui/lucide-icons';
+import { Box, Search, Send, UserCog } from '@tamagui/lucide-icons';
 import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
 import React from 'react';
@@ -47,10 +47,17 @@ export default function TabLayout() {
 				}}
 			/>
 			<Tabs.Screen
-				name="request"
+				name="send"
 				options={{
-					title: 'request',
-					tabBarIcon: ({ color }) => <ClipboardPenLine size={12} color={color} />,
+					title: 'send',
+					tabBarIcon: ({ color }) => <Send size={12} color={color} />,
+				}}
+			/>
+			<Tabs.Screen
+				name="deliver"
+				options={{
+					title: 'deliver',
+					tabBarIcon: ({ color }) => <Box size={12} color={color} />,
 				}}
 			/>
 			<Tabs.Screen
