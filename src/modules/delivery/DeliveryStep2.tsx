@@ -1,172 +1,250 @@
+import { MediaAsset } from '@/common/schema';
+import { MediaPicker } from '@/components/MediaPicker/MediaPicker';
 import { PageWrapper } from '@/components/PageWrapper';
-import { InputThemed } from '@/components/ui/InputThemed';
+import { InputField } from '@/components/ui/InputField';
+import { LabelStyled } from '@/components/ui/LabelStyled';
+import { TextareaThemed } from '@/components/ui/TextareaThemed';
+import { formStep2Scheme, FormStep2Scheme } from '@/modules/delivery/schema';
 import { useDeliveryStore } from '@/modules/delivery/store';
-import { imagePicker } from '@/utils/imagePicker';
-import { Check, HardDriveDownload, Trash } from '@tamagui/lucide-icons';
-import { ImagePickerAsset } from 'expo-image-picker';
-import { useState } from 'react';
-import {
-	Button,
-	Checkbox,
-	Form,
-	Image,
-	Label,
-	ScrollView,
-	styled,
-	Text,
-	TextArea,
-	View,
-	XStack,
-	YStack,
-} from 'tamagui';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Check } from '@tamagui/lucide-icons';
+import { useEffect, useState } from 'react';
+import { Controller, FieldValues, useForm } from 'react-hook-form';
+import { Button, Checkbox, debounce, Form, Heading, Text, XStack, YStack } from 'tamagui';
 
-const LabelStyled = styled(Label, {
-	fontSize: 18,
-	color: '$textPrimary',
-});
-const MAX_IMAGE_COUNT = 3;
 export const DeliveryStep2 = () => {
 	const deliveryStore = useDeliveryStore();
 	const [isMe, setIsMe] = useState(false);
-	const [images, setImages] = useState<ImagePickerAsset[]>([]);
-	const [width, setWidth] = useState<string>('');
-	const [height, setHeight] = useState<string>('');
-	const [length, setLength] = useState<string>('');
-	const [weight, setWeight] = useState<string>('');
-	const [description, setDescription] = useState<string>('');
-	const [rewards, setRewards] = useState<string>('');
 
-	const imgPicker = imagePicker({
-		allowsMultipleSelection: true,
-		allowsEditing: true,
-		onImagePicked: (images) => {
-			setImages((state) => [...state, ...images]);
+	const {
+		handleSubmit,
+		control,
+		watch,
+		formState: { errors },
+	} = useForm<FormStep2Scheme>({
+		resolver: zodResolver(formStep2Scheme),
+		criteriaMode: 'firstError',
+		defaultValues: {
+			...deliveryStore.step2,
 		},
+		mode: 'onBlur',
+		reValidateMode: 'onChange',
+		shouldFocusError: true,
 	});
 
-	const pickImage = () => {
-		if (images.length >= MAX_IMAGE_COUNT) {
-			return;
-		}
-		imgPicker.pickImage();
+	useEffect(() => {
+		const debouncedUpdate = debounce(
+			(values: FieldValues, { name }: { name?: keyof FieldValues }) => {
+				if (!name || errors[name as keyof typeof errors]) {
+					return;
+				}
+				deliveryStore.saveStep2(values);
+			},
+			500,
+		);
+		const { unsubscribe } = watch(debouncedUpdate);
+
+		return () => {
+			unsubscribe();
+			debouncedUpdate.cancel();
+		};
+	}, []);
+
+	const updateImages = (files: MediaAsset[]) => {
+		deliveryStore.saveStep2({ media: files });
 	};
-	const removeImg = (uri: string) => {
-		const newImages = images.filter((image) => image.uri !== uri);
-		setImages(() => newImages);
+
+	const onSubmit = (values: FormStep2Scheme) => {
+		console.log(values);
 	};
 
 	return (
 		<PageWrapper>
-			<Form gap="$6">
-				<YStack gap={4}>
-					<LabelStyled>Получатель</LabelStyled>
-					<YStack>
-						<XStack gap="$3" alignItems="center">
-							<Checkbox id="checkbox-recipient" checked={isMe} onCheckedChange={setIsMe}>
-								<Checkbox.Indicator>
-									<Check />
-								</Checkbox.Indicator>
-							</Checkbox>
-							<Label padding={0} height={14} color="$textPrimary" htmlFor="checkbox-recipient">
-								Выбрать себя получателем
-							</Label>
-						</XStack>
-						<Text color="$textSecondary" fontSize={10}>
-							заполним данными указанными в профиле
-						</Text>
-					</YStack>
-					<InputThemed placeholder="Имя" />
-					<InputThemed placeholder="Фамилия" />
-					<InputThemed placeholder="Телефон для связи" />
-				</YStack>
+			<Form gap="$6" onSubmit={handleSubmit(onSubmit)}>
 				<YStack>
-					<LabelStyled>Посылка</LabelStyled>
-					<YStack gap={10}>
-						<YStack>
-							<XStack gap="$3" alignItems="center">
-								<YStack flex={1}>
-									<LabelStyled fontSize={10}>Width(cm)</LabelStyled>
-									<InputThemed placeholder="width (cm)" value={width} onChangeText={setWidth} />
-								</YStack>
-								<YStack flex={1}>
-									<LabelStyled fontSize={10}>Length(cm)</LabelStyled>
-									<InputThemed placeholder="length (cm)" value={length} onChangeText={setLength} />
-								</YStack>
-							</XStack>
-							<XStack gap="$3" alignItems="center">
-								<YStack flex={1}>
-									<LabelStyled fontSize={10}>Height(cm)</LabelStyled>
-									<InputThemed placeholder="height (cm)" value={height} onChangeText={setHeight} />
-								</YStack>
-								<YStack flex={1}>
-									<LabelStyled fontSize={10}>Weight(kg)</LabelStyled>
-									<InputThemed placeholder="weight (kg)" value={weight} onChangeText={setWeight} />
-								</YStack>
-							</XStack>
-						</YStack>
-						<YStack>
-							<LabelStyled fontSize={12}>Загрузить фото</LabelStyled>
-							{images.length > 0 && (
-								<ScrollView horizontal>
-									<XStack gap="$2" paddingVertical={20}>
-										{images.map((image) => (
-											<View
-												key={image.uri + Date.now()}
-												aspectRatio={1}
-												width={100}
-												height={100}
-												overflow="hidden"
-												borderRadius={16}
-												backgroundColor="$bgContent"
-												position="relative"
-											>
-												<Button
-													backgroundColor="$black40"
-													position="absolute"
-													right={2}
-													bottom={2}
-													size={26}
-													circular
-													icon={<Trash color="$white" />}
-													zIndex={1}
-													onPress={() => removeImg(image.uri)}
-												/>
-												<Image
-													source={{ uri: image.uri }}
-													width="100%"
-													height="100%"
-													borderRadius={8}
-													marginRight="$2"
-												/>
-											</View>
-										))}
-									</XStack>
-								</ScrollView>
-							)}
-							<Button onPress={pickImage} icon={<HardDriveDownload size={18} color="$blue800" />} />
-						</YStack>
-						<YStack>
-							<LabelStyled fontSize={12}>Подробное описание</LabelStyled>
-							<TextArea
-								backgroundColor="$inputBg"
-								color="$textPrimary"
-								value={description}
-								borderColor="$inputBg"
-								onChangeText={setDescription}
-								focusStyle={{ borderColor: '$orange500' }}
+					<Heading fontSize={18} color="$textPrimary">
+						Получатель
+					</Heading>
+
+					<YStack gap={16}>
+						<YStack gap={16}>
+							<Controller
+								name="name"
+								control={control}
+								rules={{ required: true }}
+								render={({ field: { onChange, value, onBlur } }) => (
+									<InputField
+										required
+										placeholder="Имя"
+										onBlur={onBlur}
+										onChangeText={onChange}
+										value={value}
+										errorMessage={errors.name?.message}
+										isInvalid={!!errors.name?.message}
+									/>
+								)}
+							/>
+							<Controller
+								name="surname"
+								control={control}
+								rules={{ required: true }}
+								render={({ field: { onChange, value, onBlur } }) => (
+									<InputField
+										required
+										placeholder="Фамилия"
+										onBlur={onBlur}
+										onChangeText={onChange}
+										value={value}
+										textContentType="creditCardNumber"
+										errorMessage={errors.surname?.message}
+										isInvalid={!!errors.surname?.message}
+									/>
+								)}
+							/>
+							<Controller
+								name="phone"
+								control={control}
+								rules={{ required: true }}
+								render={({ field: { onChange, value, onBlur } }) => (
+									<InputField
+										required
+										placeholder="Телефон для связи"
+										onBlur={onBlur}
+										onChangeText={onChange}
+										value={value}
+										errorMessage={errors.phone?.message}
+										isInvalid={!!errors.phone?.message}
+									/>
+								)}
 							/>
 						</YStack>
+						<YStack>
+							<XStack gap="$3" alignItems="center">
+								<Checkbox
+									id="checkbox-recipient"
+									size="$3"
+									checked={isMe}
+									onCheckedChange={setIsMe}
+								>
+									<Checkbox.Indicator>
+										<Check />
+									</Checkbox.Indicator>
+								</Checkbox>
+								<LabelStyled padding={0} height={14} htmlFor="checkbox-recipient">
+									выбрать себя получателем
+								</LabelStyled>
+							</XStack>
+							<Text color="$textSecondary" fontSize={10}>
+								заполним данными из вашего профиля
+							</Text>
+						</YStack>
 					</YStack>
 				</YStack>
 				<YStack>
-					<LabelStyled htmlFor="input-rewards">Укажите вознаграждение</LabelStyled>
-					<InputThemed
-						id="input-rewards"
-						value={rewards}
-						onChangeText={setRewards}
-						placeholder="1000"
-					/>
+					<YStack gap={10}>
+						<Heading fontSize={18} color="$textPrimary">
+							Габариты посылки
+						</Heading>
+						<XStack gap="$3" alignItems="center">
+							<Controller
+								name="width"
+								control={control}
+								rules={{ required: true }}
+								render={({ field: { onChange, value, onBlur } }) => (
+									<InputField
+										fontSize={14}
+										label="Width(cm)"
+										onBlur={onBlur}
+										onChangeText={onChange}
+										value={value}
+										required
+										errorMessage={errors.width?.message}
+										isInvalid={!!errors.width?.message}
+									/>
+								)}
+							/>
+
+							<Controller
+								name="length"
+								control={control}
+								render={({ field: { onChange, onBlur, value } }) => (
+									<InputField
+										fontSize={14}
+										label="Length(cm)"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+										required
+										errorMessage={errors.length?.message}
+										isInvalid={!!errors.length?.message}
+									/>
+								)}
+							/>
+						</XStack>
+						<XStack gap="$3" alignItems="center">
+							<Controller
+								name="height"
+								control={control}
+								render={({ field: { onChange, onBlur, value } }) => (
+									<InputField
+										fontSize={14}
+										label="Height(cm)"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+										required
+										errorMessage={errors.height?.message}
+										isInvalid={!!errors.height?.message}
+									/>
+								)}
+							/>
+							<Controller
+								name="weight"
+								control={control}
+								render={({ field: { onChange, onBlur, value } }) => (
+									<InputField
+										fontSize={14}
+										label="Weight(kg)"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+										required
+										errorMessage={errors.weight?.message}
+										isInvalid={!!errors.weight?.message}
+									/>
+								)}
+							/>
+						</XStack>
+					</YStack>
+					<MediaPicker media={deliveryStore.step2.media} onUpdate={updateImages} />
+
+					<YStack>
+						<LabelStyled fontSize={12}>Подробное описание</LabelStyled>
+						<Controller
+							name="description"
+							control={control}
+							render={({ field: { onChange, value, onBlur } }) => (
+								<TextareaThemed onBlur={onBlur} onChangeText={onChange} value={value} />
+							)}
+						/>
+					</YStack>
 				</YStack>
+				<Controller
+					name="rewards"
+					control={control}
+					render={({ field: { onChange, value, onBlur } }) => (
+						<InputField
+							id="input-rewards"
+							onBlur={onBlur}
+							onChangeText={onChange}
+							value={value}
+							placeholder="1000"
+							label="Укажите вознаграждение"
+							errorMessage={errors.rewards?.message}
+							isInvalid={!!errors.rewards?.message}
+						/>
+					)}
+				/>
 				<Form.Trigger asChild>
 					<Button size="$4" fontSize={18}>
 						Опубликовать

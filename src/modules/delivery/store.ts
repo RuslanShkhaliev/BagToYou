@@ -1,5 +1,6 @@
 import { TransportType } from '@/common';
 import { zustandStorage } from '@/common/storage';
+import { FormStep1Scheme, FormStep2Scheme } from '@/modules/delivery/schema';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
 
@@ -10,28 +11,38 @@ export interface DeliveryRoute {
 	to: string;
 }
 interface DeliveryStore {
-	route: DeliveryRoute;
-	conditions: string;
-	transport: TransportType;
-	rewards: string;
-	date: Date;
+	step1: FormStep1Scheme;
+	step2: FormStep2Scheme;
 }
 
 interface Actions {
-	update: <K extends keyof DeliveryRoute, V extends DeliveryRoute[K]>(field: K, value: V) => void;
+	saveStep1: (step1: Partial<FormStep1Scheme>) => void;
+	saveStep2: (step2: Partial<FormStep2Scheme>) => void;
 	reset: () => void;
 }
 
 const defaultState = (): DeliveryStore => {
 	return {
-		route: {
-			from: '',
-			to: '',
+		step1: {
+			route: {
+				from: '',
+				to: '',
+			},
+			transport: TransportType.Plane,
+			date: new Date(),
 		},
-		conditions: '',
-		transport: TransportType.Plane,
-		rewards: '',
-		date: new Date(),
+		step2: {
+			name: '',
+			surname: '',
+			phone: '',
+			width: '',
+			height: '',
+			length: '',
+			weight: '',
+			description: '',
+			rewards: '',
+			media: [],
+		},
 	};
 };
 
@@ -39,11 +50,8 @@ export const useDeliveryStore = create<DeliveryStore & Actions, [['zustand/persi
 	persist(
 		(set) => ({
 			...defaultState(),
-			update: (field, value) =>
-				set((state) => ({
-					...state,
-					[field]: value,
-				})),
+			saveStep1: (patch) => set((state) => ({ step1: { ...state.step1, ...patch } })),
+			saveStep2: (patch) => set((state) => ({ step2: { ...state.step2, ...patch } })),
 			reset: () => set(() => defaultState()),
 		}),
 		{

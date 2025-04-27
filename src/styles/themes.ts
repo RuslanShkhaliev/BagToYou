@@ -25,7 +25,7 @@ export const dark = {
 	separator1: tokens.color.graphite400,
 	separator2: tokens.color.ink300,
 
-	backgroundColor: tokens.color.graphite900,
+	accent: tokens.color.blue800,
 };
 export const light = {
 	bgMain: tokens.color.graphite900,
@@ -52,4 +52,6 @@ export const light = {
 	separator2: tokens.color.ink300,
 
 	backgroundColor: tokens.color.graphite900,
+
+	accent: tokens.color.blue800,
 };

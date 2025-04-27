@@ -1,11 +1,26 @@
 import { TransportType } from '@/common';
-import { baseRequestSchema, routeRequestSchema } from '@/modules/request/schema';
+import { mediaAssetSchema } from '@/common/schema';
+import { routeRequestSchema } from '@/modules/request/schema';
 import { z } from 'zod';
 
-export const deliveryRequestSchema = baseRequestSchema.extend({
+export const formStep1Scheme = z.object({
 	route: routeRequestSchema.default({}),
+	date: z.date(),
 	transport: z.nativeEnum(TransportType).default(TransportType.Plane),
-	conditions: z.string().optional().default(''),
-	rewards: z.string().default(''),
 });
-export type DeliveryRequest = z.infer<typeof deliveryRequestSchema>;
+
+export const formStep2Scheme = z.object({
+	name: z.string().min(1, 'Имя обязательно'),
+	surname: z.string().min(1, 'Фамилия обязательна'),
+	phone: z.string().min(1, 'Телефон обязателен'),
+	width: z.string().min(1, 'Ширина обязательна'),
+	height: z.string().min(1, 'Высота обязательна'),
+	length: z.string().min(1, 'Длина обязательна'),
+	weight: z.string().min(1, 'Вес обязателен'),
+	description: z.string().optional(),
+	rewards: z.string().optional(),
+	media: z.array(mediaAssetSchema),
+});
+
+export type FormStep1Scheme = z.infer<typeof formStep1Scheme>;
+export type FormStep2Scheme = z.infer<typeof formStep2Scheme>;
