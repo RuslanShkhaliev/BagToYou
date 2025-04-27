@@ -8,16 +8,7 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config([
 	{
-		ignores: [
-			'node_modules',
-			'dist',
-			'.yarn',
-			'.expo',
-			'eslint.config.mjs',
-			'prettier.config.mjs',
-			'tamagui.config.ts',
-			'scripts',
-		],
+		ignores: ['node_modules', 'dist', '.yarn', '.expo', './**/*.config.*', 'scripts'],
 	},
 
 	js.configs.recommended,
