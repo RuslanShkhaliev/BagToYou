@@ -1,17 +1,17 @@
 import * as ImagePicker from 'expo-image-picker';
 import { ImagePickerAsset } from 'expo-image-picker';
 
-interface Props extends ImagePicker.ImagePickerOptions {
-	onImagePicked: (files: ImagePickerAsset[]) => void;
+export interface CreateMediaPickerProps extends ImagePicker.ImagePickerOptions {
+	onPicked: (files: ImagePickerAsset[]) => void;
 }
-export const imagePicker = ({
+export const createMediaPicker = ({
 	mediaTypes = ['images', 'videos'],
 	quality = 1,
 	aspect = [4, 3],
-	onImagePicked,
+	onPicked,
 	...restOptions
-}: Props) => {
-	const pickImage = async () => {
+}: CreateMediaPickerProps) => {
+	const pick = async () => {
 		// No permissions request is necessary for launching the image library
 		const result = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes,
@@ -21,13 +21,11 @@ export const imagePicker = ({
 			...restOptions,
 		});
 
-		console.log(result, 'result');
-
 		if (!result.canceled) {
-			onImagePicked(result.assets);
+			onPicked(result.assets);
 		}
 		return result;
 	};
 
-	return { pickImage };
+	return { pick };
 };
