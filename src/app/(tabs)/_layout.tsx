@@ -5,9 +5,11 @@ import { Box, Search, Send, UserCog } from '@tamagui/lucide-icons';
 import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
 import React from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabLayout() {
 	const colorScheme = useColorScheme();
+	const insets = useSafeAreaInsets();
 	return (
 		<Tabs
 			screenOptions={{
@@ -18,16 +20,18 @@ export default function TabLayout() {
 					left: 0,
 					right: 0,
 					bottom: 0,
-					height: 38,
-					backgroundColor: 'transparent', // обязательно прозрачный для BlurView
-					overflow: 'hidden', // чтобы блюр обрезался
+					height: 60 + insets.bottom,
+					backgroundColor: 'transparent',
+					overflow: 'hidden',
 					borderTopWidth: 0,
+					paddingTop: 4,
+					paddingBottom: insets.bottom,
 				},
 				tabBarBackground: () => (
 					<BlurView
-						intensity={80}
+						intensity={90}
 						tint={colorScheme === 'dark' ? 'dark' : 'light'}
-						style={{ flex: 1, backgroundColor: tokens.color.white.val }}
+						style={{ flex: 1 }}
 					/>
 				),
 				tabBarActiveTintColor: tokens.color.white.val,
@@ -35,7 +39,6 @@ export default function TabLayout() {
 
 				tabBarLabelStyle: {
 					fontSize: 12,
-					paddingVertical: 4,
 				},
 			}}
 		>
@@ -43,28 +46,28 @@ export default function TabLayout() {
 				name="index"
 				options={{
 					title: 'search',
-					tabBarIcon: ({ color }) => <Search size={12} color={color} />,
+					tabBarIcon: ({ color }) => <Search size="$1" color={color} />,
 				}}
 			/>
 			<Tabs.Screen
 				name="send"
 				options={{
 					title: 'send',
-					tabBarIcon: ({ color }) => <Send size={12} color={color} />,
+					tabBarIcon: ({ color }) => <Send size="$1" color={color} />,
 				}}
 			/>
 			<Tabs.Screen
 				name="deliver"
 				options={{
 					title: 'deliver',
-					tabBarIcon: ({ color }) => <Box size={12} color={color} />,
+					tabBarIcon: ({ color }) => <Box size="$1" color={color} />,
 				}}
 			/>
 			<Tabs.Screen
 				name="profile"
 				options={{
 					title: 'profile',
-					tabBarIcon: ({ color }) => <UserCog size={12} color={color} />,
+					tabBarIcon: ({ color }) => <UserCog size="$1" color={color} />,
 				}}
 			/>
 		</Tabs>
