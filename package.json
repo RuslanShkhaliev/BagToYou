@@ -10,13 +10,14 @@
 		"web": "expo start --web",
 		"test": "jest --watchAll",
 		"lint": "eslint .",
+    "prettier": "prettier ./src --write",
 		"lint:fix": "eslint --fix .",
 		"prepare": "husky"
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx}": [
 			"eslint --fix",
-			"prettier --write"
+			"prettier ./src --write"
 		],
 		"*.{json,md,yml,yaml}": [
 			"prettier --write"

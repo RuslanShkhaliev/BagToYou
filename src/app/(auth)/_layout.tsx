@@ -9,8 +9,14 @@ export default function AuthLayout() {
 				animation: 'fade',
 			}}
 		>
-			<Stack.Screen name="login" options={{ title: 'Вход' }} />
-			<Stack.Screen name="register" options={{ title: 'Регистрация' }} />
+			<Stack.Screen
+				name='login'
+				options={{ title: 'Вход' }}
+			/>
+			<Stack.Screen
+				name='register'
+				options={{ title: 'Регистрация' }}
+			/>
 		</Stack>
 	);
 }

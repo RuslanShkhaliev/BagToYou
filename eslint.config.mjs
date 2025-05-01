@@ -22,6 +22,8 @@ export default tseslint.config([
 			'@typescript-eslint/no-floating-promises': 'off',
 			'@typescript-eslint/no-misused-promises': 'warn',
 			'@typescript-eslint/no-empty-object-type': 'off',
+			'@typescript-eslint/prefer-nullish-coalescing': 'off',
+			'@typescript-eslint/ban-ts-comment': 'off',
 		},
 	},
 	{
@@ -48,13 +50,10 @@ export default tseslint.config([
 			'react-native/no-unused-styles': 'warn',
 			'react/no-unescaped-entities': 'off',
 			'react/display-name': 'off',
-			'react/jsx-max-props-per-line': [
-				'error',
-				{
-					maximum: 2,
-					when: 'multiline',
-				},
-			],
+			//'react/jsx-max-props-per-line': ['error', { maximum: 1, when: 'always' }],
+			//'react/jsx-indent-props': ['error', 2],
+			//'react/jsx-first-prop-new-line': [2, 'multiline'],
+			'react/jsx-closing-bracket-location': [2, 'tag-aligned'],
 		},
 		settings: {
 			react: {

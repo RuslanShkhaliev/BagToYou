@@ -1,4 +1,3 @@
-import { AppHeader } from '@/components/AppHeader';
 import { AuthProvider } from '@/context/AuthContext';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -11,6 +10,7 @@ import { TamaguiProvider, View } from 'tamagui';
 import { config } from 'tamagui.config';
 
 SplashScreen.preventAutoHideAsync();
+
 
 export default function RootLayout() {
 	const [loaded] = useFonts({
@@ -31,14 +31,15 @@ export default function RootLayout() {
 		<AuthProvider>
 			<TamaguiProvider config={config}>
 				<SafeAreaProvider>
-					<AppHeader />
-
-					<View flex={1} backgroundColor="$bgMain">
-						<Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
-							<Stack.Screen name="(auth)" />
-							<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-							<Stack.Screen name="+not-found" options={{ headerShown: false }} />
-						</Stack>
+					<View
+						bg={'$bg'}
+						flex={1}
+					>
+						<Stack
+							screenOptions={{
+								headerShown: false,
+							}}
+						/>
 						<StatusBar style="auto" />
 					</View>
 				</SafeAreaProvider>

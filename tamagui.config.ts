@@ -1,4 +1,4 @@
-import { dark, light } from '@/styles/themes';
+import { themes } from '@/styles/themes';
 import { tokens } from '@/styles/tokens';
 import { defaultConfig } from '@tamagui/config/v4';
 import { createTamagui } from 'tamagui';
@@ -9,15 +9,13 @@ export const config = createTamagui({
 		...defaultConfig.tokens,
 		...tokens,
 	},
-	themes: {
-		...defaultConfig.themes,
-		dark,
-		light,
-	},
+	themes,
 });
 
 export type Conf = typeof config;
 
 declare module 'tamagui' {
-	interface TamaguiCustomConfig extends Conf {}
+	interface TamaguiCustomConfig extends Conf {
+	}
 }
+ 

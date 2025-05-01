@@ -1,12 +1,40 @@
 import { HapticTab } from '@/components/HapticTab';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { tokens } from '@/styles/tokens';
+import { IconProps } from '@tamagui/helpers-icon';
 import { Box, Search, Send, UserCog } from '@tamagui/lucide-icons';
 import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
-import React from 'react';
+import React, { NamedExoticComponent } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+
+interface TabbarButton {
+	routeName: string;
+	title: string;
+	icon: NamedExoticComponent<IconProps>;
+}
+
+
+const tabbarButtons: TabbarButton[] = [
+	{
+		routeName: 'index',
+		title: 'Search',
+		icon: Search,
+	}, {
+		routeName: 'send',
+		title: 'Send',
+		icon: Send,
+	}, {
+		routeName: 'delivery',
+		title: 'Delivery',
+		icon: Box,
+	}, {
+		routeName: 'profile',
+		title: 'Profile',
+		icon: UserCog,
+	},
+];
 export default function TabLayout() {
 	const colorScheme = useColorScheme();
 	const insets = useSafeAreaInsets();
@@ -17,15 +45,14 @@ export default function TabLayout() {
 				tabBarButton: HapticTab,
 				tabBarStyle: {
 					position: 'absolute',
+					paddingTop: 4,
+					height: 60 + insets.bottom,
 					left: 0,
 					right: 0,
 					bottom: 0,
-					height: 60 + insets.bottom,
 					backgroundColor: 'transparent',
 					overflow: 'hidden',
 					borderTopWidth: 0,
-					paddingTop: 4,
-					paddingBottom: insets.bottom,
 				},
 				tabBarBackground: () => (
 					<BlurView
@@ -37,39 +64,29 @@ export default function TabLayout() {
 				tabBarActiveTintColor: tokens.color.white.val,
 				tabBarInactiveTintColor: tokens.color.graphite300.val,
 
+				tabBarIconStyle: {
+					marginBottom: 6,
+				},
 				tabBarLabelStyle: {
-					fontSize: 12,
+					fontSize: 9,
 				},
 			}}
 		>
-			<Tabs.Screen
-				name="index"
-				options={{
-					title: 'search',
-					tabBarIcon: ({ color }) => <Search size="$1" color={color} />,
-				}}
-			/>
-			<Tabs.Screen
-				name="send"
-				options={{
-					title: 'send',
-					tabBarIcon: ({ color }) => <Send size="$1" color={color} />,
-				}}
-			/>
-			<Tabs.Screen
-				name="deliver"
-				options={{
-					title: 'deliver',
-					tabBarIcon: ({ color }) => <Box size="$1" color={color} />,
-				}}
-			/>
-			<Tabs.Screen
-				name="profile"
-				options={{
-					title: 'profile',
-					tabBarIcon: ({ color }) => <UserCog size="$1" color={color} />,
-				}}
-			/>
+			{tabbarButtons.map((tab) => (
+				<Tabs.Screen
+					key={tab.routeName}
+					name={tab.routeName}
+					options={{
+						title: tab.title,
+						tabBarIcon: ({ color, size }) => (
+							<tab.icon
+								size={size}
+								color={color}
+							/>
+						),
+					}}
+				/>
+			))}
 		</Tabs>
 	);
 }
