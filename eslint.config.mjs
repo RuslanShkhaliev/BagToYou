@@ -24,6 +24,7 @@ export default tseslint.config([
 			'@typescript-eslint/no-empty-object-type': 'off',
 			'@typescript-eslint/prefer-nullish-coalescing': 'off',
 			'@typescript-eslint/ban-ts-comment': 'off',
+			'@typescript-eslint/no-unused-expressions': 'off',
 		},
 	},
 	{

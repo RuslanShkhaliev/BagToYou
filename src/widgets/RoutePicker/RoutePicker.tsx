@@ -1,4 +1,3 @@
-import { Location } from '@/common/schema';
 import { BottomSheet } from '@/components/BottomSheet';
 import { GroupFields } from '@/components/GroupFields';
 import { DeliveryRoute } from '@/modules/delivery/store';
@@ -6,16 +5,21 @@ import { CitiesList } from '@/widgets/RoutePicker/CitiesList';
 import { CitySearchInput } from '@/widgets/RoutePicker/CitySearchInput';
 import { InlineLoader } from '@/widgets/RoutePicker/components/InlineLoader';
 import { ReverseButton } from '@/widgets/RoutePicker/components/ReverseButton';
+import { fromIsActive, toIsActive } from '@/widgets/RoutePicker/helpers';
+import { ActiveInputType } from '@/widgets/RoutePicker/types';
 import { useRoutePicker } from '@/widgets/RoutePicker/useRoutePicker';
 import { MapPin } from '@tamagui/lucide-icons';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Input, View, XStack, YStack } from 'tamagui';
+
 
 interface PickerProps {
 	value?: DeliveryRoute;
 	onPick?: (route: DeliveryRoute) => void;
 }
 
+
+const iter = 0;
 export const RoutePicker = ({
 	value = { from: null, to: null },
 	onPick,
@@ -28,6 +32,7 @@ export const RoutePicker = ({
 
 	const {
 		route,
+		setRoute,
 		cities,
 		activeInput,
 		setActiveInput,
@@ -35,38 +40,39 @@ export const RoutePicker = ({
 		setSearchText,
 		searchText,
 		loading,
-	} = useRoutePicker({ initialValue: value, onPick });
+	} = useRoutePicker({
+		initialValue: value,
+		onComplete: (route) => {
+			toggleOpen(false);
+			onPick?.(route);
+		},
+		onFlowChange: (nextInput) => {
+			if (fromIsActive(nextInput)) {
+				inputRefs.from.current?.focus();
+			} else {
+				inputRefs.to.current?.focus();
+			}
+		},
+	});
 
-	useEffect(() => {
-		if (activeInput === 'from') {
-			inputRefs.from.current?.focus();
-		} else {
-			inputRefs.to.current?.focus();
-		}
-	}, [activeInput]);
-
-	const openSheet = () => {
+	const openSheet = (activeInput: ActiveInputType) => {
+		setActiveInput(activeInput);
 		toggleOpen(true);
 	};
-	const closeSheet = () => {
-		toggleOpen(false);
-	};
-
-	const onSelectCity = (loc: Location) => {
-		selectCity(loc);
-
-		if (activeInput === 'to' && route.from?.city) {
-			closeSheet();
-		}
+	const onFocus = (activeInput: ActiveInputType) => {
+		setActiveInput(activeInput);
+		const input = fromIsActive(activeInput) ? route.from?.city : route.to?.city;
+		setSearchText(input || '');
 	};
 
 	const onClose = () => {
-		console.log({ route, value });
 		onPick?.(route);
 	};
 	const onChangeDir = () => {
-		console.log(route);
-		onPick?.({ from: route.to, to: route.from });
+		const reversed = { from: route.to, to: route.from };
+		// setRoute(() => reversed);
+
+		onPick?.(reversed);
 	};
 
 	return (
@@ -81,8 +87,7 @@ export const RoutePicker = ({
 						placeholder: 'Origin',
 						error: '',
 						onPress: () => {
-							openSheet();
-							setActiveInput('from');
+							openSheet(ActiveInputType.From);
 						},
 					},
 					{
@@ -90,8 +95,7 @@ export const RoutePicker = ({
 						placeholder: 'Where to',
 						error: '',
 						onPress: () => {
-							openSheet();
-							setActiveInput('to');
+							openSheet(ActiveInputType.To);
 						},
 					},
 				]}
@@ -141,13 +145,12 @@ export const RoutePicker = ({
 											color={'$textSecondary'}
 										/>
 									),
-									active: activeInput === 'from',
 									placeholder: 'Origin',
-									value: activeInput === 'from' ? searchText : route.from?.city,
+									active: fromIsActive(activeInput),
+									value: fromIsActive(activeInput) ? searchText : route.from?.city,
 									onChangeText: setSearchText,
 									onFocus: () => {
-										setActiveInput('from');
-										setSearchText(route.from?.city || '');
+										onFocus(ActiveInputType.From);
 									},
 								},
 								{
@@ -158,13 +161,12 @@ export const RoutePicker = ({
 											color={'$textSecondary'}
 										/>
 									),
-									active: activeInput === 'to',
 									placeholder: 'Where to',
-									value: activeInput === 'to' ? searchText : route.to?.city,
+									active: toIsActive(activeInput),
+									value: toIsActive(activeInput) ? searchText : route.to?.city,
 									onChangeText: setSearchText,
 									onFocus: () => {
-										setActiveInput('to');
-										setSearchText(route.to?.city || '');
+										onFocus(ActiveInputType.To);
 									},
 								},
 							]}
@@ -181,7 +183,7 @@ export const RoutePicker = ({
 					pb={20}
 				>
 					<CitiesList
-						onSelect={onSelectCity}
+						onSelect={selectCity}
 						cities={cities}
 					/>
 				</View>
