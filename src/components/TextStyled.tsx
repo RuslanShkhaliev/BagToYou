@@ -1,5 +1,5 @@
 import { styled, Text } from 'tamagui';
 
-export const TextThemed = styled(Text, {
+export const TextStyled = styled(Text, {
 	color: '$textPrimary',
 });

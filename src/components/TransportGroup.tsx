@@ -1,11 +1,14 @@
 import { TransportType } from '@/common';
+import { IconTransport } from '@/components/icons';
 import { ToggleGroupItem } from '@/components/ToggleGroupItem';
-import { Text, ToggleGroup } from 'tamagui';
+import { ToggleGroup } from 'tamagui';
+
 
 interface Props {
 	value?: TransportType;
 	onChange?: (val: TransportType) => void;
 }
+
 
 const items = [
 	{
@@ -24,6 +27,14 @@ const items = [
 		name: 'корабль',
 		value: TransportType.Ship,
 	},
+	{
+		name: 'корабль',
+		value: TransportType.Bus,
+	},
+	{
+		name: 'корабль',
+		value: TransportType.Train,
+	},
 ];
 
 export const TransportGroup = ({ value, onChange }: Props) => {
@@ -32,24 +43,23 @@ export const TransportGroup = ({ value, onChange }: Props) => {
 	};
 	return (
 		<ToggleGroup
-			justifyContent="space-between"
+			justify="space-between"
 			type="single"
 			value={String(value)}
 			disableDeactivation
 			onValueChange={handleChange}
-			backgroundColor="$bgContent"
+			bg="$tabBg"
 		>
 			{items.map((item) => (
 				<ToggleGroupItem
-					flexGrow={1}
-					alignItems="center"
-					key={item.name}
-					padding="2px"
-					backgroundColor="$tabBg"
+					grow={1}
+					items="center"
+					key={item.value}
+					p={2}
 					active={item.value === value}
 					value={String(item.value)}
 				>
-					<Text>{item.name}</Text>
+					<IconTransport type={item.value} />
 				</ToggleGroupItem>
 			))}
 		</ToggleGroup>

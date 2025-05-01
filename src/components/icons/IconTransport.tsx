@@ -12,11 +12,23 @@ const icons = {
 	[TransportType.Bus]: Bus,
 };
 
-interface Props extends IconProps {
+
+interface IconTransportProps extends IconProps {
 	type: TransportType;
 }
-export const IconTransport = ({ type, size = 16, ...props }: Props) => {
+
+
+export const IconTransport = ({
+	type,
+	size = 14,
+	...props
+}: IconTransportProps) => {
 	const Icon = icons[type];
 
-	return <Icon {...props} width={size} height={size} />;
+	return (
+		<Icon
+			size={size}
+			{...props}
+		/>
+	);
 };
