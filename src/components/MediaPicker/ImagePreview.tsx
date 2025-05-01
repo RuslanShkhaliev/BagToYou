@@ -11,29 +11,29 @@ export const ImagePreview = ({ onRemove, ...asset }: ImagePreviewProps) => {
 			key={asset.uri + Date.now()}
 			width={100}
 			height={100}
-			overflow="hidden"
+			overflow='hidden'
 			borderRadius={16}
-			backgroundColor="$bgContent"
-			position="relative"
+			backgroundColor='$bgContent'
+			position='relative'
 		>
 			<Button
-				backgroundColor="$black40"
-				position="absolute"
+				backgroundColor='$black40'
+				position='absolute'
 				right={2}
 				bottom={2}
 				size={26}
 				circular
-				icon={<Trash color="$white" />}
+				icon={<Trash color='$white' />}
 				zIndex={1}
 				onPress={() => onRemove?.(asset.uri)}
 			/>
 			{asset.type === 'video' ? null : (
 				<Image
 					source={{ uri: asset.uri }}
-					width="100%"
-					height="100%"
+					width='100%'
+					height='100%'
 					borderRadius={8}
-					marginRight="$2"
+					marginRight='$2'
 				/>
 			)}
 		</View>

@@ -8,6 +8,7 @@ import * as ImgPicker from 'expo-image-picker';
 import { useEffect, useMemo, useState } from 'react';
 import { Button, ScrollView, XStack, YStack } from 'tamagui';
 
+
 interface ImagePickerProps extends ImgPicker.ImagePickerOptions {
 	maxImageCount?: number;
 	media?: MediaAsset[];
@@ -15,6 +16,7 @@ interface ImagePickerProps extends ImgPicker.ImagePickerOptions {
 	onRemove?: (file: MediaAsset) => void;
 	onUpdate?: (files: MediaAsset[]) => void;
 }
+
 
 const MAX_IMAGE_COUNT = 3;
 
@@ -35,7 +37,9 @@ export const MediaPicker = ({
 		...props,
 		onPicked: (images) => {
 			setItems((state) => {
-				const newImages: MediaAsset[] = images.map((image) => mediaAssetSchema.parse(image));
+				const newImages: MediaAsset[] = images.map((image) =>
+					mediaAssetSchema.parse(image),
+				);
 				onPicked?.(newImages);
 				return [...state, ...newImages];
 			});
@@ -46,7 +50,6 @@ export const MediaPicker = ({
 
 	useEffect(() => {
 		onUpdate?.(items);
-		console.log(items, 'useEffect');
 	}, [items]);
 
 	const pickMedia = () => {
@@ -67,10 +70,17 @@ export const MediaPicker = ({
 			<LabelStyled fontSize={12}>Загрузить фото</LabelStyled>
 			{items.length > 0 && (
 				<ScrollView horizontal>
-					<XStack gap="$2" paddingVertical={20}>
+					<XStack
+						gap="$2"
+						py={20}
+					>
 						<ImageLoader loading={loading} />
 						{mediaReversed.map((media) => (
-							<ImagePreview key={media.uri} {...media} onRemove={removeImg} />
+							<ImagePreview
+								key={media.uri}
+								{...media}
+								onRemove={removeImg}
+							/>
 						))}
 					</XStack>
 				</ScrollView>
@@ -78,7 +88,16 @@ export const MediaPicker = ({
 			<Button
 				onPress={pickMedia}
 				disabled={loading}
-				icon={loading ? <Loader /> : <HardDriveDownload size={18} color="$blue800" />}
+				icon={
+					loading ? (
+						<Loader />
+					) : (
+						<HardDriveDownload
+							size={18}
+							color="$blue800"
+						/>
+					)
+				}
 			/>
 		</YStack>
 	);
