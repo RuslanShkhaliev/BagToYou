@@ -1,6 +1,6 @@
 export enum RequestRole {
 	Sender,
-	Receiver,
+	Deliver,
 }
 
 export enum TransportType {
