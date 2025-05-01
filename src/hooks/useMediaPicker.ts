@@ -1,4 +1,7 @@
-import { createMediaPicker, CreateMediaPickerProps } from '@/lib/createMediaPicker';
+import {
+	createMediaPicker,
+	CreateMediaPickerProps,
+} from '@/lib/createMediaPicker';
 import { useState } from 'react';
 
 export const useMediaPicker = (props: CreateMediaPickerProps) => {
