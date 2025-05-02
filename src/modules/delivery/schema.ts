@@ -1,10 +1,9 @@
 import { TransportType } from '@/common';
-import { mediaAssetSchema } from '@/common/schema';
-import { routeRequestSchema } from '@/modules/request/schema';
+import { mediaAssetSchema, routeSchema } from '@/common/schema';
 import { z } from 'zod';
 
 export const formStep1Scheme = z.object({
-	route: routeRequestSchema.default({}),
+	route: routeSchema,
 	date: z.date(),
 	transport: z.nativeEnum(TransportType).default(TransportType.Plane),
 });

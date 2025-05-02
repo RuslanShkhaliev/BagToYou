@@ -16,14 +16,21 @@ export const LoginScreen = () => {
 	return (
 		<View>
 			<Text>Login</Text>
-			<TextInput placeholder="Email" value={email} onChangeText={setEmail} />
 			<TextInput
-				placeholder="Password"
+				placeholder='Email'
+				value={email}
+				onChangeText={setEmail}
+			/>
+			<TextInput
+				placeholder='Password'
 				value={password}
 				secureTextEntry
 				onChangeText={setPassword}
 			/>
-			<Button title="Войти" onPress={handleLogin} />
+			<Button
+				title='Войти'
+				onPress={handleLogin}
+			/>
 		</View>
 	);
 };

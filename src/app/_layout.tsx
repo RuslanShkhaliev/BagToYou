@@ -1,4 +1,5 @@
 import { AuthProvider } from '@/context/AuthContext';
+import { delay } from '@/utils/delay';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -18,9 +19,11 @@ export default function RootLayout() {
 	});
 
 	useEffect(() => {
-		if (loaded) {
-			SplashScreen.hideAsync();
-		}
+		delay(500).then(() => {
+			if (loaded) {
+				SplashScreen.hideAsync();
+			}
+		});
 	}, [loaded]);
 
 	if (!loaded) {
@@ -35,11 +38,13 @@ export default function RootLayout() {
 						bg={'$bg'}
 						flex={1}
 					>
-						<Stack
-							screenOptions={{
-								headerShown: false,
-							}}
-						/>
+						<Stack screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
+							<Stack.Screen name="(tabs)" />
+							<Stack.Screen
+								name="(auth)"
+								options={{ presentation: 'modal', animation: 'slide_from_bottom' }}
+							/>
+						</Stack>
 						<StatusBar style="auto" />
 					</View>
 				</SafeAreaProvider>

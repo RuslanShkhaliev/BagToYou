@@ -19,7 +19,6 @@ interface PickerProps {
 }
 
 
-const iter = 0;
 export const RoutePicker = ({
 	value = { from: null, to: null },
 	onPick,
@@ -32,12 +31,12 @@ export const RoutePicker = ({
 
 	const {
 		route,
-		setRoute,
 		cities,
 		activeInput,
 		setActiveInput,
 		selectCity,
 		setSearchText,
+		changeDir,
 		searchText,
 		loading,
 	} = useRoutePicker({
@@ -55,6 +54,7 @@ export const RoutePicker = ({
 		},
 	});
 
+
 	const openSheet = (activeInput: ActiveInputType) => {
 		setActiveInput(activeInput);
 		toggleOpen(true);
@@ -69,10 +69,9 @@ export const RoutePicker = ({
 		onPick?.(route);
 	};
 	const onChangeDir = () => {
-		const reversed = { from: route.to, to: route.from };
-		// setRoute(() => reversed);
+		const reversedRoute = changeDir();
 
-		onPick?.(reversed);
+		onPick?.(reversedRoute);
 	};
 
 	return (

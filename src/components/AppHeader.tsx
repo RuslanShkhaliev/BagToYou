@@ -1,5 +1,7 @@
+import { TextStyled } from '@/components/TextStyled';
 import { LogIn } from '@tamagui/lucide-icons';
-import { Button, Header } from 'tamagui';
+import { Link } from 'expo-router';
+import { Header, XStack } from 'tamagui';
 
 export const AppHeader = () => {
 	return (
@@ -9,18 +11,20 @@ export const AppHeader = () => {
 			flexDirection="row"
 			pl={10}
 		>
-			<Button
-				unstyled
-				borderWidth={0}
-				bg="transparent"
-				color="$btnText"
-				items="center"
-				justify="center"
-				icon={LogIn}
-				flexDirection="row"
+			<Link
+				href={'/login'}
 			>
-				Login
-			</Button>
+				<XStack
+					gap={4}
+					items={'center'}
+				>
+					<LogIn
+						size={16}
+						color={'$textPrimary'}
+					/>
+					<TextStyled>Login</TextStyled>
+				</XStack>
+			</Link>
 		</Header>
 	);
 };

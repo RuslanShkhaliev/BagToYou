@@ -1,7 +1,7 @@
 import { MediaAsset } from '@/common/schema';
 import { MediaPicker } from '@/components/MediaPicker/MediaPicker';
-import { PageWrapper } from '@/components/PageWrapper';
-import { InputField } from '@/components/ui/InputField';
+import { ScreenScroll } from '@/components/ScreenScroll';
+import { FormInput } from '@/components/ui/Inputs/FormInput';
 import { LabelStyled } from '@/components/ui/LabelStyled';
 import { TextareaThemed } from '@/components/ui/TextareaThemed';
 import { formStep2Scheme, FormStep2Scheme } from '@/modules/delivery/schema';
@@ -59,10 +59,16 @@ export const DeliveryStep2 = () => {
 	};
 
 	return (
-		<PageWrapper>
-			<Form gap="$6" onSubmit={handleSubmit(onSubmit)}>
+		<ScreenScroll>
+			<Form
+				gap="$6"
+				onSubmit={handleSubmit(onSubmit)}
+			>
 				<YStack>
-					<Heading fontSize={18} color="$textPrimary">
+					<Heading
+						fontSize={18}
+						color="$textPrimary"
+					>
 						Получатель
 					</Heading>
 
@@ -73,14 +79,14 @@ export const DeliveryStep2 = () => {
 								control={control}
 								rules={{ required: true }}
 								render={({ field: { onChange, value, onBlur } }) => (
-									<InputField
+									<FormInput
 										required
 										placeholder="Имя"
 										onBlur={onBlur}
 										onChangeText={onChange}
+										textContentType="name"
 										value={value}
-										errorMessage={errors.name?.message}
-										isInvalid={!!errors.name?.message}
+										error={errors.name?.message}
 									/>
 								)}
 							/>
@@ -89,15 +95,14 @@ export const DeliveryStep2 = () => {
 								control={control}
 								rules={{ required: true }}
 								render={({ field: { onChange, value, onBlur } }) => (
-									<InputField
+									<FormInput
 										required
 										placeholder="Фамилия"
 										onBlur={onBlur}
 										onChangeText={onChange}
 										value={value}
-										textContentType="creditCardNumber"
-										errorMessage={errors.surname?.message}
-										isInvalid={!!errors.surname?.message}
+										textContentType="name"
+										error={errors.surname?.message}
 									/>
 								)}
 							/>
@@ -106,23 +111,27 @@ export const DeliveryStep2 = () => {
 								control={control}
 								rules={{ required: true }}
 								render={({ field: { onChange, value, onBlur } }) => (
-									<InputField
+									<FormInput
 										required
 										placeholder="Телефон для связи"
+										textContentType="telephoneNumber"
+										keyboardType="phone-pad" //
 										onBlur={onBlur}
 										onChangeText={onChange}
 										value={value}
-										errorMessage={errors.phone?.message}
-										isInvalid={!!errors.phone?.message}
+										error={errors.phone?.message}
 									/>
 								)}
 							/>
 						</YStack>
 						<YStack>
-							<XStack gap="$3" alignItems="center">
+							<XStack
+								gap="$3"
+								items="center"
+							>
 								<Checkbox
 									id="checkbox-recipient"
-									size="$3"
+									size="$4"
 									checked={isMe}
 									onCheckedChange={setIsMe}
 								>
@@ -130,11 +139,18 @@ export const DeliveryStep2 = () => {
 										<Check />
 									</Checkbox.Indicator>
 								</Checkbox>
-								<LabelStyled padding={0} height={14} htmlFor="checkbox-recipient">
+								<LabelStyled
+									fontSize={14}
+									p={0}
+									htmlFor="checkbox-recipient"
+								>
 									выбрать себя получателем
 								</LabelStyled>
 							</XStack>
-							<Text color="$textSecondary" fontSize={10}>
+							<Text
+								color="$textSecondary"
+								fontSize={10}
+							>
 								заполним данными из вашего профиля
 							</Text>
 						</YStack>
@@ -142,24 +158,30 @@ export const DeliveryStep2 = () => {
 				</YStack>
 				<YStack>
 					<YStack gap={10}>
-						<Heading fontSize={18} color="$textPrimary">
+						<Heading
+							fontSize={18}
+							color="$textPrimary"
+						>
 							Габариты посылки
 						</Heading>
-						<XStack gap="$3" alignItems="center">
+						<XStack
+							gap="$3"
+							items="center"
+						>
 							<Controller
 								name="width"
 								control={control}
 								rules={{ required: true }}
 								render={({ field: { onChange, value, onBlur } }) => (
-									<InputField
+									<FormInput
 										fontSize={14}
-										label="Width(cm)"
+										label="Width (cm)"
+										keyboardType="numeric"
 										onBlur={onBlur}
 										onChangeText={onChange}
 										value={value}
 										required
-										errorMessage={errors.width?.message}
-										isInvalid={!!errors.width?.message}
+										error={errors.width?.message}
 									/>
 								)}
 							/>
@@ -168,33 +190,36 @@ export const DeliveryStep2 = () => {
 								name="length"
 								control={control}
 								render={({ field: { onChange, onBlur, value } }) => (
-									<InputField
+									<FormInput
 										fontSize={14}
-										label="Length(cm)"
+										label="Length (cm)"
+										keyboardType="numeric"
 										value={value}
 										onChangeText={onChange}
 										onBlur={onBlur}
 										required
-										errorMessage={errors.length?.message}
-										isInvalid={!!errors.length?.message}
+										error={errors.length?.message}
 									/>
 								)}
 							/>
 						</XStack>
-						<XStack gap="$3" alignItems="center">
+						<XStack
+							gap="$3"
+							items="center"
+						>
 							<Controller
 								name="height"
 								control={control}
 								render={({ field: { onChange, onBlur, value } }) => (
-									<InputField
+									<FormInput
+										keyboardType="numeric"
 										fontSize={14}
-										label="Height(cm)"
+										label="Height (cm)"
 										value={value}
 										onChangeText={onChange}
 										onBlur={onBlur}
 										required
-										errorMessage={errors.height?.message}
-										isInvalid={!!errors.height?.message}
+										error={errors.height?.message}
 									/>
 								)}
 							/>
@@ -202,29 +227,36 @@ export const DeliveryStep2 = () => {
 								name="weight"
 								control={control}
 								render={({ field: { onChange, onBlur, value } }) => (
-									<InputField
+									<FormInput
+										keyboardType="decimal-pad"
 										fontSize={14}
-										label="Weight(kg)"
+										label="Weight (kg)"
 										value={value}
 										onChangeText={onChange}
 										onBlur={onBlur}
 										required
-										errorMessage={errors.weight?.message}
-										isInvalid={!!errors.weight?.message}
+										error={errors.weight?.message}
 									/>
 								)}
 							/>
 						</XStack>
 					</YStack>
-					<MediaPicker media={deliveryStore.step2.media} onUpdate={updateImages} />
+					<MediaPicker
+						media={deliveryStore.step2.media}
+						onUpdate={updateImages}
+					/>
 
 					<YStack>
-						<LabelStyled fontSize={12}>Подробное описание</LabelStyled>
+						<LabelStyled fontSize="$5">Подробное описание</LabelStyled>
 						<Controller
 							name="description"
 							control={control}
 							render={({ field: { onChange, value, onBlur } }) => (
-								<TextareaThemed onBlur={onBlur} onChangeText={onChange} value={value} />
+								<TextareaThemed
+									onBlur={onBlur}
+									onChangeText={onChange}
+									value={value}
+								/>
 							)}
 						/>
 					</YStack>
@@ -233,24 +265,28 @@ export const DeliveryStep2 = () => {
 					name="rewards"
 					control={control}
 					render={({ field: { onChange, value, onBlur } }) => (
-						<InputField
+						<FormInput
+							keyboardType="numeric"
 							id="input-rewards"
 							onBlur={onBlur}
 							onChangeText={onChange}
 							value={value}
 							placeholder="1000"
-							label="Укажите вознаграждение"
-							errorMessage={errors.rewards?.message}
-							isInvalid={!!errors.rewards?.message}
+							label="Стоимость услуги"
+							hint={'Заказчик увидит эту цену рядом с названием объявления'}
+							error={errors.rewards?.message}
 						/>
 					)}
 				/>
 				<Form.Trigger asChild>
-					<Button size="$4" fontSize={18}>
+					<Button
+						size="$4"
+						fontSize={18}
+					>
 						Опубликовать
 					</Button>
 				</Form.Trigger>
 			</Form>
-		</PageWrapper>
+		</ScreenScroll>
 	);
 };

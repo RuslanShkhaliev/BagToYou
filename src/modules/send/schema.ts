@@ -9,7 +9,6 @@ export const senderRoute = z.object({
 });
 
 export const parcelInfoSchema = z.object({
-	description: z.string().default(''),
 	weight: z.string({ message: 'Укажите вес посылки' }).default(''),
 	length: z.string({ message: 'Укажите длину посылки' }).default(''),
 	width: z.string({ message: 'Укажите ширину посылки' }).default(''),
@@ -27,7 +26,7 @@ export const recipientInfoSchema = z.object({
 export type RecipientInfo = z.infer<typeof recipientInfoSchema>;
 
 export const senderRequestSchema = baseRequestSchema.extend({
-	package: parcelInfoSchema,
+	parcel: parcelInfoSchema,
 	recipient: recipientInfoSchema,
 	route: senderRoute,
 	rewards: z.string().default(''),

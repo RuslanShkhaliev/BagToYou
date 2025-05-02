@@ -1,28 +1,22 @@
-import { Direction } from '@/common';
-import { DateControl } from '@/components/DateControl';
-import { DatesSheet, DatesSheetRef } from '@/components/DatesSheet';
-import { DateSelection } from '@/components/interfaces';
-import { PageWrapper } from '@/components/PageWrapper';
-import { RoutesInputGroup } from '@/components/RoutesInputGroup';
-import { RoutesSheet, RoutesSheetRef } from '@/components/RoutesSheet';
+import { DateSelection } from '@/common/interface';
+import { ScreenScroll } from '@/components/ScreenScroll';
+import { ButtonStyled } from '@/components/ui/ButtonStyled';
 import { DeliveryRoute, useDeliveryStore } from '@/modules/delivery/store';
+import { DatePicker } from '@/widgets/DatesPicker';
+import { RoutePicker } from '@/widgets/RoutePicker/RoutePicker';
 import { useRouter } from 'expo-router';
-import { useCallback, useRef, useState } from 'react';
-import { Button, Form, YStack } from 'tamagui';
+import { useCallback, useState } from 'react';
+import { Form, YStack } from 'tamagui';
 
 export const DeliveryStep1 = () => {
 	const store = useDeliveryStore();
 
-	const [routes, setRoute] = useState<DeliveryRoute>(store.route);
-	const [date, setDates] = useState<Date>(store.date);
-
-	const routesSheetRef = useRef<RoutesSheetRef>(null);
-
-	const routeSelect = (dir: Direction) => {
-		routesSheetRef.current?.open(dir);
+	const [route, setRoute] = useState<DeliveryRoute>(store.step1.route);
+	const [date, setDates] = useState<Date>(store.step1.date);
+	const onPickRoute = (route: DeliveryRoute) => {
+		console.log({ route }, 'onPickRoute');
+		setRoute((prev) => route);
 	};
-	const onRouteFromSelect = () => routeSelect(Direction.From);
-	const onRouteToSelect = () => routeSelect(Direction.To);
 
 	const onSelectRoute = useCallback((route: DeliveryRoute) => {
 		setRoute((state) => ({ ...state, ...route }));
@@ -31,43 +25,34 @@ export const DeliveryStep1 = () => {
 	const onSelectDates = (dates: DateSelection) => {
 		setDates((state) => ({ ...state, ...dates }));
 	};
-
-	const datesSheetRef = useRef<DatesSheetRef>(null);
-	const dateSheetOpen = (dir: Direction) => {
-		console.log('dateSheetOpen', datesSheetRef.current);
-		datesSheetRef.current?.open(dir);
-	};
-
-	const onFromPress = () => dateSheetOpen(Direction.From);
 	const router = useRouter();
 	const nextStep = () => {
-		router.push('/deliver/step2');
+		router.push('/delivery/step2');
 	};
 
 	return (
-		<PageWrapper paddingTop={10}>
+		<ScreenScroll pt={10}>
 			<Form gap="$6">
 				<YStack gap="$4">
-					<RoutesInputGroup
-						to={routes.to}
-						from={routes.from}
-						onFromSelect={onRouteFromSelect}
-						onToSelect={onRouteToSelect}
+					<RoutePicker
+						onPick={onPickRoute}
+						value={route}
 					/>
-					<DateControl onPress={onFromPress} value={date} placeholder="Дата доставки" />
-					<RoutesSheet ref={routesSheetRef} onSelect={onSelectRoute} routes={routes} />
-					<DatesSheet
-						ref={datesSheetRef}
-						dates={{ from: date, to: date }}
-						onSelect={onSelectDates}
+					<DatePicker
+						dates={[date]}
 					/>
 				</YStack>
 				<Form.Trigger asChild>
-					<Button size="$5" fontSize="18px" onPress={nextStep}>
+					<ButtonStyled
+						size="$5"
+						primary
+						fontSize={18}
+						onPress={nextStep}
+					>
 						Продолжить
-					</Button>
+					</ButtonStyled>
 				</Form.Trigger>
 			</Form>
-		</PageWrapper>
+		</ScreenScroll>
 	);
 };

@@ -25,7 +25,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		return unsubscribe;
 	}, []);
 
-	return <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={{ user, loading }}>
+			{children}
+		</AuthContext.Provider>
+	);
 };
 
 export const useAuth = () => {

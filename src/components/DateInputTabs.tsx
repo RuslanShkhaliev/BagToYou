@@ -1,8 +1,10 @@
 import { Direction } from '@/common';
-import { DateControl } from '@/components/DateControl';
-import { DateValue } from '@/components/interfaces';
+import { DateValue } from '@/common/interface';
 import { ToggleGroupItem } from '@/components/ToggleGroupItem';
-import { Separator, ToggleGroup } from 'tamagui';
+import { Divider } from '@/components/ui/Divider';
+import { DateControl } from '@/widgets/DatesPicker/DateControl';
+import { ToggleGroup } from 'tamagui';
+
 
 interface Props {
 	fromVal?: DateValue;
@@ -10,28 +12,41 @@ interface Props {
 	dir: Direction;
 	onChange: (val: Direction) => void;
 }
+
+
 export const DateInputTabs = ({ fromVal, toVal, dir, onChange }: Props) => {
 	console.log('render', 'ew');
 	return (
-		<ToggleGroup value={dir} type="single" backgroundColor="white" onValueChange={onChange}>
+		<ToggleGroup
+			value={dir}
+			type="single"
+			bg="$white"
+			onValueChange={onChange}
+		>
 			<ToggleGroupItem
 				active={dir === Direction.From}
 				value={Direction.From}
-				padding={0}
+				p={0}
 				height="max-content"
 				overflow="hidden"
 			>
-				<DateControl value={fromVal} placeholder="Дата отправления" />
+				<DateControl
+					value={fromVal}
+					placeholder="Дата отправления"
+				/>
 			</ToggleGroupItem>
-			<Separator vertical />
+			<Divider vertical />
 			<ToggleGroupItem
 				active={dir === Direction.To}
 				value={Direction.To}
-				padding={0}
+				p={0}
 				height="max-content"
 				overflow="hidden"
 			>
-				<DateControl value={toVal} placeholder="Дата прибытия" />
+				<DateControl
+					value={toVal}
+					placeholder="Дата прибытия"
+				/>
 			</ToggleGroupItem>
 		</ToggleGroup>
 	);

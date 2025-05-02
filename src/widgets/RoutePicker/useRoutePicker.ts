@@ -38,9 +38,11 @@ export const useRoutePicker = ({
 		},
 	});
 
-	useEffect(() => {
-		setRoute(() => initialValue);
-	}, [initialValue]);
+	const changeDir = () => {
+		const reversedRoute = { from: route.to, to: route.from };
+		setRoute(() => reversedRoute);
+		return reversedRoute;
+	};
 
 	const fetchDebounced = useMemo(() => debounce(async (text: string) => {
 		iter++;
@@ -106,7 +108,7 @@ export const useRoutePicker = ({
 
 	return {
 		route,
-		setRoute,
+		changeDir,
 		searchText,
 		setSearchText,
 		activeInput,

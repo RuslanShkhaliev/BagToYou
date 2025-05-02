@@ -1,10 +1,12 @@
 import { Surface } from '@/components/ui/Surface';
-import { Text } from 'tamagui';
+import { Text, View } from 'tamagui';
 
 export const ProfileScreen = () => {
 	return (
-		<Surface>
-			<Text>Profile</Text>
-		</Surface>
+		<View>
+			<Surface>
+				<Text>Profile</Text>
+			</Surface>
+		</View>
 	);
 };

@@ -2,7 +2,7 @@ import { TextThemed } from '@/components/ui/TextThemed';
 import { useKeyboard } from '@/hooks/useKeyboard';
 import { X } from '@tamagui/lucide-icons';
 import React, { forwardRef, useEffect, useState } from 'react';
-import { Button, Sheet, SheetProps, XStack, YStack } from 'tamagui';
+import { Button, Sheet, SheetProps, View, XStack, YStack } from 'tamagui';
 
 
 export interface BottomSheetProps extends SheetProps {
@@ -11,6 +11,7 @@ export interface BottomSheetProps extends SheetProps {
 	title?: string;
 	onOpen?: () => void;
 	onClose?: () => void;
+	scroll?: boolean;
 	toggleOpen?: (open: boolean) => void;
 	keyboardShouldPersistTaps?: 'always' | 'handled' | 'never' | boolean;
 }
@@ -33,6 +34,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 			onClose,
 			unmountChildrenWhenHidden = true,
 			keyboardShouldPersistTaps = 'handled',
+			scroll = true,
 			...props
 		},
 		ref,
@@ -110,13 +112,20 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 						</XStack>
 						{header}
 					</YStack>
-					<Sheet.ScrollView
-						px={12}
-						bounces={false}
-						keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-					>
-						{children}
-					</Sheet.ScrollView>
+					{scroll ?
+					 <Sheet.ScrollView
+						 px={12}
+						 bounces={false}
+						 keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+					 >
+						 {children}
+					 </Sheet.ScrollView> :
+					 <View px={12}>
+						 {children}
+					 </View>
+					}
+
+
 				</Sheet.Frame>
 			</Sheet>
 		);

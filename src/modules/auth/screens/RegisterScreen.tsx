@@ -16,8 +16,17 @@ export const RegisterScreen = () => {
 	return (
 		<YStack>
 			<Text>Registration</Text>
-			<Input placeholder="Email" value={email} onChangeText={setEmail} />
-			<Input placeholder="Password" value={password} secureTextEntry onChangeText={setPassword} />
+			<Input
+				placeholder='Email'
+				value={email}
+				onChangeText={setEmail}
+			/>
+			<Input
+				placeholder='Password'
+				value={password}
+				secureTextEntry
+				onChangeText={setPassword}
+			/>
 			<Button onPress={handleRegister}>Войти</Button>
 		</YStack>
 	);
