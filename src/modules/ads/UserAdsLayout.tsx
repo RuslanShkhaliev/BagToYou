@@ -1,37 +1,72 @@
-import { ScreenScroll } from '@/components/ScreenScroll';
-import { AppTitle } from '@/components/ui/AppTitle';
+import { EmptyState } from '@/components/EmptyState';
+import { PageTitle } from '@/components/PageTitle';
+import { ScreenView } from '@/components/ScreenView';
+import { TabsUnderline } from '@/components/TabsUnderline';
+import { TabUnderlineItem } from '@/components/TabsUnderline/TabUnderlineItem';
 import { TextThemed } from '@/components/ui/TextThemed';
+import { AdsType } from '@/modules/ads/enums';
+import { useUserActiveAds, useUserDraftsAds } from '@/modules/ads/service';
 import { PropsWithChildren } from 'react';
-import { ToggleGroup } from 'tamagui';
-
+import { styled, Text } from 'tamagui';
 
 interface UserAdsLayoutProps extends PropsWithChildren {
-	activeTab: 'active' | 'drafts';
-	onChangeTab: (tab: 'active' | 'drafts') => void;
+	activeTab: AdsType;
+	onChangeTab: (tab: AdsType) => void;
 }
 
+const AdsCounter = styled(Text, {
+	position: 'absolute',
+	t: 0,
+	r: 0,
+	color: '$textSecondary',
+	fontSize: 10,
+});
 
-export const UserAdsLayout = ({ children, activeTab, onChangeTab }: UserAdsLayoutProps) => {
+export const UserAdsLayout = ({
+	children,
+	activeTab,
+	onChangeTab,
+}: UserAdsLayoutProps) => {
+	const { data: activeData = [], isFetching: isActiveFetching } =
+		useUserActiveAds();
+	const { data: draftsData = [], isFetching: isDraftsFetching } =
+		useUserDraftsAds();
 
 	return (
-		<ScreenScroll
+		<ScreenView
+			pt={0}
 			flex={1}
 		>
-			<AppTitle>Мои объявления</AppTitle>
-			<ToggleGroup
-				type={'single'}
-				disableDeactivation
-				value={activeTab}
-				onValueChange={onChangeTab}
-			>
-				<ToggleGroup.Item value={'active'}>
-					<TextThemed>Active</TextThemed>
-				</ToggleGroup.Item>
-				<ToggleGroup.Item value={'drafts'}>
-					<TextThemed>Drafts</TextThemed>
-				</ToggleGroup.Item>
-			</ToggleGroup>
+			<PageTitle>Мои объявления</PageTitle>
+			{!draftsData.length && !activeData.length ? (
+				<EmptyState />
+			) : (
+				<TabsUnderline
+					activeTab={activeTab}
+					onChangeTab={onChangeTab}
+				>
+					<TabUnderlineItem
+						value={'active'}
+						position={'relative'}
+					>
+						<TextThemed fontSize={18}>Активные</TextThemed>
+						{Boolean(activeData.length) && (
+							<AdsCounter>{activeData.length}</AdsCounter>
+						)}
+					</TabUnderlineItem>
+
+					<TabUnderlineItem
+						value={'drafts'}
+						position={'relative'}
+					>
+						<TextThemed fontSize={18}>Черновики</TextThemed>
+						{Boolean(draftsData.length) && (
+							<AdsCounter>{draftsData.length}</AdsCounter>
+						)}
+					</TabUnderlineItem>
+				</TabsUnderline>
+			)}
 			{children}
-		</ScreenScroll>
+		</ScreenView>
 	);
 };

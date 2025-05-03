@@ -67,3 +67,12 @@ export const generateMockDeliveryInfo = (
 export const createMockRequests = (length = 20) => {
 	return Array.from({ length }, () => generateMockDeliveryInfo());
 };
+
+export const randomInt = (options?: { min?: number; max?: number }) => {
+	return faker.number.int(options);
+};
+
+export const generateArray = <T>(
+	length: number,
+	cb: (item?: unknown, i?: number) => T,
+) => Array.from({ length }, cb);
