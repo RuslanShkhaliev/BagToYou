@@ -1,5 +1,5 @@
-import { DeliveryInfo } from '@/common/interfaces';
-import { DateRange, RouteSchema } from '@/common/schema';
+import { DeliveryInfo } from '@/shared/interfaces';
+import { DateRange, RouteSchema } from '@/shared/schema';
 import { isSameDay } from 'date-fns';
 
 interface FilterOptions {
@@ -10,6 +10,7 @@ interface FilterOptions {
 const matched = (source1: string, source2: string) => {
 	return source1.toLowerCase().includes(source2.toLowerCase());
 };
+
 export function filterDeliveries(
 	deliveries: DeliveryInfo[],
 	filters: FilterOptions,

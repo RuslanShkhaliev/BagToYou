@@ -1,8 +1,8 @@
 import { ScreenScroll } from '@/components/ScreenScroll';
-import { ButtonStyled } from '@/components/ui/ButtonStyled';
+import { ButtonStyled } from '@/components/ui/buttons/ButtonStyled';
 import { FormInput } from '@/components/ui/Inputs';
+import { TextareaThemed } from '@/components/ui/Inputs/TextareaThemed';
 import { LabelStyled } from '@/components/ui/LabelStyled';
-import { TextareaThemed } from '@/components/ui/TextareaThemed';
 import { useState } from 'react';
 import { Form, YStack } from 'tamagui';
 
@@ -11,9 +11,7 @@ export const SendStep2 = () => {
 
 	return (
 		<ScreenScroll>
-			<Form
-				gap="$6"
-			>
+			<Form gap='$6'>
 				<YStack gap={6}>
 					<LabelStyled>Условия перевозки</LabelStyled>
 					<TextareaThemed
@@ -23,16 +21,16 @@ export const SendStep2 = () => {
 					/>
 				</YStack>
 				<FormInput
-					keyboardType="numeric"
-					id="input-rewards"
+					keyboardType='numeric'
+					id='input-rewards'
 					onChangeText={setRewards}
 					value={rewards}
-					placeholder="1000"
-					label="Укажите вознаграждение"
+					placeholder='1000'
+					label='Укажите вознаграждение'
 				/>
 				<Form.Trigger asChild>
 					<ButtonStyled
-						size="$5"
+						size='$5'
 						fontSize={18}
 					>
 						Опубликовать

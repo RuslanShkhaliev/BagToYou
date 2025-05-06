@@ -1,12 +1,19 @@
-import { Location } from '@/common/schema';
 import { BottomSheet } from '@/components/BottomSheet';
 import { ToggleGroupItem } from '@/components/ToggleGroupItem';
-import { ButtonStyled } from '@/components/ui/ButtonStyled';
+import { ButtonStyled } from '@/components/ui/buttons/ButtonStyled';
+import { Location } from '@/shared/schema';
 import { DateControl } from '@/widgets/DatesPicker/DateControl';
 import React, { useMemo, useState } from 'react';
 import { CalendarList } from 'react-native-calendars/src';
-import { Button, Text, ToggleGroup, useTheme, View, XStack, YStack } from 'tamagui';
-
+import {
+	Button,
+	Text,
+	ToggleGroup,
+	useTheme,
+	View,
+	XStack,
+	YStack,
+} from 'tamagui';
 
 interface PickField {
 	value: Date | string;
@@ -18,12 +25,10 @@ interface PickField {
 	onPicked?: (route: Location) => void;
 }
 
-
 interface DatesPickerProps {
 	dates: [Date, Date?];
 	fields: PickField[];
 }
-
 
 export const DatePicker = (props: DatesPickerProps) => {
 	const [sheetOpen, toggleOpen] = useState(false);
@@ -50,7 +55,7 @@ export const DatePicker = (props: DatesPickerProps) => {
 			<DateControl
 				height={40}
 				placeholder={'select dates'}
-				rounded={16}
+				rounded={8}
 				onPress={showSheet}
 			/>
 			<BottomSheet
@@ -110,8 +115,8 @@ export const DatePicker = (props: DatesPickerProps) => {
 									width={'100%'}
 									borderWidth={0}
 									height={48}
-									justify="center"
-									items="center"
+									justify='center'
+									items='center'
 									onPress={() => {
 										onPress(date?.dateString);
 									}}
@@ -119,13 +124,14 @@ export const DatePicker = (props: DatesPickerProps) => {
 									pressStyle={{
 										bg: '$tabBg',
 									}}
-
 								>
 									<Text
 										fontWeight={700}
 										fontSize={15}
 										color={'$textPrimary'}
-									>{date?.day}</Text>
+									>
+										{date?.day}
+									</Text>
 								</Button>
 							</XStack>
 						);
@@ -154,7 +160,6 @@ export const DatePicker = (props: DatesPickerProps) => {
 								justifyContent: 'flex-start',
 							},
 						},
-
 					}}
 					ListFooterComponent={() => (
 						<ButtonStyled
@@ -162,7 +167,9 @@ export const DatePicker = (props: DatesPickerProps) => {
 							t={0}
 							z={100}
 							position={'absolute'}
-						>Продолжить</ButtonStyled>
+						>
+							Продолжить
+						</ButtonStyled>
 					)}
 				/>
 			</BottomSheet>

@@ -1,7 +1,7 @@
-import { TransportType } from '@/common';
 import { IconProps } from '@tamagui/helpers-icon';
 import { Bike, Bus, Car, Plane, Ship, TrainFront } from '@tamagui/lucide-icons';
 import React from 'react';
+import { TransportType } from 'src/shared';
 
 const icons = {
 	[TransportType.Plane]: Plane,
@@ -12,11 +12,9 @@ const icons = {
 	[TransportType.Bus]: Bus,
 };
 
-
 interface IconTransportProps extends IconProps {
 	type: TransportType;
 }
-
 
 export const IconTransport = ({
 	type,

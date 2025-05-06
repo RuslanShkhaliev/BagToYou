@@ -1,7 +1,8 @@
+import { useLayoutInsets } from '@/context/layout-insets.context';
 import { TabButton } from '@/layout/AppTabs/TabButton';
 import { TabsContainer } from '@/layout/AppTabs/TabsContainer';
 import { IconProps } from '@tamagui/helpers-icon';
-import { ClipboardList, Search, UserCog } from '@tamagui/lucide-icons';
+import { ClipboardList, Search, Settings } from '@tamagui/lucide-icons';
 import { Href } from 'expo-router';
 import { TabList, Tabs, TabSlot, TabTrigger } from 'expo-router/ui';
 import { NamedExoticComponent } from 'react';
@@ -24,17 +25,22 @@ const tabBarButtons: TabButtonItem[] = [
 		IconComponent: ClipboardList,
 	},
 	{
-		href: '/profile',
-		name: 'Profile',
-		IconComponent: UserCog,
+		href: '/settings',
+		name: 'Settings',
+		IconComponent: Settings,
 	},
 ];
-export const AppTabs = () => {
+export const BottomTabsLayout = () => {
+	const { setTabBarHeight } = useLayoutInsets();
 	return (
 		<Tabs>
-			<TabSlot />
+			<TabSlot enabled />
 			<TabList asChild>
-				<TabsContainer>
+				<TabsContainer
+					onLayout={(e) => {
+						setTabBarHeight(e.nativeEvent.layout.height);
+					}}
+				>
 					{tabBarButtons.map((tab) => (
 						<TabTrigger
 							key={tab.name}

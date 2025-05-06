@@ -1,11 +1,12 @@
-import { RequestRole } from '@/common';
 import { ToggleGroupItem } from '@/components/ToggleGroupItem';
+import { RequestRole } from 'src/shared';
 import { Text, ToggleGroup } from 'tamagui';
 
 interface Props {
 	onChange: (role: RequestRole) => void;
 	role: RequestRole;
 }
+
 export const RoleToggleGroup = ({ onChange, role }: Props) => {
 	return (
 		<ToggleGroup

@@ -1,4 +1,4 @@
-export enum ActiveInputType {
+export enum InputTargetType {
 	From = 'from',
-	To = 'to'
+	To = 'to',
 }

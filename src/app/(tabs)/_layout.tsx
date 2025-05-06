@@ -1,3 +1,3 @@
-import { AppTabs } from '@/layout/AppTabs';
+import { BottomTabsLayout } from '@/layout/AppTabs';
 
-export default AppTabs;
+export default BottomTabsLayout;

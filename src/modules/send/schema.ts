@@ -1,6 +1,6 @@
-import { MessagePlatform } from '@/common';
-import { locationSchema } from '@/common/schema';
 import { baseRequestSchema } from '@/modules/request/schema';
+import { locationSchema } from '@/shared/schema';
+import { MessagePlatform } from 'src/shared';
 import { z } from 'zod';
 
 export const senderRoute = z.object({

@@ -1,14 +1,13 @@
-import { RequestRole, RequestStatus, TransportType } from '@/common';
 import { zustandStorage } from '@/lib/storage';
 import { STORAGE_REQUEST_KEY } from '@/modules/request/constants';
 import { SenderRequest } from '@/modules/send/schema';
+import { RequestRole, RequestStatus, TransportType } from 'src/shared';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
 
 type NullableProps<T extends object> = {
 	[Key in keyof T]: T[Key] | null | undefined;
 };
-
 
 interface ReceiverState {
 	conditions: ReceiverRequest['conditions'];
@@ -17,7 +16,6 @@ interface ReceiverState {
 	rewards: string;
 }
 
-
 interface SenderState
 	extends NullableProps<
 		Pick<SenderRequest, 'package' | 'recipient' | 'route'>
@@ -25,12 +23,10 @@ interface SenderState
 	rewards: string;
 }
 
-
 interface RequestCreationStore extends RequestBase {
 	sender: SenderState;
 	receiver: ReceiverState;
 }
-
 
 interface Actions {
 	updateState: (value: Partial<RequestBase>) => void;
@@ -38,7 +34,6 @@ interface Actions {
 	updateReceiver: (value: Partial<ReceiverState>) => void;
 	reset: () => void;
 }
-
 
 const defaultState = (): RequestCreationStore => {
 	return {

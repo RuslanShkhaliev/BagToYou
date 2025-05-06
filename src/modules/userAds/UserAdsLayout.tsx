@@ -1,0 +1,76 @@
+import { EmptyState } from '@/components/EmptyState';
+import { ButtonLink } from '@/components/ui/buttons/ButtonLink';
+import { TabUnderlineItem } from '@/components/ui/TabsUnderline/TabUnderlineItem';
+import { TextThemed } from '@/components/ui/TextThemed';
+import { ScreenLayout } from '@/layout/ScreenLayout/ScreenLayout';
+import { AdsType } from '@/modules/userAds/enums';
+import {
+	useUserActiveAdsQuery,
+	useUserDraftsAdsQuery,
+} from '@/modules/userAds/query';
+import { PropsWithChildren } from 'react';
+import { TabsUnderline } from 'src/components/ui/TabsUnderline';
+import { styled, Text } from 'tamagui';
+
+interface UserAdsLayoutProps extends PropsWithChildren {
+	activeTab: AdsType;
+	onChangeTab: (tab: AdsType) => void;
+}
+
+const AdsCounter = styled(Text, {
+	position: 'absolute',
+	t: 0,
+	r: 0,
+	color: '$textSecondary',
+	fontSize: 10,
+});
+
+export const UserAdsLayout = ({
+	children,
+	activeTab,
+	onChangeTab,
+}: UserAdsLayoutProps) => {
+	const { data: activeData = [], isFetching: isActiveFetching } =
+		useUserActiveAdsQuery();
+	const { data: draftsData = [], isFetching: isDraftsFetching } =
+		useUserDraftsAdsQuery();
+
+	return (
+		<ScreenLayout
+			stickyAction={
+				<ButtonLink href={'/add'}>Разместить объявление</ButtonLink>
+			}
+			title={'Мои объявления'}
+		>
+			{!draftsData.length && !activeData.length ? (
+				<EmptyState />
+			) : (
+				<TabsUnderline
+					activeTab={activeTab}
+					onChangeTab={onChangeTab}
+				>
+					<TabUnderlineItem
+						value={'active'}
+						position={'relative'}
+					>
+						<TextThemed fontSize={18}>Активные</TextThemed>
+						{Boolean(activeData.length) && (
+							<AdsCounter>{activeData.length}</AdsCounter>
+						)}
+					</TabUnderlineItem>
+
+					<TabUnderlineItem
+						value={'drafts'}
+						position={'relative'}
+					>
+						<TextThemed fontSize={18}>Черновики</TextThemed>
+						{Boolean(draftsData.length) && (
+							<AdsCounter>{draftsData.length}</AdsCounter>
+						)}
+					</TabUnderlineItem>
+				</TabsUnderline>
+			)}
+			{children}
+		</ScreenLayout>
+	);
+};

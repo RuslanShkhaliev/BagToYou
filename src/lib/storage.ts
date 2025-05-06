@@ -1,4 +1,4 @@
-import { IS_WEB } from '@/utils/platform';
+import { IS_WEB } from '@/shared/utils/platform';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createJSONStorage } from 'zustand/middleware';
 

@@ -1,14 +1,12 @@
-import { TransportType } from '@/common';
 import { IconTransport } from '@/components/icons';
 import { ToggleGroupItem } from '@/components/ToggleGroupItem';
+import { TransportType } from 'src/shared';
 import { ToggleGroup } from 'tamagui';
-
 
 interface Props {
 	value?: TransportType;
 	onChange?: (val: TransportType) => void;
 }
-
 
 const items = [
 	{
@@ -43,17 +41,17 @@ export const TransportGroup = ({ value, onChange }: Props) => {
 	};
 	return (
 		<ToggleGroup
-			justify="space-between"
-			type="single"
+			justify='space-between'
+			type='single'
 			value={String(value)}
 			disableDeactivation
 			onValueChange={handleChange}
-			bg="$tabBg"
+			bg='$tabBg'
 		>
 			{items.map((item) => (
 				<ToggleGroupItem
 					grow={1}
-					items="center"
+					items='center'
 					key={item.value}
 					p={2}
 					active={item.value === value}

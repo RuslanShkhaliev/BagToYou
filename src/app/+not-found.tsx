@@ -1,21 +1,22 @@
-import { TextStyled } from '@/components/TextStyled';
-import { ThemedView } from '@/components/ThemedView';
-import { Link, Stack } from 'expo-router';
+import { ButtonLink } from '@/components/ui/buttons/ButtonLink';
+import { TextThemed } from '@/components/ui/TextThemed';
+import { Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
+import { View } from 'tamagui';
 
 export default function NotFoundScreen() {
 	return (
 		<>
 			<Stack.Screen options={{ title: 'Oops!' }} />
-			<ThemedView style={styles.container}>
-				<TextStyled type="title">This screen doesn't exist.</TextStyled>
-				<Link
-					href="/"
-					style={styles.link}
+			<View style={styles.container}>
+				<TextThemed>This screen doesn't exist.</TextThemed>
+				<ButtonLink
+					href='/'
+					mt={15}
 				>
-					<TextStyled type="link">Go to home screen!</TextStyled>
-				</Link>
-			</ThemedView>
+					<TextThemed>Go to home screen!</TextThemed>
+				</ButtonLink>
+			</View>
 		</>
 	);
 }
@@ -26,9 +27,5 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		padding: 20,
-	},
-	link: {
-		marginTop: 15,
-		paddingVertical: 15,
 	},
 });

@@ -1,54 +1,74 @@
-import { TransportType } from '@/common';
-import { Location } from '@/common/schema';
 import { zustandStorage } from '@/lib/storage';
-import { FormStep1Scheme, FormStep2Scheme } from '@/modules/delivery/schema';
+import { Location } from '@/shared/schema';
+import { TransportType } from 'src/shared';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
 
 export const STORAGE_DELIVERY_KEY = 'delivery_draft';
 
-
-export interface DeliveryRoute {
+export interface RouteSelection {
 	from: Location | null;
 	to: Location | null;
 }
 
-
 interface DeliveryStore {
-	step1: Omit<FormStep1Scheme, 'route'> & { route: DeliveryRoute };
-	step2: FormStep2Scheme;
+	route: RouteSelection; // Step 1 — маршрут
+	transport: TransportType; // Step 1 — транспортное средство
+	date: Date; // Step 1 — дата
+
+	senderInfo: {
+		name: string;
+		surname: string;
+		phone: string;
+	}; // Step 2 — информация о получателе
+
+	parcelInfo: {
+		weight: string;
+		length: string;
+		width: string;
+		height: string;
+		type: string;
+		media: string[]; // или MediaAsset[], если тип определён
+	}; // Step 2 — посылка
+
+	description: string; // Step 2 — описание
+	rewards: string; // Step 2 — цена
+	media: string[]; // Step 2 — файлы вне parcelInfo (если нужно)
 }
 
-
 interface Actions {
-	saveStep1: (step1: Partial<FormStep1Scheme>) => void;
-	saveStep2: (step2: Partial<FormStep2Scheme>) => void;
+	updateField: <T extends DeliveryStore, K extends keyof T>(
+		field: K,
+		value: T[K],
+	) => void;
+	updateState: (patch: Partial<DeliveryStore>) => void;
 	reset: () => void;
 }
 
-
 const defaultState = (): DeliveryStore => {
 	return {
-		step1: {
-			route: {
-				from: null,
-				to: null,
-			},
-			transport: TransportType.Plane,
-			date: new Date(),
+		route: {
+			from: null,
+			to: null,
 		},
-		step2: {
+		transport: TransportType.Plane,
+		date: new Date(),
+		senderInfo: {
 			name: '',
 			surname: '',
 			phone: '',
+		},
+		parcelInfo: {
+			weight: '',
+			length: '',
 			width: '',
 			height: '',
-			length: '',
-			weight: '',
-			description: '',
-			rewards: '',
+			type: '',
 			media: [],
 		},
+		description: '',
+		rewards: '',
+		media: [],
 	};
 };
 
@@ -59,10 +79,8 @@ export const useDeliveryStore = create<
 	persist(
 		(set) => ({
 			...defaultState(),
-			saveStep1: (patch) =>
-				set((state) => ({ step1: { ...state.step1, ...patch } })),
-			saveStep2: (patch) =>
-				set((state) => ({ step2: { ...state.step2, ...patch } })),
+			updateField: (field, value) => set(() => ({ [field]: value })),
+			updateState: (patch) => set((state) => ({ ...state, ...patch })),
 			reset: () => set(() => defaultState()),
 		}),
 		{
