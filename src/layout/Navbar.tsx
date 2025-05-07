@@ -1,8 +1,8 @@
 import { ChevronLeft, X } from '@tamagui/lucide-icons';
 import { PropsWithChildren } from 'react';
-import { Button, styled, XStack } from 'tamagui';
+import { Button, styled, XStack, XStackProps } from 'tamagui';
 
-interface NavbarProps {
+interface NavbarProps extends XStackProps {
 	onBack?: () => void;
 	onClose?: () => void;
 	left?: React.ReactNode;
@@ -16,6 +16,7 @@ export const Navbar = ({
 	children,
 	left,
 	right,
+	...props
 }: PropsWithChildren<NavbarProps>) => {
 	const ButtonBack = onBack && (
 		<NavButton
@@ -52,6 +53,7 @@ export const Navbar = ({
 			justify={'space-between'}
 			items={'center'}
 			px={12}
+			{...props}
 		>
 			<XStack
 				minW={60}

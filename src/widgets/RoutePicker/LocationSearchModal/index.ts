@@ -1,1 +1,0 @@
-export { LocationSearchModal } from './LocationSearchModal';

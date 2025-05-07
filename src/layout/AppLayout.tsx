@@ -1,58 +1,48 @@
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useTheme, View } from 'tamagui';
+import { PropsWithChildren } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme, View, XStack } from 'tamagui';
 export const AppLayout = () => {
 	const theme = useTheme();
+	const insets = useSafeAreaInsets();
+
+	const renderScreenWrapper = ({ children }: PropsWithChildren) => (
+		<View
+			style={{
+				backgroundColor: theme.bg.val,
+				flex: 1,
+			}}
+		>
+			<XStack
+				bg={'transparent'}
+				height={insets.top}
+			/>
+			{children}
+		</View>
+	);
+
 	return (
 		<View
 			style={{
-				backgroundColor: 'red',
+				backgroundColor: theme.bg.val,
 				flex: 1,
 			}}
 		>
 			<Stack
-				layout={({ children }) => (
-					<View
-						bg={'red'}
-						flex={1}
-					>
-						{children}
-					</View>
-				)}
+				screenLayout={renderScreenWrapper}
 				screenOptions={{
 					headerShown: false,
+					headerBlurEffect: 'dark',
+					headerTitleStyle: {
+						color: theme.textPrimary.val,
+					},
 					headerStyle: {
 						backgroundColor: theme.bg.val,
 					},
 				}}
 			>
-				<Stack.Screen
-					name='(tabs)'
-					options={{
-						animation: 'slide_from_left',
-						gestureEnabled: true,
-					}}
-				/>
-				<Stack.Screen
-					name='register/index'
-					options={{
-						headerShown: true,
-						presentation: 'modal',
-						gestureEnabled: true,
-						headerBackButtonDisplayMode: 'minimal',
-						headerStyle: {
-							backgroundColor: theme.bg.val,
-						},
-						headerTitleStyle: {
-							color: theme.textPrimary.val,
-						},
-						headerTitle: 'Register',
-						headerLargeTitle: true,
-					}}
-				/>
-				<Stack.Screen name='add' />
+				<Stack.Screen name='(tabs)' />
 			</Stack>
-			<StatusBar style='auto' />
 		</View>
 	);
 };

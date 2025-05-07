@@ -1,3 +1,3 @@
-import { CategoryStep } from '@/modules/creationAd/CategoryStep';
+import { CategoryStep } from '@modules/creationAd/CategoryStep';
 
 export default CategoryStep;

@@ -33,8 +33,13 @@ const tabBarButtons: TabButtonItem[] = [
 export const BottomTabsLayout = () => {
 	const { setTabBarHeight } = useLayoutInsetsContext();
 	return (
-		<Tabs>
-			<TabSlot enabled />
+		<Tabs
+			options={{
+				backBehavior: 'firstRoute',
+				initialRouteName: '/ads',
+			}}
+		>
+			<TabSlot />
 			<TabList asChild>
 				<TabsContainer
 					onLayout={(e) => {

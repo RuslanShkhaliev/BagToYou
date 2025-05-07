@@ -1,4 +1,5 @@
 import { EmptyState } from '@components/EmptyState';
+import { StickyAction } from '@components/StickyAction';
 import {
 	ButtonLink,
 	TabsUnderline,
@@ -71,6 +72,9 @@ export const UserAdsLayout = ({
 				</TabsUnderline>
 			)}
 			{children}
+			<StickyAction>
+				<ButtonLink href={'/add'}>Разместить объявление</ButtonLink>
+			</StickyAction>
 		</ScreenLayout>
 	);
 };
