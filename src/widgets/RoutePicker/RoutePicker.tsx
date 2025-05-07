@@ -3,11 +3,9 @@ import { RouteSelection } from '@modules/delivery/store';
 import React from 'react';
 import { View } from 'tamagui';
 import { RouteFieldsGroup } from './components/RouteFieldsGroup';
-import {
-	ModalSearchLocation,
-	useModalSearch,
-} from './ModalSearchLocation/ModalSearchLocation';
-import { InputTargetType } from './types';
+import { useModalSearch } from './ModalSearchLocation/hooks/useModalSearchLocation';
+import { ModalSearchLocation } from './ModalSearchLocation/ModalSearchLocation';
+import { RouteTargetType } from './types';
 interface RoutePickerProps {
 	route: RouteSelection;
 	errors: {
@@ -43,14 +41,14 @@ export const RoutePicker = ({
 						value: route?.from?.city || '',
 						error: errors.from,
 						onPress: () => {
-							openModal(InputTargetType.From);
+							openModal(RouteTargetType.From);
 						},
 					}}
 					fieldTo={{
 						value: route?.to?.city || '',
 						error: errors.to,
 						onPress: () => {
-							openModal(InputTargetType.To);
+							openModal(RouteTargetType.To);
 						},
 					}}
 				/>
