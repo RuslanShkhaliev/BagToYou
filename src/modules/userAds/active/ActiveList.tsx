@@ -1,4 +1,4 @@
-import { ListUserAds } from 'src/modules/userAds/ui/ListUserAds';
+import { ListUserAds } from '../ui/ListUserAds';
 import { useActiveAdsQuery } from './query';
 
 export const ActiveList = () => {

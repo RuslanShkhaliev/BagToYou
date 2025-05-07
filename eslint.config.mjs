@@ -20,8 +20,8 @@ export default tseslint.config([
 			'import/resolver': {
 				alias: {
 					map: [
-						['@components', './src/components'],
-						['@icons', './src/components/icons'],
+						['@components', './src/shared/components'],
+						['@icons', './src/shared/components/icons'],
 						['@modules', './src/modules'],
 						['@layout', './src/layout'],
 						['@hooks', './src/hooks'],

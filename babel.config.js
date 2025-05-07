@@ -9,13 +9,14 @@ module.exports = function (api) {
 					root: ['./src'],
 					extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
 					alias: {
-						'@components': './src/components',
-						'@icons': './src/components/icons',
+						'@components': './src/shared/components',
+						'@icons': './src/shared/components/icons',
+						'@shared': './src/shared',
+						'@utils': './src/shared/utils',
+
 						'@modules': './src/modules',
 						'@layout': './src/layout',
 						'@hooks': './src/hooks',
-						'@shared': './src/shared',
-						'@utils': './src/shared/utils',
 						'@context': './src/context',
 						'@widgets': './src/widgets',
 						'@lib': './src/lib',
@@ -33,8 +34,8 @@ module.exports = function (api) {
 					logTimings: true,
 					disableExtraction: process.env.NODE_ENV === 'development',
 				},
-				'react-native-reanimated/plugin',
 			],
+			'react-native-reanimated/plugin',
 		],
 	};
 };

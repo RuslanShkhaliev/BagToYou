@@ -1,7 +1,11 @@
-import { InputField, InputFieldProps, LabelStyled } from '@components/ui-kit';
+import {
+	InputField,
+	InputFieldProps,
+} from '@components/ui-kit/inputs/InputField';
 import React, { memo, useId } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { GetProps, Text, YStack } from 'tamagui';
+import { LabelStyled } from '../LabelStyled';
 
 interface FormInputProps extends InputFieldProps {
 	label?: string;

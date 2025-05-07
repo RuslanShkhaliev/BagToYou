@@ -1,4 +1,7 @@
-import { InputField, InputFieldProps } from '@components/ui-kit';
+import {
+	InputField,
+	InputFieldProps,
+} from '@components/ui-kit/inputs/InputField';
 import { Search } from '@tamagui/lucide-icons';
 
 export const InputSearch = (props: InputFieldProps) => {

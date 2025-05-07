@@ -1,4 +1,4 @@
-import { InputThemed } from '@components/ui-kit';
+import { InputThemed } from '@components/ui-kit/inputs/InputField';
 import { styled, TextArea } from 'tamagui';
 
 export const TextareaThemed = styled(TextArea, {

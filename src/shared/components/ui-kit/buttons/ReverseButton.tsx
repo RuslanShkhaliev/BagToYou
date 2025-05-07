@@ -1,4 +1,4 @@
-import { ButtonStyled } from '@components/ui-kit';
+import { ButtonStyled } from '@components/ui-kit/buttons/ButtonStyled';
 import { ArrowDownUp } from '@tamagui/lucide-icons';
 import React from 'react';
 import { ButtonProps } from 'tamagui';

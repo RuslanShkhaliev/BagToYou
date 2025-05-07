@@ -1,4 +1,7 @@
-import { ButtonStyled, ButtonStyledProps } from '@components/ui-kit';
+import {
+	ButtonStyled,
+	ButtonStyledProps,
+} from '@components/ui-kit/buttons/ButtonStyled';
 import { Link, LinkProps } from 'expo-router';
 
 type ButtonLinkProps = Omit<ButtonStyledProps, 'href'> & LinkProps;

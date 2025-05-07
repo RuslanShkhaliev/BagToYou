@@ -1,8 +1,8 @@
-import { useUserDraftsAdsQuery } from 'src/modules/userAds/model/query';
-import { ListUserAds } from 'src/modules/userAds/ui/ListUserAds';
+import { ListUserAds } from '../ui/ListUserAds';
+import { useDraftsAdsQuery } from './query';
 
 export const DraftsList = () => {
-	const { isFetching, refetch, data = [] } = useUserDraftsAdsQuery();
+	const { isFetching, refetch, data = [] } = useDraftsAdsQuery();
 
 	return (
 		<ListUserAds
