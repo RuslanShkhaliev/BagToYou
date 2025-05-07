@@ -1,10 +1,9 @@
-import { BottomSheet } from '@/components/BottomSheet';
-import { ToggleGroupItem } from '@/components/ToggleGroupItem';
-import { ButtonStyled } from '@/components/ui/buttons/ButtonStyled';
-import { Location } from '@/shared/schema';
-import { DateControl } from '@/widgets/DatesPicker/DateControl';
+import { ToggleGroupItem } from '@components/ToggleGroupItem';
+import { ButtonStyled } from '@components/ui-kit';
+import { BottomSheet } from '@modals/BottomSheet';
+import { Location } from '@shared/schema';
 import React, { useMemo, useState } from 'react';
-import { CalendarList } from 'react-native-calendars/src';
+import { CalendarList } from 'react-native-calendars';
 import {
 	Button,
 	Text,
@@ -14,6 +13,7 @@ import {
 	XStack,
 	YStack,
 } from 'tamagui';
+import { DateControl } from './DateControl';
 
 interface PickField {
 	value: Date | string;

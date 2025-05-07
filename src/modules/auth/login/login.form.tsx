@@ -1,11 +1,10 @@
-import { ButtonStyled } from '@/components/ui/buttons/ButtonStyled';
-import { FormInput } from '@/components/ui/Inputs/FormInput';
-import { TextThemed } from '@/components/ui/TextThemed';
+import { ButtonStyled, FormInput, TextThemed } from '@components/ui-kit';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Form } from 'tamagui';
 import { z } from 'zod';
 import { useLoginQuery } from './useLogin';
+
 const formSchema = z.object({
 	email: z
 		.string({ message: 'Email is required' })

@@ -1,5 +1,5 @@
-import { StepItem } from '@/modules/creationAd/flow';
 import { useState } from 'react';
+import { StepItem } from './flow';
 
 interface UseStepperProps {
 	initialStep: number;

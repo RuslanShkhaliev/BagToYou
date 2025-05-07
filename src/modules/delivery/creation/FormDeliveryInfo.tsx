@@ -1,10 +1,7 @@
-import { FormInput } from '@/components/ui/Inputs/FormInput';
-import { TextareaThemed } from '@/components/ui/Inputs/TextareaThemed';
-import { LabelStyled } from '@/components/ui/LabelStyled';
-import { formStep2Scheme, FormStep2Scheme } from '@/modules/delivery/schema';
-import { useDeliveryStore } from '@/modules/delivery/store';
-import { MediaAsset } from '@/shared/schema';
+import { FormInput, LabelStyled, TextareaThemed } from '@components/ui-kit';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { formStep2Scheme, FormStep2Scheme } from '@modules/delivery/schema';
+import { MediaAsset } from '@shared/schema';
 import { Check } from '@tamagui/lucide-icons';
 import { useEffect, useState } from 'react';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
@@ -19,6 +16,7 @@ import {
 	XStack,
 	YStack,
 } from 'tamagui';
+import { useDeliveryStore } from '../store';
 
 export const FormDeliveryInfo = () => {
 	const deliveryStore = useDeliveryStore();
@@ -34,7 +32,7 @@ export const FormDeliveryInfo = () => {
 		resolver: zodResolver(formStep2Scheme),
 		criteriaMode: 'firstError',
 		defaultValues: {
-			...deliveryStore.step2,
+			...formStep2Scheme.parse(deliveryStore),
 		},
 		mode: 'onBlur',
 		reValidateMode: 'onChange',

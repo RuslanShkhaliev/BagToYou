@@ -8,7 +8,36 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config([
 	{
-		ignores: ['node_modules', 'dist', '.yarn', '.expo', './**/*.config.*', 'scripts'],
+		ignores: [
+			'node_modules',
+			'dist',
+			'.yarn',
+			'.expo',
+			'./**/*.config.*',
+			'scripts',
+		],
+		settings: {
+			'import/resolver': {
+				alias: {
+					map: [
+						['@components', './src/components'],
+						['@icons', './src/components/icons'],
+						['@modules', './src/modules'],
+						['@layout', './src/layout'],
+						['@hooks', './src/hooks'],
+						['@context', './src/context'],
+						['@shared', './src/shared'],
+						['@utils', './src/shared/utils'],
+						['@lib', './src/shared/lib'],
+						['@widgets', './src/widgets'],
+						['@modals', './src/modals'],
+						['@localization', './src/localization'],
+						['@', './src'],
+					],
+					extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+				},
+			},
+		},
 	},
 
 	js.configs.recommended,

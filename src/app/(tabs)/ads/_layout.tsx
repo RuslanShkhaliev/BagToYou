@@ -1,5 +1,5 @@
-import { AdsType } from '@/modules/userAds/enums';
-import { UserAdsLayout } from '@/modules/userAds/UserAdsLayout';
+import { AdsType } from '@modules/userAds/enums';
+import { UserAdsLayout } from '@modules/userAds/UserAdsLayout';
 import { Slot, usePathname, useRouter } from 'expo-router';
 
 export default function UserAdsLayoutWrapper() {

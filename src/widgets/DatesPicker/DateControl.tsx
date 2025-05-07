@@ -1,5 +1,5 @@
-import { InputField, InputFieldProps } from '@/components/ui/Inputs';
-import { DateValue } from '@/shared/interface';
+import { InputField, InputFieldProps } from '@components/ui-kit';
+import { DateValue } from '@shared/interface';
 import { format } from 'date-fns';
 import { useMemo } from 'react';
 

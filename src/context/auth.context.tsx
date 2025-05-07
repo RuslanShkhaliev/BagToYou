@@ -1,5 +1,4 @@
-import { auth } from '@/lib/firebase/firebase';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth, onAuthStateChanged, User } from '@lib/firebase';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface AuthContextType {

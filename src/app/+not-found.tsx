@@ -1,14 +1,18 @@
-import { ButtonLink } from '@/components/ui/buttons/ButtonLink';
-import { TextThemed } from '@/components/ui/TextThemed';
+import { ButtonLink, TextThemed } from '@components/ui-kit';
+import { ScreenView } from '@layout/ScreenView';
 import { Stack } from 'expo-router';
+import React from 'react';
 import { StyleSheet } from 'react-native';
-import { View } from 'tamagui';
 
 export default function NotFoundScreen() {
 	return (
 		<>
-			<Stack.Screen options={{ title: 'Oops!' }} />
-			<View style={styles.container}>
+			<Stack.Screen
+				options={{
+					title: 'Oops!',
+				}}
+			/>
+			<ScreenView style={styles.container}>
 				<TextThemed>This screen doesn't exist.</TextThemed>
 				<ButtonLink
 					href='/'
@@ -16,7 +20,7 @@ export default function NotFoundScreen() {
 				>
 					<TextThemed>Go to home screen!</TextThemed>
 				</ButtonLink>
-			</View>
+			</ScreenView>
 		</>
 	);
 }

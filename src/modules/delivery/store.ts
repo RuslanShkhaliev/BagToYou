@@ -1,6 +1,6 @@
-import { zustandStorage } from '@/lib/storage';
-import { Location } from '@/shared/schema';
-import { TransportType } from 'src/shared';
+import { zustandStorage } from '@lib/storage';
+import { TransportType } from '@shared/enums';
+import { Location } from '@shared/schema';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
 

@@ -1,5 +1,5 @@
-import { IS_WEB } from '@/shared/utils/platform';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { IS_WEB } from '@utils/platform';
 import {
 	browserLocalPersistence,
 	getReactNativePersistence,

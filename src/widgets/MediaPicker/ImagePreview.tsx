@@ -1,4 +1,4 @@
-import { MediaAsset } from '@/shared/schema';
+import { MediaAsset } from '@shared/schema';
 import { Trash } from '@tamagui/lucide-icons';
 import { useId } from 'react';
 import { Button, Image, View } from 'tamagui';

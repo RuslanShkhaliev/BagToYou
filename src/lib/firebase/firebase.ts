@@ -1,8 +1,8 @@
-import { getPersistence } from '@/lib/firebase/persistance';
 import { initializeAuth } from '@firebase/auth';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
+import { getPersistence } from './persistance';
 
 const firebaseConfig = {
 	apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,

@@ -1,4 +1,4 @@
-import { TextThemed } from '@/components/ui/TextThemed';
+import { TextThemed } from '@components/ui-kit';
 import { LogIn } from '@tamagui/lucide-icons';
 import { Link } from 'expo-router';
 import { Header, XStack } from 'tamagui';

@@ -1,12 +1,12 @@
-import { FieldGroup } from '@/components/FieldGroup';
-import { ReverseButton } from '@/components/ui/buttons/ReverseButton';
-import { LocationSearchModal } from '@/modals/LocationSearchModal';
-import { RouteSelection } from '@/modules/delivery/store';
-import { RouteField } from '@/widgets/RoutePicker/components/RouteField';
-import { InputTargetType } from '@/widgets/RoutePicker/types';
+import { FieldGroup } from '@components/FieldGroup';
+import { ReverseButton } from '@components/ui-kit';
+import { RouteSelection } from '@modules/delivery/store';
 import { MapPin } from '@tamagui/lucide-icons';
 import React, { useState } from 'react';
 import { View } from 'tamagui';
+import { RouteField } from './components/RouteField';
+import { LocationSearchModal } from './LocationSearchModal';
+import { InputTargetType } from './types';
 
 interface RoutePickerProps {
 	route: RouteSelection;

@@ -1,18 +1,13 @@
-import { ButtonStyled } from '@/components/ui/buttons/ButtonStyled';
-import { PageTitle } from '@/components/ui/PageTitle';
-import { Surface } from '@/components/ui/Surface';
-import { ScreenLayout } from '@/layout/ScreenLayout/ScreenLayout';
+import { Surface } from '@components/Surface';
+import { ButtonStyled, PageTitle } from '@components/ui-kit';
+import { ScreenLayout } from '@layout/ScreenLayout';
 import { useRouter } from 'expo-router';
 
-export const Settings = () => {
+export const SettingsScreen = () => {
 	const router = useRouter();
+
 	const open = () => {
-		router.push('/profile', {
-			name: 'profile',
-			params: {
-				onClose: open,
-			},
-		});
+		router.push('/profile');
 	};
 	return (
 		<ScreenLayout title={<PageTitle>Настройки</PageTitle>}>

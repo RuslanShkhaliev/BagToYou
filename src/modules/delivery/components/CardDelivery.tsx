@@ -1,9 +1,8 @@
-import { IconBaggage, IconKg, IconTransport } from '@/components/icons';
-import { Badge } from '@/components/ui/Badge';
-import { Divider } from '@/components/ui/Divider';
-import { Surface } from '@/components/ui/Surface';
-import { DeliveryInfo } from '@/shared/interfaces';
-import { NBSP } from '@/shared/unicodes';
+import { Surface } from '@components/Surface';
+import { IconBaggage, IconKg, IconTransport } from '@components/icons';
+import { Badge, Divider } from '@components/ui-kit';
+import { DeliveryInfo } from '@shared/interfaces';
+import { NBSP } from '@shared/unicodes';
 import {
 	ChevronDown,
 	MapPin,

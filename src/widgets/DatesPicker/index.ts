@@ -1,1 +1,1 @@
-export * from 'src/widgets/DatesPicker/DatePicker';
+export * from './DatePicker';

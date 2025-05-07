@@ -1,13 +1,6 @@
-// interface Step {
-// 	key: number;
-// 	step: number;
-// 	Component: React.ReactNode | null;
-// 	steps?: Step[];
-// }
-
-import { StepMediaPick } from '@/modules/creationAd/StepMediaPick';
-import { FormDeliveryInfo } from '@/modules/delivery/creation/FormDeliveryInfo';
-import { SelectRouteAndDates } from '@/modules/delivery/creation/SelectRouteAndDates';
+import { FormDeliveryInfo } from '@modules/delivery/creation/FormDeliveryInfo';
+import { SelectRouteAndDates } from '@modules/delivery/creation/SelectRouteAndDates';
+import { StepMediaPick } from './StepMediaPick';
 
 export enum CategoryType {
 	delivery,

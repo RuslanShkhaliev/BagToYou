@@ -7,7 +7,7 @@ export const useLoginQuery = () => {
 	const loginMutation = useMutation({
 		mutationFn: loginApi,
 		onSuccess: () => {
-			router.push('/');
+			router.replace('/');
 		},
 	});
 

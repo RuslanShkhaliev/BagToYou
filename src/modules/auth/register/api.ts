@@ -1,10 +1,14 @@
-import { auth } from '@/lib/firebase/firebase';
-import { createUserWithEmailAndPassword, UserCredential } from 'firebase/auth';
+import {
+	auth,
+	createUserWithEmailAndPassword,
+	UserCredential,
+} from '@lib/firebase';
 
 export interface RegisterParams {
 	email: string;
 	password: string;
 }
+
 export const register = ({
 	email,
 	password,

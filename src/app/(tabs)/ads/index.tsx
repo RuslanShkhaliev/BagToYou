@@ -1,3 +1,3 @@
-import { UserActiveAds } from '@/modules/userAds/screens/UserActiveAds';
+import { ActiveList } from '@modules/userAds/active/ActiveList';
 
-export default UserActiveAds;
+export default ActiveList;

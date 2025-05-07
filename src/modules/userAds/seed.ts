@@ -1,6 +1,6 @@
-import { UserAd } from '@/modules/userAds/interfaces';
-import { randomInt } from '@/seed/helpers';
 import { faker } from '@faker-js/faker';
+import { UserAd } from '@modules/userAds/interfaces';
+import { randomInt } from '@shared/api/seed/helpers';
 
 export const generateUserAdMock = (): UserAd => ({
 	expired: faker.date.future().toString(),

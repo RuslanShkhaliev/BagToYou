@@ -1,10 +1,5 @@
-import { InputTargetType } from '@/widgets/RoutePicker/types';
 import { z } from 'zod';
-
-export enum Mode {
-	FromTo = 'from-to',
-	ToOnly = 'to-only',
-}
+import { InputTargetType, Mode } from './types';
 
 export const locationSearchParamsSchema = z.object({
 	mode: z.nativeEnum(Mode).default(Mode.FromTo),

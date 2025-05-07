@@ -1,3 +1,3 @@
-import { UserDraftAds } from '@/modules/userAds/screens/UserDraftAds';
+import { DraftsList } from '@modules/userAds/drafts/DraftsList';
 
-export default UserDraftAds;
+export default DraftsList;

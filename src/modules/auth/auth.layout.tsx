@@ -20,7 +20,10 @@ export const AuthLayout = ({
 			pt={30}
 			px={12}
 		>
-			<Card bg={'$bgCard'}>
+			<Card
+				bg={'$bgCard'}
+				pb={10}
+			>
 				<Card.Header>
 					<H4 color={'$textPrimary'}>{title}</H4>
 					<Paragraph color={'$textSecondary'}>{description}</Paragraph>

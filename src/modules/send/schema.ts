@@ -1,6 +1,5 @@
-import { baseRequestSchema } from '@/modules/request/schema';
-import { locationSchema } from '@/shared/schema';
-import { MessagePlatform } from 'src/shared';
+import { MessagePlatform } from '@shared/enums';
+import { locationSchema } from '@shared/schema';
 import { z } from 'zod';
 
 export const senderRoute = z.object({
@@ -25,7 +24,7 @@ export const recipientInfoSchema = z.object({
 
 export type RecipientInfo = z.infer<typeof recipientInfoSchema>;
 
-export const senderRequestSchema = baseRequestSchema.extend({
+export const senderRequestSchema = z.object({
 	parcel: parcelInfoSchema,
 	recipient: recipientInfoSchema,
 	route: senderRoute,

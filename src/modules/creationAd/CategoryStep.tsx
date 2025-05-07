@@ -1,12 +1,11 @@
-import { ButtonLink } from '@/components/ui/buttons/ButtonLink';
-import { PageTitle } from '@/components/ui/PageTitle';
-import { ScreenLayout } from '@/layout/ScreenLayout/ScreenLayout';
-import { CategoryType } from '@/modules/creationAd/flow';
+import { ButtonLink, PageTitle } from '@components/ui-kit';
+import { ScreenLayout } from '@layout/ScreenLayout';
 import { IconProps } from '@tamagui/helpers-icon';
 import { Box, Truck } from '@tamagui/lucide-icons';
 import { useRouter } from 'expo-router';
 import { NamedExoticComponent } from 'react';
 import { ScrollView } from 'tamagui';
+import { CategoryType } from './flow';
 
 export interface CategoryItem {
 	type: CategoryType;

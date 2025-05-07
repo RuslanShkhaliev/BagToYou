@@ -1,6 +1,6 @@
-import { DeliveryInfo } from '@/shared/interfaces';
-import { CardDelivery } from '@/modules/delivery/components/CardDelivery';
-import { ScreenView } from '@/components/ScreenView';
+import { DeliveryInfo } from '@shared/interfaces';
+import { CardDelivery } from '@modules/delivery/components/CardDelivery';
+import { ScreenView } from '@layout/ScreenView';
 import { useState } from 'react';
 import { FlatList } from 'react-native';
 
@@ -10,7 +10,7 @@ export const ListScreen = () => {
 		<ScreenView>
 			<FlatList
 				ListHeaderComponent={() => (
-
+ 
 				)}
 				data={data}
 				renderItem={

@@ -1,1 +1,2 @@
-export { ProfileInfo } from '@/modules/profile/screens/ProfileInfo';
+export { ProfileInfo } from './ProfileInfo';
+export { ProfileSettings } from './ProfileSettings';

@@ -1,9 +1,7 @@
 import { Stack } from 'expo-router';
 import React from 'react';
-import { useTheme } from 'tamagui';
 
 export default function CreationLayout() {
-	const theme = useTheme();
 	return (
 		<Stack
 			screenOptions={{
@@ -11,7 +9,7 @@ export default function CreationLayout() {
 				headerTransparent: true,
 				headerBackButtonMenuEnabled: true,
 				headerBackButtonDisplayMode: 'minimal',
-				headerBlurEffect: 'systemUltraThinMaterialDark',
+				headerBlurEffect: 'dark',
 				headerShadowVisible: true,
 				headerBackTitleStyle: '',
 				headerTitleStyle: {

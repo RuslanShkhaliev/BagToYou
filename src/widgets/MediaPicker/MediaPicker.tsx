@@ -1,11 +1,11 @@
-import { LabelStyled } from '@/components/ui/LabelStyled';
-import { useMediaPicker } from '@/hooks/useMediaPicker';
-import { MediaAsset, mediaAssetSchema } from '@/shared/schema';
-import { ImageLoader } from '@/widgets/MediaPicker/ImageLoader';
-import { ImagePreview } from '@/widgets/MediaPicker/ImagePreview';
+import { LabelStyled } from '@components/ui-kit';
+import { useMediaPicker } from '@hooks/useMediaPicker';
+import { MediaAsset, mediaAssetSchema } from '@shared/schema';
 import * as ImgPicker from 'expo-image-picker';
 import { useEffect, useMemo, useState } from 'react';
 import { XStack, YStack } from 'tamagui';
+import { ImageLoader } from './ImageLoader';
+import { ImagePreview } from './ImagePreview';
 
 interface ImagePickerProps extends ImgPicker.ImagePickerOptions {
 	maxImageCount?: number;

@@ -1,4 +1,4 @@
-import { InputField, InputFieldProps } from '@/components/ui/Inputs';
+import { InputField, InputFieldProps } from '@components/ui-kit';
 import React, { forwardRef } from 'react';
 import { Input } from 'tamagui';
 

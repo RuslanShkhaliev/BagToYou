@@ -1,3 +1,3 @@
-import { ProfileInfo } from '@/modules/profile/screens/ProfileInfo';
+import { ProfileInfo } from '@modules/profile';
 
 export default ProfileInfo;

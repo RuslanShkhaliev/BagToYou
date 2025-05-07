@@ -1,16 +1,16 @@
-import { EmptyState } from '@/components/EmptyState';
-import { ButtonLink } from '@/components/ui/buttons/ButtonLink';
-import { TabUnderlineItem } from '@/components/ui/TabsUnderline/TabUnderlineItem';
-import { TextThemed } from '@/components/ui/TextThemed';
-import { ScreenLayout } from '@/layout/ScreenLayout/ScreenLayout';
-import { AdsType } from '@/modules/userAds/enums';
+import { EmptyState } from '@components/EmptyState';
 import {
-	useUserActiveAdsQuery,
-	useUserDraftsAdsQuery,
-} from '@/modules/userAds/query';
+	ButtonLink,
+	TabsUnderline,
+	TabUnderlineItem,
+	TextThemed,
+} from '@components/ui-kit';
+import { ScreenLayout } from '@layout/ScreenLayout';
+import { useActiveAdsQuery } from '@modules/userAds/active/query';
+import { useDraftsAdsQuery } from '@modules/userAds/drafts/query';
 import { PropsWithChildren } from 'react';
-import { TabsUnderline } from 'src/components/ui/TabsUnderline';
 import { styled, Text } from 'tamagui';
+import { AdsType } from './enums';
 
 interface UserAdsLayoutProps extends PropsWithChildren {
 	activeTab: AdsType;
@@ -31,9 +31,9 @@ export const UserAdsLayout = ({
 	onChangeTab,
 }: UserAdsLayoutProps) => {
 	const { data: activeData = [], isFetching: isActiveFetching } =
-		useUserActiveAdsQuery();
+		useActiveAdsQuery();
 	const { data: draftsData = [], isFetching: isDraftsFetching } =
-		useUserDraftsAdsQuery();
+		useDraftsAdsQuery();
 
 	return (
 		<ScreenLayout
@@ -60,8 +60,8 @@ export const UserAdsLayout = ({
 					</TabUnderlineItem>
 
 					<TabUnderlineItem
-						value={'drafts'}
 						position={'relative'}
+						value={'drafts'}
 					>
 						<TextThemed fontSize={18}>Черновики</TextThemed>
 						{Boolean(draftsData.length) && (

@@ -1,6 +1,6 @@
-import { SelectMedia } from '@/modules/delivery/creation/SelectMedia';
-import { SelectRouteAndDates } from '@/modules/delivery/creation/SelectRouteAndDates';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SelectMedia } from './SelectMedia';
+import { SelectRouteAndDates } from './SelectRouteAndDates';
 
 const Stack = createNativeStackNavigator();
 

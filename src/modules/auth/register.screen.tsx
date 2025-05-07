@@ -1,5 +1,6 @@
-import { ButtonLink } from '@/components/ui/buttons/ButtonLink';
-import { TextThemed } from '@/components/ui/TextThemed';
+import { TextThemed } from '@components/ui-kit';
+import { ROUTES } from '@shared/constants/routes';
+import { Link } from 'expo-router';
 import { XStack } from 'tamagui';
 import { AuthLayout } from './auth.layout';
 import { RegisterForm } from './register/register.form';
@@ -13,13 +14,24 @@ export const RegisterScreen = () => {
 					gap={10}
 					flex={1}
 				>
-					<ButtonLink
-						replace
-						href={'/login'}
+					<XStack
+						justify={'flex-end'}
+						items='center'
+						gap={6}
+						flex={1}
+						px={16}
 					>
-						Уже есть аккаунт?
-						<TextThemed textDecorationLine='underline'>Войти</TextThemed>
-					</ButtonLink>
+						<TextThemed>Уже есть аккаунт?</TextThemed>
+						<Link
+							href={ROUTES.LOGIN}
+							replace
+							asChild
+						>
+							<TextThemed textDecorationLine='underline'>
+								Авторизоваться
+							</TextThemed>
+						</Link>
+					</XStack>
 				</XStack>
 			}
 		>

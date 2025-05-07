@@ -1,11 +1,11 @@
-import { useLayoutInsets } from '@/context/layout-insets.context';
-import { TabButton } from '@/layout/AppTabs/TabButton';
-import { TabsContainer } from '@/layout/AppTabs/TabsContainer';
+import { useLayoutInsetsContext } from '@context/layout-insets.context';
 import { IconProps } from '@tamagui/helpers-icon';
 import { ClipboardList, Search, Settings } from '@tamagui/lucide-icons';
 import { Href } from 'expo-router';
 import { TabList, Tabs, TabSlot, TabTrigger } from 'expo-router/ui';
 import { NamedExoticComponent } from 'react';
+import { TabButton } from './TabButton';
+import { TabsContainer } from './TabsContainer';
 
 interface TabButtonItem {
 	name: string;
@@ -31,7 +31,7 @@ const tabBarButtons: TabButtonItem[] = [
 	},
 ];
 export const BottomTabsLayout = () => {
-	const { setTabBarHeight } = useLayoutInsets();
+	const { setTabBarHeight } = useLayoutInsetsContext();
 	return (
 		<Tabs>
 			<TabSlot enabled />

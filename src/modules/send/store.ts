@@ -1,7 +1,6 @@
-import { zustandStorage } from '@/lib/storage';
-import { STORAGE_REQUEST_KEY } from '@/modules/request/constants';
-import { SenderRequest } from '@/modules/send/schema';
-import { RequestRole, RequestStatus, TransportType } from 'src/shared';
+import { zustandStorage } from '@lib/storage';
+import { SenderRequest } from '@modules/send/schema';
+import { RequestRole, RequestStatus, TransportType } from '@shared/enums';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
 
@@ -34,6 +33,8 @@ interface Actions {
 	updateReceiver: (value: Partial<ReceiverState>) => void;
 	reset: () => void;
 }
+
+const STORAGE_REQUEST_KEY = 'delivery_request';
 
 const defaultState = (): RequestCreationStore => {
 	return {

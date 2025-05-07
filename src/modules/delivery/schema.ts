@@ -1,5 +1,5 @@
-import { mediaAssetSchema, routeSchema } from '@/shared/schema';
-import { TransportType } from 'src/shared';
+import { TransportType } from '@shared/enums';
+import { mediaAssetSchema, routeSchema } from '@shared/schema';
 import { z } from 'zod';
 
 export const formStep1Scheme = z.object({

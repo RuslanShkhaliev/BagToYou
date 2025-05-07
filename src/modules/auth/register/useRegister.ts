@@ -7,7 +7,7 @@ export const useRegister = () => {
 	const registerMutation = useMutation({
 		mutationFn: registerApi,
 		onSuccess: () => {
-			router.push('/');
+			router.replace('/');
 		},
 	});
 

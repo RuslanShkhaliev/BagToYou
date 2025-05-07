@@ -1,16 +1,14 @@
-import { AuthProvider } from '@/context/auth.context';
-import { LayoutInsetsProvider } from '@/context/layout-insets.context';
-import { queryClient } from '@/shared/api';
-import { Portal } from '@/shared/constants';
-import { delay } from '@/shared/utils/delay';
+import { AuthProvider } from '@context/auth.context';
+import { LayoutInsetsProvider } from '@context/layout-insets.context';
+import { AppLayout } from '@layout/AppLayout';
+import { queryClient } from '@shared/api';
 import { QueryClientProvider } from '@tanstack/react-query';
+import { delay } from '@utils/delay';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
 import 'react-native-reanimated';
-import { PortalHost, TamaguiProvider, View } from 'tamagui';
+import { TamaguiProvider } from 'tamagui';
 import { config } from 'tamagui.config';
 
 SplashScreen.preventAutoHideAsync();
@@ -41,43 +39,7 @@ export default function RootLayout() {
 			<QueryClientProvider client={queryClient}>
 				<LayoutInsetsProvider>
 					<TamaguiProvider config={config}>
-						<View
-							bg={'$bg'}
-							style={{
-								backgroundColor: '$bg',
-								flex: 1,
-							}}
-						>
-							<Stack
-								screenOptions={{
-									headerShown: false,
-								}}
-							>
-								<Stack.Screen
-									name='(tabs)'
-									options={{
-										animation: 'slide_from_left',
-										gestureEnabled: true,
-									}}
-								/>
-								<Stack.Screen
-									name='(auth)'
-									options={{
-										presentation: 'modal',
-										gestureEnabled: true,
-									}}
-								/>
-								<Stack.Screen name='add' />
-								<Stack.Screen
-									name='(modals)'
-									options={{
-										presentation: 'modal',
-									}}
-								/>
-							</Stack>
-							<PortalHost name={Portal.Body} />
-							<StatusBar style='auto' />
-						</View>
+						<AppLayout />
 					</TamaguiProvider>
 				</LayoutInsetsProvider>
 			</QueryClientProvider>

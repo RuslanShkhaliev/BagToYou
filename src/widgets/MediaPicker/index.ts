@@ -1,1 +1,1 @@
-export * from 'src/widgets/MediaPicker/MediaPicker';
+export * from './MediaPicker';

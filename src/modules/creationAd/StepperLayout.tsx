@@ -1,14 +1,10 @@
-import { ButtonStyled } from '@/components/ui/buttons/ButtonStyled';
-import { ScreenLayout } from '@/layout/ScreenLayout/ScreenLayout';
-import { AdCreationProvider } from '@/modules/creationAd/context';
-import { CategoryType, getStepsByCategory } from '@/modules/creationAd/flow';
-import { useStepper } from '@/modules/creationAd/useStepper';
+import { ButtonStyled } from '@components/ui-kit';
+import { ScreenLayout } from '@layout/ScreenLayout';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { View } from 'tamagui';
-
-interface StepperProps {
-	category: CategoryType;
-}
+import { AdCreationProvider } from './context';
+import { getStepsByCategory } from './flow';
+import { useStepper } from './useStepper';
 
 export const StepperLayout = () => {
 	const { category } = useLocalSearchParams<{ category: string }>();

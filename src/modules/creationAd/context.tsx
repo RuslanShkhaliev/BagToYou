@@ -1,5 +1,5 @@
-import { CategoryType } from '@/modules/creationAd/flow';
 import { createContext, PropsWithChildren, useContext, useState } from 'react';
+import { CategoryType } from './flow';
 
 interface FormData {
 	category?: CategoryType;

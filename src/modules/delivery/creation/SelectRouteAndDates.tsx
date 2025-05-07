@@ -1,8 +1,8 @@
-import { TextThemed } from '@/components/ui/TextThemed';
-import { ScreenLayout } from '@/layout/ScreenLayout/ScreenLayout';
-import { useDeliveryStore } from '@/modules/delivery/store';
-import { DatePicker } from '@/widgets/DatesPicker';
-import { RoutePicker } from '@/widgets/RoutePicker/RoutePicker';
+import { TextThemed } from '@components/ui-kit';
+import { ScreenLayout } from '@layout/ScreenLayout';
+import { useDeliveryStore } from '@modules/delivery';
+import { DatePicker } from '@widgets/DatesPicker';
+import { RoutePicker } from '@widgets/RoutePicker';
 import { Form, YStack } from 'tamagui';
 
 export const SelectRouteAndDates = () => {

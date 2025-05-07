@@ -54,7 +54,7 @@ export const LayoutInsetsProvider = ({ children }: PropsWithChildren) => {
 	);
 };
 
-export const useLayoutInsets = () => {
+export const useLayoutInsetsContext = () => {
 	const ctx = useContext(LayoutInsetsContext);
 	if (!ctx) {
 		throw new Error('useLayoutInsets must be used within LayoutInsetsProvider');

@@ -1,3 +1,3 @@
-import { ProfileSettings } from '@/modules/profile/screens/ProfileSettings';
+import { ProfileSettings } from '@modules/profile';
 
 export default ProfileSettings;

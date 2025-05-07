@@ -1,4 +1,4 @@
-import { tokens } from '@/shared/styles/tokens';
+import { tokens } from '@shared/styles/tokens';
 
 export const dark = {
 	// === Базовые цвета ===

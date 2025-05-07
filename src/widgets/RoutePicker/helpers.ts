@@ -1,5 +1,5 @@
-import { Location } from '@/shared/schema';
-import { InputTargetType } from '@/widgets/RoutePicker/types';
+import { Location } from '@shared/schema';
+import { InputTargetType } from '@widgets/RoutePicker/types';
 
 export const filterCities = (text: string, list: Location[]): Location[] => {
 	if (!text) {

@@ -1,4 +1,4 @@
-import { MediaPicker } from '@/widgets/MediaPicker';
+import { MediaPicker } from '@widgets/MediaPicker';
 
 export const StepMediaPick = () => {
 	return <MediaPicker />;

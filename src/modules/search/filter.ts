@@ -1,5 +1,5 @@
-import { DeliveryInfo } from '@/shared/interfaces';
-import { DateRange, RouteSchema } from '@/shared/schema';
+import { DeliveryInfo } from '@shared/interfaces';
+import { DateRange, RouteSchema } from '@shared/schema';
 import { isSameDay } from 'date-fns';
 
 interface FilterOptions {

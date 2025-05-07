@@ -1,4 +1,4 @@
-import { ButtonStyled } from '@/components/ui/buttons/ButtonStyled';
+import { ButtonStyled } from '@components/ui-kit';
 import { ImageUp } from '@tamagui/lucide-icons';
 import { Spinner } from 'tamagui';
 
