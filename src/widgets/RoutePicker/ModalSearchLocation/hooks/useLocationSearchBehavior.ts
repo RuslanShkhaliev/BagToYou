@@ -1,14 +1,14 @@
 import { RouteSelection } from '@modules/delivery';
 import { Location } from '@shared/schema';
-import { RouteFieldRef } from '@widgets/RoutePicker/components/RouteField';
 import { fromIsActive, toIsActive } from '@widgets/RoutePicker/helpers';
-import { InputTargetType } from '@widgets/RoutePicker/types';
+import { RouteTargetType } from '@widgets/RoutePicker/types';
+import { Input } from 'tamagui';
 
 export interface UseLocationSearchBehaviorProps {
 	route: RouteSelection;
-	inputTarget: InputTargetType;
-	inputFromRef: React.RefObject<RouteFieldRef>;
-	inputToRef: React.RefObject<RouteFieldRef>;
+	inputTarget: RouteTargetType;
+	inputFromRef: React.RefObject<Input>;
+	inputToRef: React.RefObject<Input>;
 	onSelect: (city: string, newRoute: RouteSelection) => void;
 	onComplete?: (newRoute: RouteSelection) => void;
 }

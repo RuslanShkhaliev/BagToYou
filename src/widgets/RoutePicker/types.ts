@@ -1,4 +1,6 @@
-export enum InputTargetType {
+import { Location } from '@shared/schema';
+
+export enum RouteTargetType {
 	From = 'from',
 	To = 'to',
 }
@@ -8,6 +10,6 @@ export enum Mode {
 	ToOnly = 'to-only',
 }
 export interface RouteSelection {
-	from: Location;
-	to: Location;
+	[RouteTargetType.From]: Location | null;
+	[RouteTargetType.To]: Location | null;
 }

@@ -2,71 +2,29 @@ import { ButtonStyled } from '@components/ui-kit';
 import { ModalWrapper } from '@modals/ModalWrapper';
 import { RouteSelection } from '@modules/delivery';
 import { debounce } from '@utils/debounce';
-import React, {
-	forwardRef,
-	Ref,
-	useCallback,
-	useEffect,
-	useImperativeHandle,
-	useMemo,
-	useRef,
-	useState,
-} from 'react';
-import { View } from 'tamagui';
-import { RouteFieldRef } from '../components/RouteField';
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import { Input, View } from 'tamagui';
 import { RouteFieldsGroup } from '../components/RouteFieldsGroup';
 import { fromIsActive, toIsActive } from '../helpers';
-import { InputTargetType } from '../types';
+import { RouteTargetType } from '../types';
 import { useLocationSearchBehavior } from './hooks/useLocationSearchBehavior';
 import { useLocationSearchState } from './hooks/useLocationSearchState';
+import { useDefineSearchModal } from './hooks/useModalSearchLocation';
 import { LocationsList } from './LocationsList';
 import { useLoadLocationsQuery } from './query';
 
-interface ModalWrapperRef {
-	open: (target?: InputTargetType) => void;
+export interface ModalWrapperRef {
+	open: (target?: RouteTargetType) => void;
 	close: () => void;
 }
-
-interface ModalSearchLocationProps {
+export interface ModalSearchLocationProps {
 	initialRoute: RouteSelection;
 	onlyTo?: boolean;
-	target?: InputTargetType;
+	target?: RouteTargetType;
 	onComplete?: (route: RouteSelection) => void;
 	onClose?: () => void;
 	visible?: boolean;
 }
-
-export const useModalSearch = () => {
-	const modalRef = useRef<ModalWrapperRef>(null);
-
-	return {
-		modalRef,
-		open: (target?: InputTargetType) => modalRef.current?.open(target),
-		close: () => modalRef.current?.close(),
-	};
-};
-
-const useDefineSearchModal = (
-	ref: Ref<ModalWrapperRef>,
-	onOpen: (target: InputTargetType) => void,
-) => {
-	const [visible, setVisible] = useState(false);
-	const open = useCallback((target?: InputTargetType) => {
-		onOpen(target || InputTargetType.From);
-		setVisible(true);
-	}, []);
-	const close = useCallback(() => setVisible(false), []);
-	useImperativeHandle(ref, () => ({
-		open,
-		close,
-	}));
-
-	return {
-		visible,
-		open,
-		close,
-	};
-};
 
 export const ModalSearchLocation = forwardRef<
 	ModalWrapperRef,
@@ -77,12 +35,10 @@ export const ModalSearchLocation = forwardRef<
 		onClose?.();
 	};
 
-	const [route, setRoute] = useState<RouteSelection>(
-		initialRoute || { from: null, to: null },
-	);
+	const [route, setRoute] = useState<RouteSelection>(initialRoute);
 
 	const { searchText, inputTarget, setSearchText, setInputTarget } =
-		useLocationSearchState({ route });
+		useLocationSearchState(route);
 
 	const { visible, close } = useDefineSearchModal(ref, (target) => {
 		setInputTarget(target);
@@ -90,8 +46,8 @@ export const ModalSearchLocation = forwardRef<
 
 	const { data: cities, refetch } = useLoadLocationsQuery(searchText);
 	const fetchDebounced = useMemo(() => debounce(refetch, 330), [refetch]);
-	const inputFromRef = useRef<RouteFieldRef>(null);
-	const inputToRef = useRef<RouteFieldRef>(null);
+	const inputFromRef = useRef<Input>(null);
+	const inputToRef = useRef<Input>(null);
 
 	const { selectCity } = useLocationSearchBehavior({
 		inputFromRef,
@@ -119,7 +75,6 @@ export const ModalSearchLocation = forwardRef<
 		<ModalWrapper
 			onClose={handleClose}
 			title='Search for a location'
-			ref={ref}
 			visible={visible}
 			footer={<ButtonStyled onPress={handleClose}>Close</ButtonStyled>}
 		>
@@ -132,7 +87,7 @@ export const ModalSearchLocation = forwardRef<
 						active: fromIsActive(inputTarget),
 						onChangeText: setSearchText,
 						onFocus: () => {
-							setInputTarget(InputTargetType.From);
+							setInputTarget(RouteTargetType.From);
 						},
 					}}
 					fieldTo={{
@@ -141,7 +96,7 @@ export const ModalSearchLocation = forwardRef<
 						active: toIsActive(inputTarget),
 						onChangeText: setSearchText,
 						onFocus: () => {
-							setInputTarget(InputTargetType.To);
+							setInputTarget(RouteTargetType.To);
 						},
 					}}
 				/>

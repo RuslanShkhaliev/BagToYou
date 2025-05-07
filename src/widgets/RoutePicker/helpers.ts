@@ -1,5 +1,5 @@
 import { Location } from '@shared/schema';
-import { InputTargetType } from '@widgets/RoutePicker/types';
+import { RouteTargetType } from '@widgets/RoutePicker/types';
 
 export const filterCities = (text: string, list: Location[]): Location[] => {
 	if (!text) {
@@ -10,7 +10,7 @@ export const filterCities = (text: string, list: Location[]): Location[] => {
 		item.city.toLowerCase().startsWith(text.toLowerCase()),
 	);
 };
-export const fromIsActive = (activeInput: InputTargetType | null) =>
-	activeInput === InputTargetType.From;
-export const toIsActive = (activeInput: InputTargetType | null) =>
-	activeInput === InputTargetType.To;
+export const fromIsActive = (activeInput: RouteTargetType | null) =>
+	activeInput === RouteTargetType.From;
+export const toIsActive = (activeInput: RouteTargetType | null) =>
+	activeInput === RouteTargetType.To;

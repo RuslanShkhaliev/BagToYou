@@ -1,17 +1,10 @@
-import { InputTargetType, RouteSelection } from '@widgets/RoutePicker/types';
+import { RouteSelection, RouteTargetType } from '@widgets/RoutePicker/types';
 import { useEffect, useState } from 'react';
 
-interface UseLocationSearchStateProps {
-	route: RouteSelection;
-	target?: InputTargetType;
-}
-
-export const useLocationSearchState = ({
-	route,
-}: UseLocationSearchStateProps) => {
+export const useLocationSearchState = (route: RouteSelection) => {
 	const [searchText, setSearchText] = useState('');
-	const [inputTarget, setInputTarget] = useState<InputTargetType>(
-		InputTargetType.From,
+	const [inputTarget, setInputTarget] = useState<RouteTargetType>(
+		RouteTargetType.From,
 	);
 
 	useEffect(() => {
