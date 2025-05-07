@@ -1,10 +1,10 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import tseslint from 'typescript-eslint'
-import pluginReact from 'eslint-plugin-react'
-import prettier from 'eslint-config-prettier'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactNative from 'eslint-plugin-react-native'
+import js from '@eslint/js';
+import prettier from 'eslint-config-prettier';
+import pluginReact from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactNative from 'eslint-plugin-react-native';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config([
 	{
@@ -13,10 +13,31 @@ export default tseslint.config([
 			'dist',
 			'.yarn',
 			'.expo',
-			'eslint.config.mjs',
-			'prettier.config.mjs',
+			'./**/*.config.*',
 			'scripts',
 		],
+		settings: {
+			'import/resolver': {
+				alias: {
+					map: [
+						['@components', './src/shared/components'],
+						['@icons', './src/shared/components/icons'],
+						['@modules', './src/modules'],
+						['@layout', './src/layout'],
+						['@hooks', './src/hooks'],
+						['@context', './src/context'],
+						['@shared', './src/shared'],
+						['@utils', './src/shared/utils'],
+						['@lib', './src/shared/lib'],
+						['@widgets', './src/widgets'],
+						['@modals', './src/modals'],
+						['@localization', './src/localization'],
+						['@', './src'],
+					],
+					extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+				},
+			},
+		},
 	},
 
 	js.configs.recommended,
@@ -29,6 +50,10 @@ export default tseslint.config([
 			'@typescript-eslint/no-require-imports': 'off',
 			'@typescript-eslint/no-floating-promises': 'off',
 			'@typescript-eslint/no-misused-promises': 'warn',
+			'@typescript-eslint/no-empty-object-type': 'off',
+			'@typescript-eslint/prefer-nullish-coalescing': 'off',
+			'@typescript-eslint/ban-ts-comment': 'off',
+			'@typescript-eslint/no-unused-expressions': 'off',
 		},
 	},
 	{
@@ -54,6 +79,11 @@ export default tseslint.config([
 			'react-native/no-raw-text': 'off',
 			'react-native/no-unused-styles': 'warn',
 			'react/no-unescaped-entities': 'off',
+			'react/display-name': 'off',
+			//'react/jsx-max-props-per-line': ['error', { maximum: 1, when: 'always' }],
+			//'react/jsx-indent-props': ['error', 2],
+			//'react/jsx-first-prop-new-line': [2, 'multiline'],
+			'react/jsx-closing-bracket-location': [2, 'tag-aligned'],
 		},
 		settings: {
 			react: {
@@ -73,4 +103,4 @@ export default tseslint.config([
 	},
 
 	prettier,
-])
+]);

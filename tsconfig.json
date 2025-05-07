@@ -1,11 +1,36 @@
 {
 	"extends": "expo/tsconfig.base",
-	"include": ["./src/**/*.ts", "./src/**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
+	"include": [
+		"./src/**/*.ts",
+		"./src/**/*.tsx",
+		".expo/types/**/*.ts",
+		"expo-env.d.ts",
+		"tamagui.config.ts"
+	],
 	"compilerOptions": {
 		"strict": true,
+		"jsx": "react-native",
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@components/*": ["./src/shared/components/*"],
+			"@icons": ["./src/shared/components/icons/*"],
+
+			"@modules/*": ["./src/modules/*"],
+			"@layout/*": ["./src/layout/*"],
+			"@widgets/*": ["./src/widgets/*"],
+			"@modals/*": ["./src/modals/*"],
+
+			"@hooks/*": ["./src/hooks/*"],
+			"@context/*": ["./src/context/*"],
+			"@lib/*": ["./src/lib/*"],
+
+			"@shared/*": ["./src/shared/*"],
+			"@utils/*": ["./src/shared/utils/*"],
+
+			"@localization/*": ["./src/localization/*"],
+
+			"@/*": ["./src/*"],
+			"@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
 		}
 	}
 }

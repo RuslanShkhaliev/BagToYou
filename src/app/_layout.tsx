@@ -1,26 +1,33 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { AuthProvider } from '@context/auth.context';
+import { LayoutInsetsProvider } from '@context/layout-insets.context';
+import { AppLayout } from '@layout/AppLayout';
+import { queryClient } from '@shared/api';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { delay } from '@utils/delay';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import 'react-native-reanimated';
+import { TamaguiProvider } from 'tamagui';
+import { config } from 'tamagui.config';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+export const unstable_settings = {
+	initialRouteName: '(tabs)',
+};
+
 export default function RootLayout() {
-	const colorScheme = useColorScheme();
 	const [loaded] = useFonts({
-		SpaceMono: require('src/assets/fonts/SpaceMono-Regular.ttf'),
+		SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
 	});
 
 	useEffect(() => {
-		if (loaded) {
-			SplashScreen.hideAsync();
-		}
+		delay(500).then(() => {
+			if (loaded) {
+				SplashScreen.hideAsync();
+			}
+		});
 	}, [loaded]);
 
 	if (!loaded) {
@@ -28,12 +35,14 @@ export default function RootLayout() {
 	}
 
 	return (
-		<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-			<Stack>
-				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-				<Stack.Screen name="+not-found" />
-			</Stack>
-			<StatusBar style="auto" />
-		</ThemeProvider>
+		<AuthProvider>
+			<QueryClientProvider client={queryClient}>
+				<LayoutInsetsProvider>
+					<TamaguiProvider config={config}>
+						<AppLayout />
+					</TamaguiProvider>
+				</LayoutInsetsProvider>
+			</QueryClientProvider>
+		</AuthProvider>
 	);
 }
