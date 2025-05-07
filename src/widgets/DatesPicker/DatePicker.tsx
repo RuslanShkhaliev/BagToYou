@@ -27,10 +27,9 @@ interface PickField {
 
 interface DatesPickerProps {
 	dates: [Date, Date?];
-	fields: PickField[];
 }
 
-export const DatePicker = (props: DatesPickerProps) => {
+export const DatePicker = ({ dates }: DatesPickerProps) => {
 	const [sheetOpen, toggleOpen] = useState(false);
 	const showSheet = () => {
 		toggleOpen(true);

@@ -1,4 +1,5 @@
 import { InputField, InputFieldProps } from '@components/ui-kit';
+import { MapPin } from '@tamagui/lucide-icons';
 import React, { forwardRef } from 'react';
 import { Input } from 'tamagui';
 
@@ -13,10 +14,16 @@ export const RouteField = forwardRef<Input, RouteFieldProps>(
 		return (
 			<InputField
 				ref={ref}
-				group
+				icon={
+					<MapPin
+						size={18}
+						color={'$textSecondary'}
+					/>
+				}
 				disableAssist
 				autoFocus={active}
-				height={44}
+				height={50}
+				editable={!props.readOnly}
 				{...props}
 			/>
 		);

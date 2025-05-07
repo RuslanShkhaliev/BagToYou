@@ -7,6 +7,7 @@ import { delay } from '@utils/delay';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect } from 'react';
+import { StatusBar } from 'react-native';
 import 'react-native-reanimated';
 import { TamaguiProvider } from 'tamagui';
 import { config } from 'tamagui.config';
@@ -39,6 +40,11 @@ export default function RootLayout() {
 			<QueryClientProvider client={queryClient}>
 				<LayoutInsetsProvider>
 					<TamaguiProvider config={config}>
+						<StatusBar
+							translucent
+							barStyle='light-content'
+							backgroundColor='transparent'
+						/>
 						<AppLayout />
 					</TamaguiProvider>
 				</LayoutInsetsProvider>

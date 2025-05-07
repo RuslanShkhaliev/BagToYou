@@ -1,85 +1,59 @@
 import { TextThemed } from '@components/ui-kit';
-import { NavButton } from '@layout/Navbar';
-import { X } from '@tamagui/lucide-icons';
-import React, {
-	forwardRef,
-	PropsWithChildren,
-	useImperativeHandle,
-	useState,
-} from 'react';
+import { Navbar } from '@layout/Navbar';
+import React, { forwardRef } from 'react';
 import { Modal, ModalProps } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { View, XStack, YStack } from 'tamagui';
+import { View, YStack } from 'tamagui';
 
-export interface ModalWrapperRef {
-	close: () => void;
-	open: () => void;
-}
-interface ModalWrapperProps
-	extends Pick<ModalProps, 'visible' | 'presentationStyle'> {
+interface ModalWrapperProps extends ModalProps {
 	title?: React.ReactNode;
 	footer?: React.ReactNode;
+	children?: React.ReactNode;
 	closable?: boolean;
+	hideNavbar?: boolean;
+	visible?: boolean;
 	onClose?: () => void;
 }
-export const ModalWrapper = forwardRef<
-	ModalWrapperRef,
-	PropsWithChildren<ModalWrapperProps>
->(({ children, presentationStyle = 'pageSheet', onClose, ...props }, ref) => {
-	const insets = useSafeAreaInsets();
-	const [visible, setVisible] = useState(false);
-
-	useImperativeHandle(ref, () => ({
-		close: () => {
-			setVisible(false);
+export const ModalWrapper = forwardRef<Modal, ModalWrapperProps>(
+	(
+		{
+			children,
+			presentationStyle = 'pageSheet',
+			hideNavbar,
+			title,
+			visible,
+			onClose,
+			...props
 		},
-		open: () => {
-			setVisible(true);
-		},
-	}));
-	const handleClose = () => {
-		setVisible(false);
-		onClose?.();
-	};
-	return (
-		<Modal
-			animationType='slide'
-			presentationStyle={presentationStyle}
-			onRequestClose={handleClose}
-			visible={visible}
-			{...props}
-		>
-			<YStack
-				flex={1}
-				bg={'$bg'}
+		ref,
+	) => {
+		const insets = useSafeAreaInsets();
+		return (
+			<Modal
+				ref={ref}
+				animationType='slide'
+				presentationStyle={presentationStyle}
+				onRequestClose={onClose}
+				visible={visible}
+				{...props}
 			>
-				<XStack
-					height={50}
-					justify={'center'}
-					items={'center'}
+				<YStack
+					flex={1}
+					bg={'$bg'}
 				>
-					<TextThemed
-						fontSize={16}
-						fontWeight={'bold'}
-					>
-						{props.title}
-					</TextThemed>
-					<NavButton
-						position={'absolute'}
-						r={0}
-						onPress={handleClose}
-						icon={
-							<X
-								size={30}
-								color={'$textPrimary'}
-							/>
-						}
-					/>
-				</XStack>
-				{children}
-				{props.footer && <View px={12}>{props.footer}</View>}
-				<View height={insets.bottom} />
-			</YStack>
-		</Modal>
-	);
-});
+					{!hideNavbar && (
+						<Navbar
+							height={60}
+							onClose={onClose}
+						>
+							{title && <TextThemed fontSize={18}>{title}</TextThemed>}
+						</Navbar>
+					)}
+					{children}
+					{props.footer && <View px={12}>{props.footer}</View>}
+					<View height={insets.bottom} />
+				</YStack>
+			</Modal>
+		);
+	},
+);

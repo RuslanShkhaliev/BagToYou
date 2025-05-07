@@ -1,15 +1,24 @@
 import { ButtonLink, ButtonStyled } from '@components/ui-kit';
-import { ScreenLayout } from '@layout/ScreenLayout';
-import { useState } from 'react';
+import { useNavigation } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { Modal, Pressable, StyleSheet } from 'react-native';
 import Animated, { FadeIn, SlideInDown } from 'react-native-reanimated';
-import { Text, useTheme } from 'tamagui';
+import { Text, useTheme, View } from 'tamagui';
 
 export const ProfileInfo = () => {
 	const [open, setModalVisible] = useState(false);
 	const theme = useTheme();
+
+	const navigation = useNavigation();
+
+	useEffect(() => {
+		navigation.setOptions({
+			headerShown: true,
+			headerTitle: 'Hellow',
+		});
+	}, [navigation]);
 	return (
-		<ScreenLayout hideHeader>
+		<View>
 			<ButtonLink href={'/profile/index'}>Назад</ButtonLink>
 			<ButtonStyled onPress={() => setModalVisible(true)}>
 				Открыть модалку
@@ -52,7 +61,7 @@ export const ProfileInfo = () => {
 					</Animated.View>
 				</Animated.View>
 			</Modal>
-		</ScreenLayout>
+		</View>
 		// <ScreenLayout
 		// 	title='Профиль'
 		// 	hideHeader

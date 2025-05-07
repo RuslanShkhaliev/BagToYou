@@ -73,6 +73,13 @@ export default tseslint.config([
 		},
 		rules: {
 			'react/react-in-jsx-scope': 'off',
+			'react/self-closing-comp': [
+				'error',
+				{
+					component: true,
+					html: true,
+				},
+			],
 			'react-hooks/rules-of-hooks': 'error',
 			'react-hooks/exhaustive-deps': 'off',
 			'react-native/no-inline-styles': 'off',
@@ -80,9 +87,6 @@ export default tseslint.config([
 			'react-native/no-unused-styles': 'warn',
 			'react/no-unescaped-entities': 'off',
 			'react/display-name': 'off',
-			//'react/jsx-max-props-per-line': ['error', { maximum: 1, when: 'always' }],
-			//'react/jsx-indent-props': ['error', 2],
-			//'react/jsx-first-prop-new-line': [2, 'multiline'],
 			'react/jsx-closing-bracket-location': [2, 'tag-aligned'],
 		},
 		settings: {

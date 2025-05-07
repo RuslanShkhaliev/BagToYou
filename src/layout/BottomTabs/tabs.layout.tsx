@@ -1,10 +1,11 @@
 import { useLayoutInsetsContext } from '@/context/layout-insets.context';
 import { ROUTES } from '@/shared/constants/routes';
+import { HapticTab } from '@components/HapticTab';
 import { IconProps } from '@tamagui/helpers-icon';
-import { ClipboardList, Search, Settings } from '@tamagui/lucide-icons';
+import { ClipboardList, Search, User } from '@tamagui/lucide-icons';
 import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
-import { NamedExoticComponent } from 'react';
+import { NamedExoticComponent, PropsWithChildren } from 'react';
 import { StyleSheet } from 'react-native';
 import { useTheme } from 'tamagui';
 interface TabButtonItem {
@@ -25,34 +26,44 @@ const tabBarButtons: TabButtonItem[] = [
 	},
 	{
 		href: ROUTES.ADS,
-		name: 'Объявления',
+		name: 'Ads',
 		IconComponent: ClipboardList,
 	},
 	{
 		href: ROUTES.SETTINGS,
-		name: 'Settings',
-		IconComponent: Settings,
+		name: 'Profile',
+		IconComponent: User,
 	},
 ];
-export const BottomTabsLayout = () => {
+
+const styles = StyleSheet.create({
+	tabBar: {
+		position: 'absolute',
+		bottom: 0,
+		left: 0,
+		right: 0,
+		zIndex: 1000,
+		backgroundColor: 'transparent',
+		borderTopWidth: 0,
+	},
+});
+export const BottomTabsLayout = ({ children }: PropsWithChildren) => {
 	const theme = useTheme();
 	const { setTabBarHeight } = useLayoutInsetsContext();
 	return (
 		<Tabs
 			screenOptions={{
-				tabBarStyle: {
-					position: 'absolute',
-					bottom: 0,
-					left: 0,
-					right: 0,
-					zIndex: 1000,
-					backgroundColor: 'transparent',
-					borderTopWidth: 0,
+				headerShown: false,
+				headerStyle: {
+					backgroundColor: theme.bg.val,
 				},
+				tabBarStyle: styles.tabBar,
+				tabBarButton: HapticTab,
 				tabBarLabelStyle: {
 					color: theme.textSecondary.val,
 				},
-				tabBarActiveTintColor: 'white',
+				tabBarInactiveTintColor: theme.textSecondary.val,
+				tabBarActiveTintColor: theme.accent.val,
 				tabBarBackground: () => (
 					<BlurView
 						style={StyleSheet.absoluteFill}
@@ -64,10 +75,10 @@ export const BottomTabsLayout = () => {
 		>
 			{tabBarButtons.map((tabButton) => (
 				<Tabs.Screen
+					key={tabButton.name}
 					name={tabButton.href}
 					options={{
-						title: tabButton.name,
-						tabBarLabel: tabButton.name,
+						tabBarActiveTintColor: theme.btnAccentBgHover.val,
 						tabBarIcon: ({ color, size }) => (
 							<tabButton.IconComponent
 								size={size}
@@ -75,7 +86,6 @@ export const BottomTabsLayout = () => {
 							/>
 						),
 					}}
-					key={tabButton.name}
 				/>
 			))}
 		</Tabs>

@@ -1,0 +1,1 @@
+export { ModalSearchLocation } from './ModalSearchLocation';

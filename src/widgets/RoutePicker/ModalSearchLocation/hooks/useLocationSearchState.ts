@@ -8,10 +8,11 @@ interface UseLocationSearchStateProps {
 
 export const useLocationSearchState = ({
 	route,
-	target = InputTargetType.From,
 }: UseLocationSearchStateProps) => {
 	const [searchText, setSearchText] = useState('');
-	const [inputTarget, setInputTarget] = useState<InputTargetType>(target);
+	const [inputTarget, setInputTarget] = useState<InputTargetType>(
+		InputTargetType.From,
+	);
 
 	useEffect(() => {
 		setSearchText(route[inputTarget]?.city || '');

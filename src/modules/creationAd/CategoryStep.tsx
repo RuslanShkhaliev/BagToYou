@@ -1,10 +1,10 @@
-import { ButtonLink, PageTitle } from '@components/ui-kit';
+import { ButtonLink } from '@components/ui-kit';
 import { ScreenLayout } from '@layout/ScreenLayout';
 import { IconProps } from '@tamagui/helpers-icon';
 import { Box, Truck } from '@tamagui/lucide-icons';
-import { useRouter } from 'expo-router';
-import { NamedExoticComponent } from 'react';
-import { ScrollView } from 'tamagui';
+import { useNavigation, useRouter } from 'expo-router';
+import { NamedExoticComponent, useEffect } from 'react';
+import { ScrollView, useTheme } from 'tamagui';
 import { CategoryType } from './flow';
 
 export interface CategoryItem {
@@ -28,22 +28,28 @@ export const categoriesList: CategoryItem[] = [
 
 export const CategoryStep = () => {
 	const router = useRouter();
+
+	const navigation = useNavigation();
+
+	const theme = useTheme();
+	useEffect(() => {
+		navigation.setOptions({
+			headerShown: true,
+			headerTitle: 'Create ad',
+			headerBackButtonDisplayMode: 'minimal',
+			headerTitleStyle: {
+				color: theme.textPrimary.val,
+			},
+			headerStyle: {
+				backgroundColor: theme.bg.val,
+			},
+		});
+	}, [navigation]);
 	return (
 		<ScreenLayout
 			bodyProps={{
 				px: 0,
 			}}
-			hideHeader
-			navBar={
-				<PageTitle
-					fontSize={26}
-					text={'left'}
-					px={12}
-					bg={'$bg'}
-				>
-					Новое объявление
-				</PageTitle>
-			}
 			onClose={() => router.replace('/ads')}
 		>
 			<ScrollView

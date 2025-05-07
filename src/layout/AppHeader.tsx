@@ -11,6 +11,7 @@ export const AppHeader = () => {
 			items={'center'}
 			flexDirection='row'
 			pl={10}
+			bg={'$bg'}
 		>
 			<Link href={'/login'}>
 				<XStack

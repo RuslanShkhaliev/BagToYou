@@ -1,6 +1,4 @@
 import { useLayoutInsetsContext } from '@context/layout-insets.context';
-import { AppHeader } from '@layout/AppHeader';
-import { Navbar } from '@layout/Navbar';
 import { PropsWithChildren } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, ViewProps, XStack, YStack } from 'tamagui';
@@ -57,7 +55,8 @@ export const ScreenLayout = ({
 			pt={modal ? 12 : 0}
 			{...containerProps}
 		>
-			{!modal && <XStack height={insets.top} />}
+			{/* {!modal && <XStack height={insets.top} />} */}
+			{/*  }
 			{showHeader && (header ?? <AppHeader />)}
 			<Navbar
 				onClose={onClose}
@@ -67,7 +66,7 @@ export const ScreenLayout = ({
 				right={right}
 			>
 				{navBar}
-			</Navbar>
+			</Navbar> */}
 
 			<View
 				flex={1}
