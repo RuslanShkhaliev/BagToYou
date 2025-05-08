@@ -13,6 +13,7 @@ interface ModalWrapperProps extends ModalProps {
 	hideNavbar?: boolean;
 	visible?: boolean;
 	onClose?: () => void;
+	onBack?: () => void;
 }
 
 export const ModalWrapper = forwardRef<Modal, ModalWrapperProps>(
@@ -24,6 +25,7 @@ export const ModalWrapper = forwardRef<Modal, ModalWrapperProps>(
 			title,
 			visible,
 			onClose,
+			onBack,
 			...props
 		},
 		ref,
@@ -46,6 +48,8 @@ export const ModalWrapper = forwardRef<Modal, ModalWrapperProps>(
 						<Navbar
 							height={60}
 							onClose={onClose}
+							onBack={onBack}
+							closable={!!onClose}
 						>
 							{title && <TextThemed fontSize={18}>{title}</TextThemed>}
 						</Navbar>

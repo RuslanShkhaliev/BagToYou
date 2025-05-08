@@ -16,8 +16,8 @@ interface NavbarProps extends XStackProps {
 }
 
 export const Navbar = ({
-	showBackButton = true,
-	closable = false,
+	showBackButton,
+	closable,
 	children,
 
 	left,
@@ -27,13 +27,13 @@ export const Navbar = ({
 	onClose,
 	...props
 }: NavbarProps) => {
-	const BackButton = showBackButton && (
+	const BackButton = showBackButton !== false && onBack && (
 		<NavButton
 			onPress={onBack}
 			Icon={ChevronLeft}
 		/>
 	);
-	const CloseButton = closable && (
+	const CloseButton = closable !== false && onClose && (
 		<NavButton
 			onPress={onClose}
 			Icon={X}

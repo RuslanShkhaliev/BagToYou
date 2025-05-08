@@ -1,6 +1,6 @@
 import { ButtonStyled } from '@components/ui-kit';
 import { ScreenView } from '@layout/ScreenView';
-import { RouteSelection } from '@modules/delivery/store';
+import { RouteSelection } from '@modules/delivery/creation/store';
 import { createMockRequests } from '@shared/api/seed/helpers';
 import { DatePicker } from '@widgets/DatesPicker';
 import { RoutePicker } from '@widgets/RoutePicker';

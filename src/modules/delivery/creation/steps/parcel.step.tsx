@@ -1,7 +1,7 @@
 import { FormInput, LabelStyled, TextareaThemed } from '@components/ui-kit';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useDeliveryStore } from '@modules/delivery/creation/store';
 import { formStep2Scheme, FormStep2Scheme } from '@modules/delivery/schema';
-import { useDeliveryStore } from '@modules/delivery/store';
 import { MediaAsset } from '@shared/schema';
 import { Check } from '@tamagui/lucide-icons';
 import { useEffect, useState } from 'react';

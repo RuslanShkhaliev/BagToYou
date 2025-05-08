@@ -17,27 +17,6 @@ export const CreateAdPage = () => {
 			px={12}
 			pt={20}
 		>
-			{/*		<YStack
-			 gap={16}
-			 items={'center'}
-			 flex={1}
-			 >
-			 <TextThemed>Выберите тип объявления</TextThemed>
-			 <CardAdType
-			 height={100}
-			 href={'/create/receive'}
-			 title='Я хочу отправить посылку'
-			 icon={Box}
-			 type={AdType.DELIVERY}
-			 />
-			 <CardAdType
-			 height={100}
-			 href={'/create/delivery'}
-			 title='Я могу привезти вещи'
-			 icon={Truck}
-			 type={AdType.PICKUP}
-			 />
-			 </YStack>*/}
 			<YStack
 				gap={16}
 				items={'center'}
@@ -54,25 +33,6 @@ export const CreateAdPage = () => {
 					icon={Truck}
 				/>
 			</YStack>
-
-			{/*			<XStack
-			 gap={16}
-			 items={'center'}
-			 flex={1}
-			 >
-			 <CardAdType
-			 href={'/create/receive'}
-			 title='Я хочу отправить посылку'
-			 icon={Box}
-			 type={AdType.DELIVERY}
-			 />
-			 <CardAdType
-			 href={'/create/delivery'}
-			 title='Я могу привезти вещи'
-			 icon={Truck}
-			 type={AdType.PICKUP}
-			 />
-			 </XStack>*/}
 		</ScreenView>
 	);
 };

@@ -1,7 +1,6 @@
 import { ToggleGroupItem } from '@components/ToggleGroupItem';
 import { ButtonStyled } from '@components/ui-kit';
 import { BottomSheet } from '@modals/BottomSheet';
-import { Location } from '@shared/schema';
 import React, { useMemo, useState } from 'react';
 import { CalendarList } from 'react-native-calendars';
 import {
@@ -15,18 +14,8 @@ import {
 } from 'tamagui';
 import { DateControl } from './DateControl';
 
-interface PickField {
-	value: Date | string;
-	placeholder?: string;
-	onClear?: () => void;
-	icon?: React.ReactNode;
-	pressable?: boolean;
-	error?: string;
-	onPicked?: (route: Location) => void;
-}
-
 interface DatesPickerProps {
-	dates: [Date, Date?];
+	dates: string[];
 }
 
 export const DatePicker = ({ dates }: DatesPickerProps) => {

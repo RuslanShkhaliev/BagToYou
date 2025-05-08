@@ -1,5 +1,5 @@
-import { ParcelStep } from '@modules/delivery/creation/parcel.step';
-import { RouteStep } from '@modules/delivery/creation/route.step';
+import { ParcelStep } from '@modules/delivery/creation/steps/parcel.step';
+import { RouteStep } from '@modules/delivery/creation/steps/routeStep/route.step';
 import { StepMediaPick } from './StepMediaPick';
 
 export enum CategoryType {

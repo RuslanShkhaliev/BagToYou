@@ -7,7 +7,7 @@ export const dateRangeSchema = z.object({
 export type DateRange = z.infer<typeof dateRangeSchema>;
 
 export const locationSchema = z.object({
-	city: z.string().nonempty(),
+	city: z.string(),
 	country: z.string().optional(),
 	lat: z.number().optional(),
 	lng: z.number().optional(),
@@ -25,6 +25,7 @@ export const routeSchema = z
 	});
 
 export type RouteSchema = z.infer<typeof routeSchema>;
+
 export const mediaAssetSchema = z.object({
 	uri: z.string(),
 	fileName: z.string().nullable().optional(),
@@ -40,10 +41,9 @@ export const mediaAssetSchema = z.object({
 export type MediaAsset = z.infer<typeof mediaAssetSchema>;
 
 export const parcelInfoSchema = z.object({
-	weight: z.string({ message: 'Укажите вес посылки' }).default(''),
-	length: z.string({ message: 'Укажите длину посылки' }).default(''),
-	width: z.string({ message: 'Укажите ширину посылки' }).default(''),
-	height: z.string({ message: 'Укажите высоту посылки' }).default(''),
-	photos: z.array(z.string()).default([]),
+	weight: z.string({ message: 'Укажите вес посылки' }),
+	length: z.string({ message: 'Укажите длину посылки' }),
+	width: z.string({ message: 'Укажите ширину посылки' }),
+	height: z.string({ message: 'Укажите высоту посылки' }),
 });
 export type ParcelInfo = z.infer<typeof parcelInfoSchema>;

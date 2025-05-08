@@ -17,10 +17,13 @@ export const useModalSearch = () => {
 	};
 };
 
-export const useDefineSearchModal = (
-	ref: Ref<ModalWrapperRef>,
-	onOpen: (target: RouteTargetType) => void,
-) => {
+export const useDefineSearchModal = ({
+	ref,
+	onOpen,
+}: {
+	ref: Ref<ModalWrapperRef>;
+	onOpen: (target: RouteTargetType) => void;
+}) => {
 	const [visible, setVisible] = useState(false);
 	const open = useCallback((target?: RouteTargetType) => {
 		onOpen(target || RouteTargetType.From);

@@ -1,39 +1,35 @@
 import { zustandStorage } from '@lib/storage';
 import { TransportType } from '@shared/enums';
-import { Location } from '@shared/schema';
+import { Location, ParcelInfo } from '@shared/schema';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
 
 export const STORAGE_DELIVERY_KEY = 'delivery_draft';
 
 export interface RouteSelection {
-	from: Location | null;
-	to: Location | null;
+	from: Location;
+	to: Location;
+}
+
+interface ContactInfo {
+	name: string;
+	surname: string;
+	phone: string;
 }
 
 interface DeliveryStore {
-	route: RouteSelection; // Step 1 — маршрут
-	transport: TransportType; // Step 1 — транспортное средство
-	date: Date; // Step 1 — дата
+	route: RouteSelection;
+	transport: TransportType;
+	dates: string[]; // ISO строки дат
 
-	senderInfo: {
-		name: string;
-		surname: string;
-		phone: string;
-	}; // Step 2 — информация о получателе
+	senderInfo: ContactInfo;
+	recipientInfo: ContactInfo;
 
-	parcelInfo: {
-		weight: string;
-		length: string;
-		width: string;
-		height: string;
-		type: string;
-		media: string[]; // или MediaAsset[], если тип определён
-	}; // Step 2 — посылка
+	parcelInfo: ParcelInfo;
 
-	description: string; // Step 2 — описание
-	rewards: string; // Step 2 — цена
-	media: string[]; // Step 2 — файлы вне parcelInfo (если нужно)
+	description: string;
+	rewards: string;
+	media: string[];
 }
 
 interface Actions {
@@ -48,12 +44,17 @@ interface Actions {
 const defaultState = (): DeliveryStore => {
 	return {
 		route: {
-			from: null,
-			to: null,
+			from: { city: '' },
+			to: { city: '' },
 		},
 		transport: TransportType.Plane,
-		date: new Date(),
+		dates: [new Date().toISOString()],
 		senderInfo: {
+			name: '',
+			surname: '',
+			phone: '',
+		},
+		recipientInfo: {
 			name: '',
 			surname: '',
 			phone: '',
@@ -63,8 +64,6 @@ const defaultState = (): DeliveryStore => {
 			length: '',
 			width: '',
 			height: '',
-			type: '',
-			media: [],
 		},
 		description: '',
 		rewards: '',
@@ -79,7 +78,8 @@ export const useDeliveryStore = create<
 	persist(
 		(set) => ({
 			...defaultState(),
-			updateField: (field, value) => set(() => ({ [field]: value })),
+			updateField: (field, value) =>
+				set((state) => ({ ...state, [field]: value })),
 			updateState: (patch) => set((state) => ({ ...state, ...patch })),
 			reset: () => set(() => defaultState()),
 		}),
