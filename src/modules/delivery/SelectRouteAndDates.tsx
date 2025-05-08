@@ -1,6 +1,6 @@
 import { TextThemed } from '@components/ui-kit';
 import { ScreenLayout } from '@layout/ScreenLayout';
-import { useDeliveryStore } from '@modules/delivery';
+import { useDeliveryStore } from '@modules/delivery/index';
 import { DatePicker } from '@widgets/DatesPicker';
 import { RoutePicker } from '@widgets/RoutePicker';
 import { Form, YStack } from 'tamagui';

@@ -1,11 +1,12 @@
 import { ButtonStyled } from '@components/ui-kit';
+import { ScreenView } from '@layout/ScreenView';
 import { RouteSelection } from '@modules/delivery/store';
 import { createMockRequests } from '@shared/api/seed/helpers';
 import { DatePicker } from '@widgets/DatesPicker';
 import { RoutePicker } from '@widgets/RoutePicker';
 import { useNavigation } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { View, YStack } from 'tamagui';
+import { YStack } from 'tamagui';
 
 export const SearchScreen = () => {
 	const [errors, setErrors] = useState<{ from: string; to: string }>({
@@ -38,8 +39,7 @@ export const SearchScreen = () => {
 	};
 	const similarRequests = createMockRequests(10);
 	return (
-		<View
-			flex={1}
+		<ScreenView
 			gap={20}
 			pt={50}
 			px={12}
@@ -58,6 +58,6 @@ export const SearchScreen = () => {
 			>
 				Найти маршруты
 			</ButtonStyled>
-		</View>
+		</ScreenView>
 	);
 };

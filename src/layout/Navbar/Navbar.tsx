@@ -1,0 +1,73 @@
+import { NavButton } from '@layout/Navbar/NavButton';
+import { ChevronLeft, X } from '@tamagui/lucide-icons';
+import { XStack, XStackProps } from 'tamagui';
+
+interface NavbarProps extends XStackProps {
+	showBackButton?: boolean;
+	closable?: boolean;
+
+	children?: React.ReactNode;
+	left?: React.ReactNode;
+	right?: React.ReactNode;
+	title?: React.ReactNode;
+
+	onBack?: () => void;
+	onClose?: () => void;
+}
+
+export const Navbar = ({
+	showBackButton = true,
+	closable = false,
+	children,
+
+	left,
+	right,
+
+	onBack,
+	onClose,
+	...props
+}: NavbarProps) => {
+	const BackButton = showBackButton && (
+		<NavButton
+			onPress={onBack}
+			Icon={ChevronLeft}
+		/>
+	);
+	const CloseButton = closable && (
+		<NavButton
+			onPress={onClose}
+			Icon={X}
+		/>
+	);
+
+	return (
+		<XStack
+			justify={'space-between'}
+			items={'center'}
+			px={12}
+			bg={'$bg'}
+			height={56}
+			{...props}
+		>
+			<XStack
+				width={80}
+				justify='flex-start'
+			>
+				{left || BackButton}
+			</XStack>
+			<XStack
+				flex={2}
+				justify={'center'}
+			>
+				{children}
+			</XStack>
+			<XStack
+				minW={60}
+				items={'center'}
+				justify={'flex-end'}
+			>
+				{right || CloseButton}
+			</XStack>
+		</XStack>
+	);
+};

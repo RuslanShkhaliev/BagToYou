@@ -1,5 +1,5 @@
 import { TextThemed } from '@components/ui-kit';
-import { Navbar } from '@layout/Navbar';
+import { Navbar } from '@layout/Navbar/Navbar';
 import React, { forwardRef } from 'react';
 import { Modal, ModalProps } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -14,6 +14,7 @@ interface ModalWrapperProps extends ModalProps {
 	visible?: boolean;
 	onClose?: () => void;
 }
+
 export const ModalWrapper = forwardRef<Modal, ModalWrapperProps>(
 	(
 		{

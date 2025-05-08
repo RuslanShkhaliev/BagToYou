@@ -1,5 +1,5 @@
-import { FormDeliveryInfo } from '@modules/delivery/creation/FormDeliveryInfo';
-import { SelectRouteAndDates } from '@modules/delivery/creation/SelectRouteAndDates';
+import { FormDeliveryInfo } from '@modules/delivery/FormDeliveryInfo';
+import { SelectRouteAndDates } from '@modules/delivery/SelectRouteAndDates';
 import { StepMediaPick } from './StepMediaPick';
 
 export enum CategoryType {

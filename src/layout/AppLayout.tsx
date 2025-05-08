@@ -1,26 +1,8 @@
 import { Stack } from 'expo-router';
-import { PropsWithChildren } from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme, View, XStack } from 'tamagui';
+import { useTheme, View } from 'tamagui';
+
 export const AppLayout = () => {
 	const theme = useTheme();
-	const insets = useSafeAreaInsets();
-
-	const renderScreenWrapper = ({ children }: PropsWithChildren) => (
-		<View
-			style={{
-				backgroundColor: theme.bg.val,
-				flex: 1,
-			}}
-		>
-			<XStack
-				bg={'transparent'}
-				height={insets.top}
-			/>
-			{children}
-		</View>
-	);
-
 	return (
 		<View
 			style={{
@@ -29,7 +11,6 @@ export const AppLayout = () => {
 			}}
 		>
 			<Stack
-				screenLayout={renderScreenWrapper}
 				screenOptions={{
 					headerShown: false,
 					headerBlurEffect: 'dark',
@@ -42,6 +23,14 @@ export const AppLayout = () => {
 				}}
 			>
 				<Stack.Screen name='(tabs)' />
+				<Stack.Screen
+					name='create'
+					options={{
+						gestureEnabled: true,
+						gestureDirection: 'vertical',
+						presentation: 'modal',
+					}}
+				/>
 			</Stack>
 		</View>
 	);

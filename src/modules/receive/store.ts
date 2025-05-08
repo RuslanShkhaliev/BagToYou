@@ -1,5 +1,5 @@
 import { zustandStorage } from '@lib/storage';
-import { SenderRequest } from '@modules/send/schema';
+import { SenderRequest } from '@modules/receive/schema';
 import { RequestRole, RequestStatus, TransportType } from '@shared/enums';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';

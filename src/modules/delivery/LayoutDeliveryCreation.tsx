@@ -1,6 +1,6 @@
+import { StepMedia } from '@modules/delivery/StepMedia';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SelectMedia } from './SelectMedia';
-import { SelectRouteAndDates } from './SelectRouteAndDates';
+import { SelectRouteAndDates } from 'src/modules/delivery/SelectRouteAndDates';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,11 +17,11 @@ export const LayoutDeliveryCreation = () => {
 			/>
 			<Stack.Screen
 				name='Step2'
-				component={SelectMedia}
+				component={StepMedia}
 			/>
 			<Stack.Screen
 				name='Step3'
-				component={SelectMedia}
+				component={StepMedia}
 			/>
 		</Stack.Navigator>
 	);

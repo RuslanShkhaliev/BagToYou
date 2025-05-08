@@ -1,38 +1,42 @@
 import { useLayoutInsetsContext } from '@context/layout-insets.context';
-import { AppHeader } from '@layout/AppHeader';
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { View, ViewProps } from 'tamagui';
+import { View, ViewProps, YStack } from 'tamagui';
 
 interface ScreenViewProps extends ViewProps {
-	hideHeader?: boolean;
-	scrollable?: boolean;
+	isModal?: boolean;
+	withBottomSafeArea?: boolean;
 }
 
 export const ScreenView = ({
-	pt = 0,
-	hideHeader = false,
+	isModal = false,
+	withBottomSafeArea = true,
 	children,
 	...props
 }: ScreenViewProps) => {
 	const insets = useSafeAreaInsets();
-	const { bottomOffset } = useLayoutInsetsContext();
+	const { tabBarHeight } = useLayoutInsetsContext();
+
+	const bottomOffset = isModal ? insets.bottom : tabBarHeight;
 	return (
-		<View
+		<YStack
 			bg={'$bg'}
-			pt={Number(pt) + insets.top}
 			flex={1}
-			pb={bottomOffset}
 			{...props}
 		>
-			{!hideHeader && <AppHeader />}
-
-			<View
-				px={12}
-				flex={1}
-			>
-				{children}
-			</View>
-		</View>
+			{!isModal && (
+				<View
+					height={insets.top}
+					bg={'transparent'}
+				/>
+			)}
+			{children}
+			{withBottomSafeArea && (
+				<View
+					height={bottomOffset}
+					bg={'transparent'}
+				/>
+			)}
+		</YStack>
 	);
 };

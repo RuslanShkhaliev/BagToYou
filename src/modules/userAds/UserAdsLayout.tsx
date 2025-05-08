@@ -1,12 +1,12 @@
 import { EmptyState } from '@components/EmptyState';
-import { StickyAction } from '@components/StickyAction';
+import { FloatAction } from '@components/FloatAction';
 import {
 	ButtonLink,
 	TabsUnderline,
 	TabUnderlineItem,
 	TextThemed,
 } from '@components/ui-kit';
-import { ScreenLayout } from '@layout/ScreenLayout';
+import { ScreenView } from '@layout/ScreenView';
 import { useActiveAdsQuery } from '@modules/userAds/active/query';
 import { useDraftsAdsQuery } from '@modules/userAds/drafts/query';
 import { PropsWithChildren } from 'react';
@@ -20,8 +20,8 @@ interface UserAdsLayoutProps extends PropsWithChildren {
 
 const AdsCounter = styled(Text, {
 	position: 'absolute',
-	t: 0,
-	r: 0,
+	t: 5,
+	r: -5,
 	color: '$textSecondary',
 	fontSize: 10,
 });
@@ -37,12 +37,7 @@ export const UserAdsLayout = ({
 		useDraftsAdsQuery();
 
 	return (
-		<ScreenLayout
-			stickyAction={
-				<ButtonLink href={'/add'}>Разместить объявление</ButtonLink>
-			}
-			title={'Мои объявления'}
-		>
+		<ScreenView>
 			{!draftsData.length && !activeData.length ? (
 				<EmptyState />
 			) : (
@@ -72,9 +67,9 @@ export const UserAdsLayout = ({
 				</TabsUnderline>
 			)}
 			{children}
-			<StickyAction>
-				<ButtonLink href={'/add'}>Разместить объявление</ButtonLink>
-			</StickyAction>
-		</ScreenLayout>
+			<FloatAction bg={'transparent'}>
+				<ButtonLink href={'/create'}>Создать объявление</ButtonLink>
+			</FloatAction>
+		</ScreenView>
 	);
 };

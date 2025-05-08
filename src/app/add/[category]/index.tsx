@@ -1,3 +1,3 @@
-import { StepperLayout } from '@modules/creationAd/StepperLayout';
+import { StepperLayout } from '@modules/ads/StepperLayout';
 
 export default StepperLayout;

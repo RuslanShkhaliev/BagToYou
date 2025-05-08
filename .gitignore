@@ -17,7 +17,7 @@ node_modules/
 
 # --- IDE ---
 .vscode/
-.idea/
+.idea
 *.sw?
 *.swo
 .DS_Store

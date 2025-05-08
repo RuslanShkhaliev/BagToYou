@@ -5,6 +5,7 @@ import { MediaAsset } from '@shared/schema';
 import { Check } from '@tamagui/lucide-icons';
 import { useEffect, useState } from 'react';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
+import { useDeliveryStore } from 'src/modules/delivery/store';
 import {
 	Checkbox,
 	debounce,
@@ -16,7 +17,6 @@ import {
 	XStack,
 	YStack,
 } from 'tamagui';
-import { useDeliveryStore } from '../store';
 
 export const FormDeliveryInfo = () => {
 	const deliveryStore = useDeliveryStore();
