@@ -1,11 +1,11 @@
 import { FormInput, LabelStyled, TextareaThemed } from '@components/ui-kit';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { formStep2Scheme, FormStep2Scheme } from '@modules/delivery/schema';
+import { useDeliveryStore } from '@modules/delivery/store';
 import { MediaAsset } from '@shared/schema';
 import { Check } from '@tamagui/lucide-icons';
 import { useEffect, useState } from 'react';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
-import { useDeliveryStore } from 'src/modules/delivery/store';
 import {
 	Checkbox,
 	debounce,
@@ -18,7 +18,7 @@ import {
 	YStack,
 } from 'tamagui';
 
-export const FormDeliveryInfo = () => {
+export const ParcelStep = () => {
 	const deliveryStore = useDeliveryStore();
 	const [isMe, setIsMe] = useState(false);
 

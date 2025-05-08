@@ -16,6 +16,7 @@ export const NavButton = ({ Icon, onPress }: NavButtonProps) => {
 			icon={
 				<Icon
 					size={30}
+					shrink={0}
 					color={'$textPrimary'}
 				/>
 			}

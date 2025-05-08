@@ -1,3 +1,3 @@
-import { CreateAdPage } from 'src/modules/creation';
+import { CreateAdPage } from '@modules/creation';
 
 export default CreateAdPage;

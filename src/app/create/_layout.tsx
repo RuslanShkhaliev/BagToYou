@@ -1,3 +1,3 @@
-import { CreationLayout } from '@modules/creation/CreationLayout';
+import { CreationLayout } from '@modules/creation';
 
 export default CreationLayout;

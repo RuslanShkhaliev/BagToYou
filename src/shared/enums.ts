@@ -1,3 +1,11 @@
+/**
+ * Типы объявлений, которые может создать пользователь
+ */
+export enum AdType {
+	DELIVERY = 'delivery',
+	PICKUP = 'pickup',
+}
+
 export enum RequestRole {
 	Sender,
 	Deliver,
@@ -36,6 +44,7 @@ export enum Direction {
 	From = 'from',
 	To = 'to',
 }
+
 export enum DateRange {
 	Start = 'start',
 	End = 'end',
