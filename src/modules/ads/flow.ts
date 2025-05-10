@@ -1,5 +1,5 @@
-import { ParcelStep } from '@modules/delivery/creation/steps/parcel.step';
-import { RouteStep } from '@modules/delivery/creation/steps/routeStep/route.step';
+import { ParcelStepPage } from '@modules/delivery/creation/steps/ParcelStep.Page';
+import { RouteStepPage } from '@modules/delivery/creation/steps/routeStep/RouteStep.Page';
 import { StepMediaPick } from './StepMediaPick';
 
 export enum CategoryType {
@@ -28,7 +28,7 @@ type CategoryStepsMap = Map<CategoryType, StepItem[]>;
 export const stepsMap: CategoryStepsMap = new Map();
 
 stepsMap.set(CategoryType.delivery, [
-	{ component: RouteStep },
+	{ component: RouteStepPage },
 	{ component: StepMediaPick },
-	{ component: ParcelStep },
+	{ component: ParcelStepPage },
 ]);

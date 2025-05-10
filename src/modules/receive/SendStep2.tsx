@@ -1,10 +1,10 @@
+import { ScreenScroll } from '@components/layout';
 import {
 	ButtonStyled,
 	FormInput,
 	LabelStyled,
 	TextareaThemed,
 } from '@components/ui-kit';
-import { ScreenScroll } from '@layout/ScreenScroll';
 import { useState } from 'react';
 import { Form, YStack } from 'tamagui';
 

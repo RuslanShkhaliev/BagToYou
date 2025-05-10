@@ -1,6 +1,6 @@
+import { ScreenScroll } from '@components/layout';
 import { TransportGroup } from '@components/TransportGroup';
 import { ButtonStyled, LabelStyled } from '@components/ui-kit';
-import { ScreenScroll } from '@layout/ScreenScroll';
 import { TransportType } from '@shared/enums';
 import { DateSelection } from '@shared/interface';
 import { Location } from '@shared/schema';

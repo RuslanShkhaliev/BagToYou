@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { IS_WEB } from '@utils/platform';
+import { isWeb } from '@utils/platform';
 import {
 	browserLocalPersistence,
 	getReactNativePersistence,
 } from 'firebase/auth';
 
 export const getPersistence = () => {
-	return IS_WEB
+	return isWeb
 		? browserLocalPersistence
 		: getReactNativePersistence(AsyncStorage);
 };

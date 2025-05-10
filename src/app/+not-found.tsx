@@ -1,5 +1,5 @@
+import { ScreenView } from '@components/layout';
 import { ButtonLink, TextThemed } from '@components/ui-kit';
-import { ScreenView } from '@layout/ScreenView';
 import { Stack } from 'expo-router';
 import React from 'react';
 import { StyleSheet } from 'react-native';

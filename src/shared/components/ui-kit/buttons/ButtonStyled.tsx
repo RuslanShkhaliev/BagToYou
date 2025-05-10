@@ -1,4 +1,5 @@
-import { GetProps, styled, Button as TButton } from 'tamagui';
+import { Button as TButton, GetProps, styled } from 'tamagui';
+
 export const StyledButton = styled(TButton, {
 	name: 'Button',
 	bg: '$btnBg',

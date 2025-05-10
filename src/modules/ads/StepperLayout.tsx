@@ -1,5 +1,5 @@
+import { ScreenLayout } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
-import { ScreenLayout } from '@layout/ScreenLayout';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { View } from 'tamagui';
 import { AdCreationProvider } from './context';

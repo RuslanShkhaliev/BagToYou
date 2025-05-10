@@ -7,6 +7,9 @@ export const queryClient = new QueryClient();
 
 export const fetchClient = createFetchClient<ApiPaths>({
 	baseUrl: CONFIG.API_BASE_URL,
+	headers: {
+		'Content-Type': 'application/json',
+	},
 });
 
 export const $apiClient = createClient(fetchClient);

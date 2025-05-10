@@ -1,5 +1,5 @@
+import { ScreenView } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
-import { ScreenView } from '@layout/ScreenView';
 import { RouteSelection } from '@modules/delivery/creation/store';
 import { createMockRequests } from '@shared/api/seed/helpers';
 import { DatePicker } from '@widgets/DatesPicker';

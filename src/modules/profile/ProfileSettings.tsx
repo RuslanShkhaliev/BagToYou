@@ -1,5 +1,5 @@
+import { ModalLayout } from '@components/layout';
 import { TextThemed } from '@components/ui-kit';
-import { ModalLayout } from '@layout/ModalLayout';
 import { useRouter } from 'expo-router';
 
 export const ProfileSettings = () => {

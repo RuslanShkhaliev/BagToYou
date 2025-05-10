@@ -1,4 +1,3 @@
-import { BottomTabsLayout } from '@layout/BottomTabs';
-// import { BottomTabsLayout } from '@layout/BottomTabs/tabs.layout';
+import { BottomTabsLayout } from '@widgets/BottomTabs';
 
 export default BottomTabsLayout;

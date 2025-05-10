@@ -1,5 +1,5 @@
 import { TextThemed } from '@components/ui-kit';
-import { Navbar } from '@layout/Navbar/Navbar';
+import { Navbar } from '@widgets/Navbar';
 import React, { forwardRef } from 'react';
 import { Modal, ModalProps } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

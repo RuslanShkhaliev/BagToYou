@@ -1,12 +1,12 @@
 import { EmptyState } from '@components/EmptyState';
 import { FloatAction } from '@components/FloatAction';
+import { ScreenView } from '@components/layout';
 import {
 	ButtonLink,
 	TabsUnderline,
 	TabUnderlineItem,
 	TextThemed,
 } from '@components/ui-kit';
-import { ScreenView } from '@layout/ScreenView';
 import { useActiveAdsQuery } from '@modules/userAds/active/query';
 import { useDraftsAdsQuery } from '@modules/userAds/drafts/query';
 import { PropsWithChildren } from 'react';

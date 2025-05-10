@@ -1,5 +1,5 @@
-import { ScreenLayout, ScreenLayoutProps } from '@layout/ScreenLayout';
 import { PropsWithChildren } from 'react';
+import { ScreenLayout, ScreenLayoutProps } from './ScreenLayout';
 
 export type ModalLayoutProps = Omit<ScreenLayoutProps, 'modal'>;
 
