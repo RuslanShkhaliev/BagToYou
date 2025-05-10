@@ -1,6 +1,4 @@
-import { ButtonStyled, ReverseButton } from '@components/ui-kit';
 import { RouteSelection } from '@modules/delivery/creation/store';
-import { X } from '@tamagui/lucide-icons';
 import React from 'react';
 import { View } from 'tamagui';
 import { RouteFieldsGroup } from './components/RouteFieldsGroup';
@@ -11,8 +9,8 @@ interface RoutePickerProps {
 	errors: {
 		from?: string;
 		to?: string;
-		matched?: string;
 	};
+	error?: string;
 	onlyTo?: boolean;
 	onChange?: (route: Partial<RouteSelection>) => void;
 	onBlur?: () => void;
@@ -21,6 +19,7 @@ interface RoutePickerProps {
 export const RoutePicker = ({
 	route,
 	errors,
+	error,
 	onlyTo = false,
 	onChange,
 	onBlur,
@@ -53,45 +52,26 @@ export const RoutePicker = ({
 				<RouteFieldsGroup
 					readOnly
 					onlyTo={onlyTo}
-					error={errors.matched}
+					error={error}
+					onReverse={onReverse}
 					fieldFrom={{
-						value: route.from.city || '',
+						value: route.from?.city || '',
 						error: errors.from,
 						onPress: () => {
 							openModal(RouteTargetType.From);
 						},
 					}}
 					fieldTo={{
-						value: route.to.city || '',
+						value: route.to?.city || '',
 						error: errors.to,
+						clearable: true,
+						onClear: () => {
+							onChange?.({ ...route, to: { city: '' } });
+						},
 						onPress: () => {
 							openModal(RouteTargetType.To);
 						},
 					}}
-				/>
-				<ButtonStyled
-					position={'absolute'}
-					variant={'ghost'}
-					onPress={onClear}
-					b={5}
-					r={5}
-					width={30}
-					circular
-					icon={
-						<X
-							shrink={0}
-							size={18}
-							color={'$textPrimary'}
-						/>
-					}
-				/>
-				<ReverseButton
-					position={'absolute'}
-					items={'center'}
-					onPress={onReverse}
-					r={5}
-					t={5}
-					height={40}
 				/>
 			</View>
 			<ModalSearchLocation
@@ -99,7 +79,7 @@ export const RoutePicker = ({
 				onlyTo={onlyTo}
 				onSelect={onSelect}
 				onComplete={onComplete}
-				initialRoute={route}
+				route={route}
 			/>
 		</React.Fragment>
 	);

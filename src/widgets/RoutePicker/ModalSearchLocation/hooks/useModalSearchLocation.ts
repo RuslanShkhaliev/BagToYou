@@ -4,7 +4,7 @@ import { RouteTargetType } from '@widgets/RoutePicker/types';
 import { useCallback } from 'react';
 
 import { useImperativeHandle } from 'react';
-import { ModalWrapperRef } from '../ModalSearchLocation';
+import { ModalWrapperRef } from '../SearchLocation.Modal';
 
 export const useModalSearch = () => {
 	const modalRef = useRef<ModalWrapperRef>(null);
@@ -17,19 +17,26 @@ export const useModalSearch = () => {
 	};
 };
 
+interface UseDefineSearchModalProps {
+	ref: Ref<ModalWrapperRef>;
+	onOpen?: (target: RouteTargetType) => void;
+	onClose?: () => void;
+}
+
 export const useDefineSearchModal = ({
 	ref,
 	onOpen,
-}: {
-	ref: Ref<ModalWrapperRef>;
-	onOpen: (target: RouteTargetType) => void;
-}) => {
+	onClose,
+}: UseDefineSearchModalProps) => {
 	const [visible, setVisible] = useState(false);
 	const open = useCallback((target?: RouteTargetType) => {
-		onOpen(target || RouteTargetType.From);
+		onOpen?.(target || RouteTargetType.From);
 		setVisible(true);
 	}, []);
-	const close = useCallback(() => setVisible(false), []);
+	const close = useCallback(() => {
+		setVisible(false);
+		onClose?.();
+	}, []);
 	useImperativeHandle(ref, () => ({
 		open,
 		close,

@@ -18,7 +18,7 @@ export const InlineLoader = ({
 		<XStack
 			gap={10}
 			bg={'$inputBg'}
-			rounded={16}
+			rounded={12}
 			px={16}
 			height={38}
 			items={'center'}

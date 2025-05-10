@@ -1,2 +1,2 @@
 export { useModalSearch } from './hooks/useModalSearchLocation';
-export * from './ModalSearchLocation';
+export * from './SearchLocation.Modal';
