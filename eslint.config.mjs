@@ -23,7 +23,6 @@ export default tseslint.config([
 						['@components', './src/shared/components'],
 						['@icons', './src/shared/components/icons'],
 						['@modules', './src/modules'],
-						['@layout', './src/layout'],
 						['@hooks', './src/hooks'],
 						['@context', './src/context'],
 						['@shared', './src/shared'],
@@ -54,6 +53,7 @@ export default tseslint.config([
 			'@typescript-eslint/prefer-nullish-coalescing': 'off',
 			'@typescript-eslint/ban-ts-comment': 'off',
 			'@typescript-eslint/no-unused-expressions': 'off',
+			'@typescript-eslint/no-empty-function': 'off',
 		},
 	},
 	{

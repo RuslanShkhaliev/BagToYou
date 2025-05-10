@@ -1,6 +1,4 @@
-import { setupServer } from 'msw/native';
+import { setupWorker } from 'msw/browser';
 import { handlers } from './handlers';
 
-const serverNative = setupServer(...handlers);
-
-export default serverNative;
+export const worker = setupWorker(...handlers);

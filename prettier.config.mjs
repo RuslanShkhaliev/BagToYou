@@ -5,10 +5,10 @@ const config = {
 	trailingComma: 'all',
 	printWidth: 80,
 	useTabs: true,
-	tabWidth: 2,
+	tabWidth: 4,
 	jsxSingleQuote: true,
 	bracketSpacing: true,
 	jsxBracketSameLine: false,
-	singleAttributePerLine: true
-}
-export default config
+	singleAttributePerLine: true,
+};
+export default config;
