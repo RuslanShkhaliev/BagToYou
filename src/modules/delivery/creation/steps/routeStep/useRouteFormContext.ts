@@ -4,7 +4,7 @@ import { parseErrors } from '../shared/utils';
 import { FormValues } from './RouteStep.Page';
 import { formRouteSchema } from './schema';
 
-export const useRouteStep = ({ onSubmit }: UseStepProps<FormValues>) => {
+export const useRouteFormContext = ({ onSubmit }: UseStepProps<FormValues>) => {
 	const {
 		control,
 		setValue,

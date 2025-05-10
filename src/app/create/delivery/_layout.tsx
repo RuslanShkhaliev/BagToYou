@@ -1,1 +1,1 @@
-export { DeliveryCreationLayout as default } from '@modules/delivery/creation/creation.layout';
+export { DeliveryCreationLayout as default } from '@modules/delivery/creation/Creation.Layout';

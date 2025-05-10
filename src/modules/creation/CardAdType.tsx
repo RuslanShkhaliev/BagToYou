@@ -30,6 +30,7 @@ export const CardAdType = ({
 	return (
 		<Link
 			href={href}
+			asChild
 			style={{ width: '100%' }}
 		>
 			<Card

@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 
-export const CreationLayout = () => {
+export const CreateAdLayout = () => {
 	return (
 		<Stack
 			initialRouteName={'index'}

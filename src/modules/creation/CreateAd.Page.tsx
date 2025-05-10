@@ -1,7 +1,7 @@
-import { useNavbar } from '@layout/Navbar';
-import { ScreenView } from '@layout/ScreenView';
-import { CardAdType } from '@modules/creation/card-ad-type';
+import { ScreenView } from '@components/layout';
+import { CardAdType } from '@modules/creation/CardAdType';
 import { Box, Truck } from '@tamagui/lucide-icons';
+import { useNavbar } from '@widgets/Navbar';
 import { YStack } from 'tamagui';
 
 export const CreateAdPage = () => {
@@ -23,12 +23,12 @@ export const CreateAdPage = () => {
 				flex={1}
 			>
 				<CardAdType
-					href={'/create/receive'}
+					href={'/create/delivery'}
 					title='Я хочу отправить посылку'
 					icon={Box}
 				/>
 				<CardAdType
-					href={'/create/delivery'}
+					href={'/create/receive'}
 					title='Я могу привезти посылку'
 					icon={Truck}
 				/>

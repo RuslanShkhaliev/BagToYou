@@ -1,25 +1,31 @@
+import { ScreenView } from '@components/layout';
 import { TextThemed } from '@components/ui-kit';
-import { ScreenView } from '@layout/ScreenView';
 import { useDeliveryStore } from '@modules/delivery';
 import { DatePicker } from '@widgets/DatesPicker';
 import { RoutePicker } from '@widgets/RoutePicker';
 import { useRouter } from 'expo-router';
 import { Controller } from 'react-hook-form';
-import { Button, Form, View, YStack } from 'tamagui';
+import { Button, Form, YStack } from 'tamagui';
 import { z } from 'zod';
 import { formRouteSchema } from './schema';
-import { useRouteStep } from './useRouteStep';
+import { useRouteFormContext } from './useRouteFormContext';
+
 export type FormValues = z.infer<typeof formRouteSchema>;
 
-export const RouteStep = () => {
+export const RouteStepPage = () => {
 	const { updateState } = useDeliveryStore();
 	const router = useRouter();
-	const { control, onSubmit, onSelectRoute, errors } = useRouteStep({
+	const { control, onSubmit, setValue, clearErrors } = useRouteFormContext({
 		onSubmit: (formData) => {
 			updateState(formData);
 			router.push('/create/delivery/contacts');
 		},
 	});
+
+	const onSelectRoute = (route: FormValues['route']) => {
+		setValue('route', route, { shouldValidate: true });
+		// clearErrors();
+	};
 
 	return (
 		<ScreenView px={16}>
@@ -32,29 +38,21 @@ export const RouteStep = () => {
 					<Controller
 						control={control}
 						name={'route'}
-						render={({ field }) => {
+						render={({ field, fieldState: { error } }) => {
+							console.log(error);
+
 							return (
-								<View>
-									<RoutePicker
-										onChange={(route) => {
-											onSelectRoute({ ...field.value, ...route });
-										}}
-										route={field.value}
-										errors={{
-											matched: errors.route?.message,
-											from: errors.route?.from?.message,
-											to: errors.route?.to?.message,
-										}}
-									/>
-									{errors.route?.message && (
-										<TextThemed
-											fontSize={14}
-											color={'$error'}
-										>
-											{errors.route?.message}
-										</TextThemed>
-									)}
-								</View>
+								<RoutePicker
+									onChange={(route) => {
+										onSelectRoute({ ...field.value, ...route });
+									}}
+									route={field.value}
+									error={error?.message}
+									errors={{
+										from: error?.from?.message,
+										to: error?.to?.message,
+									}}
+								/>
 							);
 						}}
 					/>

@@ -1,1 +1,1 @@
-export { ContactsStep as default } from '@modules/delivery/creation/steps/contacts.step';
+export { ContactsStepPage as default } from '@modules/delivery/creation/steps/contactsStep/ContactsStep.Page';

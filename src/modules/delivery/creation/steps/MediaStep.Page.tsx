@@ -1,7 +1,7 @@
-import { ScreenLayout } from '@layout/ScreenLayout';
+import { ScreenLayout } from '@components/layout';
 import { MediaPicker } from '@widgets/MediaPicker';
 
-export const MediaStep = () => {
+export const MediaStepPage = () => {
 	return (
 		<ScreenLayout>
 			<MediaPicker />

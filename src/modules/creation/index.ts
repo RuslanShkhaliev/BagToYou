@@ -1,2 +1,2 @@
-export { CreateAdPage } from './create-ad.page';
-export { CreationLayout } from './creation.layout';
+export { CreateAdLayout as CreationLayout } from './CreateAd.Layout';
+export { CreateAdPage } from './CreateAd.Page';

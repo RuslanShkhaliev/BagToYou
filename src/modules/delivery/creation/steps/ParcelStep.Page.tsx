@@ -18,7 +18,7 @@ import {
 	YStack,
 } from 'tamagui';
 
-export const ParcelStep = () => {
+export const ParcelStepPage = () => {
 	const deliveryStore = useDeliveryStore();
 	const [isMe, setIsMe] = useState(false);
 
