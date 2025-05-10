@@ -164,6 +164,7 @@ export const ParcelStep = () => {
 						</YStack>
 					</YStack>
 				</YStack>
+				{/* Габариты посылки */}
 				<YStack gap={10}>
 					<Heading
 						fontSize={18}
