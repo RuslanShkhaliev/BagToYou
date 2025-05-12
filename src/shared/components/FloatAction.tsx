@@ -1,14 +1,13 @@
-import { YStack, YStackProps } from 'tamagui';
+import { ViewProps } from 'react-native-svg/lib/typescript/fabric/utils';
+import { View } from 'tamagui';
 
-export const FloatAction = ({ children, ...props }: YStackProps) => {
+export const FloatAction = ({ children, ...props }: ViewProps) => {
 	return (
-		<YStack
-			z={100}
-			px={16}
-			py={12}
+		<View
+			p={12}
 			{...props}
 		>
 			{children}
-		</YStack>
+		</View>
 	);
 };

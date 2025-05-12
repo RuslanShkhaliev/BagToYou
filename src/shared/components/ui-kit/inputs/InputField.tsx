@@ -2,51 +2,13 @@ import { X } from '@tamagui/lucide-icons';
 import React, { forwardRef, memo } from 'react';
 import { Button, GetProps, Input, styled, XStack, YStack } from 'tamagui';
 
-export const InputThemed = styled(Input, {
-	bg: '$inputBg',
-	color: '$inputText',
-	caretColor: '$textPrimary',
-	placeholderTextColor: '$textSecondary',
-	borderColor: '$inputBg',
-	outlineStyle: 'none',
-	flex: 1,
-	focusVisibleStyle: {
-		outlineColor: 'transparent',
-	},
-	pressStyle: {
-		bg: '$white8',
-	},
-	rounded: 0,
-	pr: 16,
-	fontSize: 16,
-	selectTextOnFocus: false,
-	height: 52,
-	variants: {
-		disableAssist: {
-			true: {
-				autoCorrect: false,
-				keyboardType: 'default',
-				textContentType: 'none',
-				autoCapitalize: 'none',
-				importantForAutofill: 'no',
-				spellCheck: false,
-			},
-		},
-		inValid: {
-			true: {
-				color: '$error',
-				borderColor: '$error',
-				outlineColor: '$error',
-				placeholderTextColor: '$error',
-			},
-		},
-	} as const,
-});
-
 export interface InputFieldProps extends GetProps<typeof InputThemed> {
 	icon?: React.ReactNode;
 	clearable?: boolean;
 	onClear?: () => void;
+	type?: 'text' | 'number' | 'decimal';
+	allowNegative?: boolean;
+	maxDecimals?: number;
 }
 
 export const InputField = memo(
@@ -55,48 +17,25 @@ export const InputField = memo(
 			{
 				icon,
 				clearable = false,
-				onChangeText,
 				value = '',
-				onClear,
 				height = 52,
+				type = 'text',
+				allowNegative = false,
+				maxDecimals = 2,
+				onClear,
+				onChangeText,
 				...props
 			},
 			ref,
 		) => {
-			const clear = () => {
+			const showClearButton = clearable && !!value?.length;
+
+			const handleChange = (text: string) => {
+				onChangeText?.(text);
+			};
+			const handleClear = () => {
 				onChangeText?.('');
 				onClear?.();
-			};
-
-			const ClearButton = () => {
-				return (
-					<YStack
-						position={'absolute'}
-						z={1}
-						r={0}
-						t={0}
-						pr={16}
-						height={height}
-						items='center'
-						justify='center'
-					>
-						<Button
-							rounded='$12'
-							width={20}
-							height={20}
-							p={0}
-							items='center'
-							justify='center'
-							bg='$graphite500'
-							onPress={clear}
-						>
-							<X
-								color='$white'
-								size={12}
-							/>
-						</Button>
-					</YStack>
-				);
 			};
 
 			return (
@@ -121,15 +60,87 @@ export const InputField = memo(
 					)}
 					<InputThemed
 						ref={ref}
-						onChangeText={onChangeText}
+						onChangeText={handleChange}
 						height={height}
-						value={value}
+						value={String(value)}
 						pl={icon ? 52 : 16}
+						width={'100%'}
 						{...props}
 					/>
-					{clearable && !!value?.length && <ClearButton />}
+					{showClearButton && (
+						<YStack
+							position={'absolute'}
+							z={1}
+							r={0}
+							t={0}
+							pr={16}
+							height={height}
+							items='center'
+							justify='center'
+						>
+							<ClearButton onClear={handleClear} />
+						</YStack>
+					)}
 				</XStack>
 			);
 		},
 	),
 );
+
+const ClearButton = ({ onClear }: { onClear: () => void }) => {
+	return (
+		<Button
+			rounded='$12'
+			width={20}
+			height={20}
+			p={0}
+			items='center'
+			justify='center'
+			bg='$graphite500'
+			onPress={onClear}
+		>
+			<X
+				color='$white'
+				size={12}
+			/>
+		</Button>
+	);
+};
+export const InputThemed = styled(Input, {
+	bg: '$inputBg',
+	color: '$inputText',
+	caretColor: '$textPrimary',
+	placeholderTextColor: '$textSecondary',
+	outlineStyle: 'none',
+	focusVisibleStyle: {
+		outlineColor: 'transparent',
+	},
+	pressStyle: {
+		bg: '$white8',
+	},
+	rounded: 0,
+	pr: 16,
+	fontSize: 16,
+	selectTextOnFocus: false,
+	minH: 52,
+	variants: {
+		disableAssist: {
+			true: {
+				autoCorrect: false,
+				keyboardType: 'default',
+				textContentType: 'none',
+				autoCapitalize: 'none',
+				importantForAutofill: 'no',
+				spellCheck: false,
+			},
+		},
+		inValid: {
+			true: {
+				color: '$error',
+				borderColor: '$error',
+				outlineColor: '$error',
+				placeholderTextColor: '$error',
+			},
+		},
+	} as const,
+});

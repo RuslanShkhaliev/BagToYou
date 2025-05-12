@@ -7,7 +7,7 @@ export const ReverseButton = (props: ButtonProps) => {
 	return (
 		<ButtonStyled
 			p={8}
-			ghost
+			variant='ghost'
 			aspectRatio={1}
 			pressStyle={{
 				bg: '$black16',

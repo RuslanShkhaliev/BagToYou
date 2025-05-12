@@ -1,15 +1,16 @@
+import { TextThemed } from '@components/ui-kit';
 import { ChevronLeft, X } from '@tamagui/lucide-icons';
 import { XStack, XStackProps } from 'tamagui';
 import { NavButton } from './NavButton';
 
 interface NavbarProps extends XStackProps {
+	title?: React.ReactNode;
 	showBackButton?: boolean;
 	closable?: boolean;
 
 	children?: React.ReactNode;
 	left?: React.ReactNode;
 	right?: React.ReactNode;
-	title?: React.ReactNode;
 
 	onBack?: () => void;
 	onClose?: () => void;
@@ -19,6 +20,7 @@ export const Navbar = ({
 	showBackButton,
 	closable,
 	children,
+	title,
 
 	left,
 	right,
@@ -59,7 +61,14 @@ export const Navbar = ({
 				flex={2}
 				justify={'center'}
 			>
-				{children}
+				{children ?? (
+					<TextThemed
+						fontSize={18}
+						fontWeight={600}
+					>
+						{title}
+					</TextThemed>
+				)}
 			</XStack>
 			<XStack
 				minW={60}

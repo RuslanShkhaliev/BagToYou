@@ -6,7 +6,7 @@ export type ModalLayoutProps = Omit<ScreenLayoutProps, 'modal'>;
 export const ModalLayout = (props: PropsWithChildren<ModalLayoutProps>) => {
 	return (
 		<ScreenLayout
-			modal
+			modalView
 			{...props}
 		>
 			{props.children}

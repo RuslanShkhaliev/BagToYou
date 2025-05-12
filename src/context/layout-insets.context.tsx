@@ -2,7 +2,6 @@ import {
 	createContext,
 	PropsWithChildren,
 	useContext,
-	useEffect,
 	useMemo,
 	useState,
 } from 'react';
@@ -31,10 +30,6 @@ export const LayoutInsetsProvider = ({ children }: PropsWithChildren) => {
 		() => tabBarHeight + stickyHeight,
 		[tabBarHeight, stickyHeight],
 	);
-
-	useEffect(() => {
-		console.log(tabBarHeight);
-	}, [tabBarHeight]);
 	const context = {
 		bottomOffset,
 		tabBarHeight,

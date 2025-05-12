@@ -1,10 +1,10 @@
 import {
-	InputField,
 	InputFieldProps,
+	InputThemed,
 } from '@components/ui-kit/inputs/InputField';
 import React, { memo, useId } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { GetProps, Text, YStack } from 'tamagui';
+import { GetProps, styled, Text, TextArea, YStack } from 'tamagui';
 import { LabelStyled } from '../LabelStyled';
 import { TextThemed } from '../TextThemed';
 
@@ -20,7 +20,7 @@ export interface FormInputProps<T extends FieldValues = FieldValues>
 	name: Path<T>;
 }
 
-export const FormInput = memo(
+export const FormTextarea = memo(
 	<T extends FieldValues>({
 		label,
 		hint,
@@ -60,7 +60,7 @@ export const FormInput = memo(
 						fieldState: { error },
 					}) => (
 						<YStack>
-							<InputField
+							<TextareaStyled
 								id={inputId}
 								inValid={Boolean(error?.message)}
 								rounded={10}
@@ -97,3 +97,10 @@ export const FormInput = memo(
 		);
 	},
 );
+export const TextareaStyled = styled(TextArea, {
+	...InputThemed.staticConfig.defaultProps,
+	rounded: 16,
+	numberOfLines: 4,
+	minH: 120,
+	height: 120,
+});

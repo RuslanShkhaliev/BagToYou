@@ -1,92 +1,48 @@
 import { useLayoutInsetsContext } from '@context/layout-insets.context';
 import { PropsWithChildren } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { View, ViewProps, XStack, YStack } from 'tamagui';
+import { View, YStack, YStackProps } from 'tamagui';
 
 export interface ScreenLayoutProps {
-	header?: React.ReactNode;
-	hideHeader?: boolean;
-	title?: React.ReactNode;
-	navBar?: React.ReactNode;
-	left?: React.ReactNode;
-	right?: React.ReactNode;
-	stickyAction?: React.ReactNode;
-	fullscreen?: boolean;
-	withBack?: boolean;
-	closable?: boolean;
-	onClose?: () => void;
-	onBack?: () => void;
-	modal?: boolean;
-	bodyProps?: ViewProps;
-	containerProps?: ViewProps;
-	withoutTabBarOffset?: boolean;
+	footer?: React.ReactNode;
+	navbar?: React.ReactNode;
+	withBottomSafeArea?: boolean;
 }
 
 export const ScreenLayout = ({
-	header,
-	hideHeader = false,
-	title,
 	children,
-	onBack,
-	onClose,
-	navBar,
-	left,
-	right,
-	stickyAction,
-	modal = false,
-	containerProps,
-	bodyProps,
-	withoutTabBarOffset = false,
-}: PropsWithChildren<ScreenLayoutProps>) => {
+	footer,
+	navbar,
+	withBottomSafeArea = true,
+	px = 12,
+	...props
+}: PropsWithChildren<ScreenLayoutProps> & YStackProps) => {
 	const { tabBarHeight } = useLayoutInsetsContext();
 	const insets = useSafeAreaInsets();
 
-	const showHeader = !hideHeader && !modal;
-
-	const { setStickyHeight } = useLayoutInsetsContext();
-
-	const bottomOffset =
-		modal || withoutTabBarOffset ? insets.bottom : tabBarHeight;
+	const bottomOffset = withBottomSafeArea ? tabBarHeight : insets.bottom;
 
 	return (
 		<View
 			flex={1}
 			bg={'$bg'}
-			pt={modal ? 12 : 0}
-			{...containerProps}
 		>
-			{/* {!modal && <XStack height={insets.top} />} */}
-			{/*  }
-			{showHeader && (header ?? <AppHeader />)}
-			<Navbar
-				onClose={onClose}
-				onBack={onBack}
-				title={title}
-				left={left}
-				right={right}
-			>
-				{navBar}
-			</Navbar> */}
-
-			<View
+			{navbar}
+			<YStack
 				flex={1}
-				px={12}
-				{...bodyProps}
+				px={px}
+				{...props}
 			>
 				{children}
-			</View>
+			</YStack>
 
-			{stickyAction && (
-				<YStack
-					p={12}
-					onLayout={(e) => {
-						setStickyHeight(e.nativeEvent.layout.height);
-					}}
-				>
-					{stickyAction}
-				</YStack>
+			{footer}
+			{withBottomSafeArea && (
+				<View
+					bg={'transparent'}
+					height={bottomOffset}
+				/>
 			)}
-			<XStack height={bottomOffset} />
 		</View>
 	);
 };

@@ -22,6 +22,8 @@ module.exports = function (api) {
 						'@localization': './src/localization',
 						'@modals': './src/modals',
 						'@': './src',
+						'@firebase/auth':
+							'./node_modules/@firebase/auth/dist/index.rn.d.ts',
 					},
 				},
 			],

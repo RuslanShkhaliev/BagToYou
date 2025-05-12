@@ -1,4 +1,4 @@
-import { ScreenView } from '@components/layout';
+import { ScreenLayout } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
 import { RouteSelection } from '@modules/delivery/creation/store';
 import { createMockRequests } from '@shared/api/seed/helpers';
@@ -39,10 +39,9 @@ export const SearchScreen = () => {
 	};
 	const similarRequests = createMockRequests(10);
 	return (
-		<ScreenView
+		<ScreenLayout
 			gap={20}
 			pt={50}
-			px={12}
 		>
 			<YStack gap={12}>
 				<RoutePicker
@@ -54,10 +53,10 @@ export const SearchScreen = () => {
 			</YStack>
 			<ButtonStyled
 				onPress={handleSearch}
-				primary
+				variant={'primary'}
 			>
 				Найти маршруты
 			</ButtonStyled>
-		</ScreenView>
+		</ScreenLayout>
 	);
 };

@@ -1,4 +1,4 @@
-import { ScreenView } from '@components/layout';
+import { ScreenLayout } from '@components/layout';
 import { ButtonLink, TextThemed } from '@components/ui-kit';
 import { Stack } from 'expo-router';
 import React from 'react';
@@ -12,7 +12,7 @@ export default function NotFoundScreen() {
 					title: 'Oops!',
 				}}
 			/>
-			<ScreenView style={styles.container}>
+			<ScreenLayout style={styles.container}>
 				<TextThemed>This screen doesn't exist.</TextThemed>
 				<ButtonLink
 					href='/'
@@ -20,7 +20,7 @@ export default function NotFoundScreen() {
 				>
 					<TextThemed>Go to home screen!</TextThemed>
 				</ButtonLink>
-			</ScreenView>
+			</ScreenLayout>
 		</>
 	);
 }

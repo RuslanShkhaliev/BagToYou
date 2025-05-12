@@ -10,6 +10,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TamaguiProvider, View } from 'tamagui';
 import { config } from 'tamagui.config';
 
@@ -23,6 +24,8 @@ export default function RootLayout() {
 	const [loaded] = useFonts({
 		SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
 	});
+
+	const insets = useSafeAreaInsets();
 
 	useEffect(() => {
 		delay(500).then(() => {
@@ -50,6 +53,7 @@ export default function RootLayout() {
 							style={{
 								backgroundColor: themes.dark.bg.val,
 								flex: 1,
+								paddingTop: insets.top,
 							}}
 						>
 							<Stack
@@ -65,14 +69,7 @@ export default function RootLayout() {
 								}}
 							>
 								<Stack.Screen name='(tabs)' />
-								<Stack.Screen
-									name='create'
-									options={{
-										gestureEnabled: true,
-										gestureDirection: 'vertical',
-										presentation: 'modal',
-									}}
-								/>
+								<Stack.Screen name='delivery/create' />
 							</Stack>
 						</View>
 					</TamaguiProvider>

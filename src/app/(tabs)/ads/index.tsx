@@ -1,3 +1,3 @@
-import { ActiveList } from '@modules/userAds/active/ActiveList';
+import { ActiveList } from '@modules/ads/active/ActiveList';
 
 export default ActiveList;

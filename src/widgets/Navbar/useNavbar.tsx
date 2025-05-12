@@ -45,7 +45,7 @@ export const useNavbar = ({
 					onClose={onClose}
 				>
 					<TextThemed
-						fontSize={20}
+						fontSize={18}
 						fontWeight={600}
 					>
 						{title}

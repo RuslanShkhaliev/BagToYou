@@ -17,7 +17,7 @@ interface ContactInfo {
 	phone: string;
 }
 
-interface DeliveryStore {
+export interface DeliveryStore {
 	route: RouteSelection;
 	transport: TransportType;
 	dates: string[]; // ISO строки дат
