@@ -60,6 +60,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 				open={open}
 				moveOnKeyboardChange
 				onPositionChange={setPos}
+				dismissOnSnapToBottom
 				onOpenChange={onOpenChange}
 				forceRemoveScrollEnabled={open}
 				unmountChildrenWhenHidden={unmountChildrenWhenHidden}

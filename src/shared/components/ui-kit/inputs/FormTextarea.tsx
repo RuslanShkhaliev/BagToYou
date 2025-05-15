@@ -8,7 +8,7 @@ import { GetProps, styled, Text, TextArea, YStack } from 'tamagui';
 import { LabelStyled } from '../LabelStyled';
 import { TextThemed } from '../TextThemed';
 
-export interface FormInputProps<T extends FieldValues = FieldValues>
+export interface FormTextareaProps<T extends FieldValues = FieldValues>
 	extends InputFieldProps {
 	label?: string;
 	hint?: string;
@@ -32,7 +32,7 @@ export const FormTextarea = memo(
 		name,
 		onChangeText,
 		...inputProps
-	}: FormInputProps<T>) => {
+	}: FormTextareaProps<T>) => {
 		const generatedId = useId();
 		const inputId =
 			inputProps.id ?? (label ? `input-${generatedId}` : undefined);

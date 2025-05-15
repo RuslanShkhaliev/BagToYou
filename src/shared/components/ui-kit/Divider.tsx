@@ -1,5 +1,12 @@
 import { Separator, styled } from 'tamagui';
 
 export const Divider = styled(Separator, {
-	borderColor: '#343434',
+	borderColor: '$graphite500',
+	variants: {
+		invalid: {
+			true: {
+				borderColor: '$error',
+			},
+		},
+	} as const,
 });

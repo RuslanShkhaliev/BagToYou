@@ -7,6 +7,7 @@ export interface DeliveryInfo {
 	route: RouteSchema[];
 	rewards: number;
 	parcelInfo: ParcelInfo;
+	media: string[];
 	dates: DateSelection;
 	author: Profile;
 	description?: string;

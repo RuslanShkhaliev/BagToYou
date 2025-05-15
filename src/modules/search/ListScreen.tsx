@@ -1,5 +1,5 @@
 import { DeliveryInfo } from '@shared/interfaces';
-import { CardDelivery } from '@modules/delivery/components/CardDelivery';
+import { CardDelivery } from '@modules/shipment/components/CardDelivery';
 import { ScreenLayout } from '@components/layout';
 import { useState } from 'react';
 import { FlatList } from 'react-native';

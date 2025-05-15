@@ -1,3 +1,3 @@
-import { RegisterScreen } from '@/modules/auth';
+import { RegisterScreen } from '@modules/auth';
 
 export default RegisterScreen;

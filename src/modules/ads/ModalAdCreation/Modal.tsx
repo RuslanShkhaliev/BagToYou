@@ -3,6 +3,8 @@ import {
 	ModalRef,
 	useModalControls,
 } from '@modules/ads/ModalAdCreation/hooks/useModalControls';
+import { ROUTES_DELIVERY } from '@modules/delivery/routes';
+import { ROUTES_SHIPMENT } from '@modules/shipment/routes';
 import { Box, Truck } from '@tamagui/lucide-icons';
 import { Href, useRouter } from 'expo-router';
 import { forwardRef, useImperativeHandle } from 'react';
@@ -43,12 +45,12 @@ export const ModalCreateAd = forwardRef<ModalRef, ModalCreateAdProps>(
 						title='Я хочу отправить посылку'
 						icon={Box}
 						onPress={() => {
-							onSelect('/delivery/create/route');
+							onSelect(ROUTES_SHIPMENT.CREATE.ROUTE);
 						}}
 					/>
 					<CardAdType
 						onPress={() => {
-							onSelect('/delivery/create/contacts');
+							onSelect(ROUTES_DELIVERY.CREATE.ROUTE);
 						}}
 						title='Я могу привезти посылку'
 						icon={Truck}

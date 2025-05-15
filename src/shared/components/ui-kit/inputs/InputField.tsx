@@ -63,7 +63,7 @@ export const InputField = memo(
 						onChangeText={handleChange}
 						height={height}
 						value={String(value)}
-						pl={icon ? 52 : 16}
+						pl={icon ? 44 : 16}
 						width={'100%'}
 						{...props}
 					/>

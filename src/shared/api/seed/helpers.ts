@@ -1,10 +1,12 @@
 import { faker } from '@faker-js/faker';
 import { TransportType } from '@shared/enums';
 import { DeliveryInfo } from '@shared/interfaces';
-import { Location, RouteSchema } from '@shared/schema';
+import { LocationSchema, ParcelInfo, RouteSchema } from '@shared/schema';
 
 function randomEnumValue<T extends object>(anEnum: T): number {
-	const values = Object.values(anEnum).filter((val) => typeof val === 'number');
+	const values = Object.values(anEnum).filter(
+		(val) => typeof val === 'number',
+	);
 	return faker.helpers.arrayElement(values);
 }
 
@@ -16,16 +18,18 @@ const generateProfileInfo = () => ({
 	reviews: faker.number.int({ min: 0, max: 200000 }),
 });
 
-const generateParcelInfo = () => ({
-	weight: faker.number.int({ min: 1, max: 20 }).toString(),
-	length: faker.number.int({ min: 10, max: 120 }).toString(),
-	width: faker.number.int({ min: 10, max: 90 }).toString(),
-	height: faker.number.int({ min: 22, max: 100 }).toString(),
-	photos: Array.from({ length: faker.number.int({ min: 0, max: 4 }) }, () =>
-		faker.image.url(),
-	),
+const generateParcelInfo = (): ParcelInfo => ({
+	weight: faker.number.int({ min: 1, max: 20 }),
+	length: faker.number.int({ min: 10, max: 120 }),
+	width: faker.number.int({ min: 10, max: 90 }),
+	height: faker.number.int({ min: 22, max: 100 }),
 });
-export const generateLocationMock = (): Location => ({
+
+const generateMedia = (): string[] =>
+	Array.from({ length: faker.number.int({ min: 0, max: 4 }) }, () =>
+		faker.image.url(),
+	);
+export const generateLocationMock = (): LocationSchema => ({
 	city: faker.location.city(),
 	country: faker.location.country(),
 	lng: faker.location.longitude(),
@@ -56,6 +60,7 @@ export const generateMockDeliveryInfo = (
 			from: fromDate,
 			to: toDate,
 		},
+		media: generateMedia(),
 		author: generateProfileInfo(),
 		transportType: randomEnumValue(TransportType),
 		createdAt: faker.date.recent({

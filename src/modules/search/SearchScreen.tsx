@@ -1,9 +1,9 @@
 import { ScreenLayout } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
-import { RouteSelection } from '@modules/delivery/creation/store';
 import { createMockRequests } from '@shared/api/seed/helpers';
-import { DatePicker } from '@widgets/DatesPicker';
-import { RoutePicker } from '@widgets/RoutePicker';
+import { RouteSchema } from '@shared/schema';
+import { DateRangeSelector } from '@widgets/DateRangeSelector';
+import { LocationSelector } from '@widgets/LocationSelector';
 import { useNavigation } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { YStack } from 'tamagui';
@@ -13,7 +13,7 @@ export const SearchScreen = () => {
 		from: '',
 		to: '',
 	});
-	const [route, setRoute] = useState<RouteSelection>({
+	const [route, setRoute] = useState<RouteSchema>({
 		from: null,
 		to: null,
 	});
@@ -33,7 +33,7 @@ export const SearchScreen = () => {
 	};
 	const handleSearch = async () => {};
 
-	const updateRoute = (route: RouteSelection) => {
+	const updateRoute = (route: RouteSchema) => {
 		resetErrors();
 		setRoute((prev) => ({ ...prev, ...route }));
 	};
@@ -44,12 +44,15 @@ export const SearchScreen = () => {
 			pt={50}
 		>
 			<YStack gap={12}>
-				<RoutePicker
+				<LocationSelector
 					onChange={updateRoute}
 					route={route}
 					errors={errors}
 				/>
-				<DatePicker />
+				<DateRangeSelector
+					dates={dates}
+					onChange={(dates) => setDates(dates)}
+				/>
 			</YStack>
 			<ButtonStyled
 				onPress={handleSearch}

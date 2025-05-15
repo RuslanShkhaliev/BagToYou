@@ -1,5 +1,5 @@
 import { CONFIG } from '@shared/config';
-import { filterCities } from '@widgets/RoutePicker/helpers';
+import { filterCities } from '@widgets/LocationSelector/helpers';
 import { HttpResponse } from 'msw';
 import { createOpenApiHttp } from 'openapi-msw';
 import type { ApiPaths } from '../schema';

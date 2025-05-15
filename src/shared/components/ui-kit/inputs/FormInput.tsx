@@ -3,25 +3,34 @@ import {
 	InputFieldProps,
 } from '@components/ui-kit/inputs/InputField';
 import React, { memo, useId } from 'react';
-import { Control, Controller, FieldValues, Path } from 'react-hook-form';
+import {
+	Controller,
+	FieldPath,
+	FieldValues,
+	UseControllerProps,
+} from 'react-hook-form';
 import { GetProps, Text, YStack } from 'tamagui';
 import { LabelStyled } from '../LabelStyled';
 import { TextThemed } from '../TextThemed';
 
-export interface FormInputProps<T extends FieldValues = FieldValues>
-	extends InputFieldProps {
+export type FormInputProps<
+	TFieldValues extends FieldValues,
+	TName extends FieldPath<TFieldValues>,
+> = Omit<InputFieldProps, 'value'> & {
 	label?: string;
 	hint?: string;
 	required?: boolean;
 	error?: string;
 	labelSize?: number;
 	labelStyles?: GetProps<typeof LabelStyled>;
-	control: Control<T>;
-	name: Path<T>;
-}
+} & UseControllerProps<TFieldValues, TName>;
 
+/**
+ * Компонент ввода для использования с react-hook-form
+ * Автоматически интегрируется с Controller
+ */
 export const FormInput = memo(
-	<T extends FieldValues>({
+	<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>({
 		label,
 		hint,
 		required,
@@ -29,9 +38,11 @@ export const FormInput = memo(
 		labelSize = 16,
 		control,
 		name,
+		defaultValue,
 		onChangeText,
+		rules,
 		...inputProps
-	}: FormInputProps<T>) => {
+	}: FormInputProps<TFieldValues, TName>) => {
 		const generatedId = useId();
 		const inputId =
 			inputProps.id ?? (label ? `input-${generatedId}` : undefined);
@@ -51,11 +62,13 @@ export const FormInput = memo(
 						{label} {required && <Text color='$error'>*</Text>}
 					</LabelStyled>
 				)}
-				<Controller
+				<Controller<TFieldValues, TName>
 					control={control}
 					name={name}
+					defaultValue={defaultValue}
+					rules={rules}
 					render={({
-						field: { onChange, ...field },
+						field: { onChange, value, ...field },
 						fieldState: { error },
 					}) => (
 						<YStack gap={6}>
@@ -63,6 +76,7 @@ export const FormInput = memo(
 								id={inputId}
 								inValid={Boolean(error?.message)}
 								rounded={10}
+								value={String(value ?? '')}
 								onChangeText={(text) => {
 									onChange(text);
 									onChangeText?.(text);
