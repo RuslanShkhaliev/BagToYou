@@ -7,5 +7,6 @@ export * from './IncrementControl';
 export * from './inputs';
 export * from './LabelStyled';
 export * from './PageTitle';
+export * from './selects';
 export * from './TabsUnderline';
 export * from './TextThemed';

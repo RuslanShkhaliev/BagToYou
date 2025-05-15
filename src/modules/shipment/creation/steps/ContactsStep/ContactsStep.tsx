@@ -1,33 +1,18 @@
 import { FloatAction } from '@components/FloatAction';
 import { ScreenLayout, ScreenScroll } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
-import { useShipmentStore } from '@modules/shipment';
-import { ROUTES_SHIPMENT } from '@modules/shipment/routes';
 import { useNavbar } from '@widgets/Navbar';
-import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View } from 'tamagui';
 import { ContactPartyForm } from './components/ContactPartyForm';
 import { generateProfileInfo } from './constants';
 import { useContactsStep } from './hooks/useContactsStep';
-import { contactsStepSchema } from './schema';
 
 export const ContactsStep = () => {
-	const router = useRouter();
 	const [isMeSender, setIsMeSender] = useState(false);
 	const [isMeRecipient, setIsMeRecipient] = useState(false);
 
-	const { updateState } = useShipmentStore();
-	const { control, onSubmit, setValue } = useContactsStep({
-		schema: contactsStepSchema,
-		onSubmit: (formData) => {
-			console.log(formData, 'formData');
-
-			updateState(formData);
-
-			router.push(ROUTES_SHIPMENT.CREATE.PARCEL);
-		},
-	});
+	const { handleSubmit, setValue } = useContactsStep();
 
 	useNavbar({
 		right: (
@@ -58,7 +43,7 @@ export const ContactsStep = () => {
 			px={0}
 			footer={
 				<FloatAction>
-					<ButtonStyled onPress={onSubmit}>Далее</ButtonStyled>
+					<ButtonStyled onPress={handleSubmit}>Далее</ButtonStyled>
 				</FloatAction>
 			}
 		>

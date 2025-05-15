@@ -24,10 +24,11 @@ export const useFormValidate = <S extends z.ZodTypeAny>({
 			onSuccess?.(data);
 		} else {
 			error.issues.forEach((issue) => {
-				setError(issue.path[0] as Path<z.infer<S>>, {
+				setError(issue.path.join('.') as Path<z.infer<S>>, {
 					message: issue.message,
 				});
 			});
+			console.log(error.issues, 'errors');
 		}
 	};
 

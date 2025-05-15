@@ -47,6 +47,7 @@ export const useNavbar = ({
 					<TextThemed
 						fontSize={18}
 						fontWeight={600}
+						text='center'
 					>
 						{title}
 					</TextThemed>

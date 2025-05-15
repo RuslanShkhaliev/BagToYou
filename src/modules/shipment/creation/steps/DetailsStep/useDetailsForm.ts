@@ -1,4 +1,5 @@
 import { useFormValidate } from '@hooks/useFormValidate';
+import { ROUTES_SHIPMENT } from '@modules/shipment/routes';
 import { useRouter } from 'expo-router';
 import { shipmentCreationSchema } from '../../schema';
 import { useShipmentStore } from '../../store';
@@ -16,7 +17,7 @@ export const useDetailsForm = () => {
 			schema: formDetailsSchema,
 			onSuccess: (data) => {
 				updateState(data);
-				router.replace('/ads');
+				router.replace(ROUTES_SHIPMENT.CREATE.CONTACTS);
 			},
 		});
 

@@ -8,7 +8,7 @@ import { useRouter } from 'expo-router';
 import { z } from 'zod';
 const formRouteStep = shipmentCreationSchema.pick({
 	route: true,
-	dates: true,
+	// dates: true,
 });
 
 export type FormRouteStep = z.infer<typeof formRouteStep>;

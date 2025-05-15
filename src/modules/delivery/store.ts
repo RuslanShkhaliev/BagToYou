@@ -1,35 +1,27 @@
 import { zustandStorage } from '@lib/storage';
 import { MessengerType, TransportType } from '@shared/enums';
-import { ParcelInfo, RouteSchema } from '@shared/schema';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
-
-export interface DeliveryState {
-	route: RouteSchema;
-	dates: string[];
-	transport: TransportType;
-
-	parcelInfo: ParcelInfo;
-	description: string;
-	rewards: string;
-	messenger: MessengerType[];
-}
+import { DeliveryCreationSchema } from './schema';
 
 interface Actions {
-	updateState: (value: Partial<DeliveryState>) => void;
+	updateState: (value: Partial<DeliveryCreationSchema>) => void;
 	reset: () => void;
 }
 
 const STORAGE_DELIVERY_KEY = 'delivery_request';
 
-const defaultState = (): DeliveryState => {
+const defaultState = (): DeliveryCreationSchema => {
 	return {
 		route: {
 			from: { city: '' },
 			to: { city: '' },
 		},
-		transport: TransportType.Car,
-		dates: [],
+		transport: TransportType.Plane,
+		dates: {
+			from: new Date().toISOString(),
+			to: '',
+		},
 		parcelInfo: {
 			weight: 0,
 			length: 0,
@@ -38,12 +30,14 @@ const defaultState = (): DeliveryState => {
 		},
 		description: '',
 		rewards: '',
-		messenger: [],
+		messenger: [MessengerType.fb],
 	};
 };
 
+type DeliveryStore = DeliveryCreationSchema & Actions;
+
 export const useDeliveryStore = create<
-	DeliveryState & Actions,
+	DeliveryStore,
 	[['zustand/persist', unknown]]
 >(
 	persist(
