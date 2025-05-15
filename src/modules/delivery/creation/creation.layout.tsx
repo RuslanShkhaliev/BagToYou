@@ -5,6 +5,7 @@ import { DeliveryStore, useDeliveryStore } from './store';
 export const DeliveryCreationLayout = () => {
 	const form = useForm<DeliveryStore>({
 		defaultValues: useDeliveryStore.getState(),
+		reValidateMode: 'onChange',
 	});
 
 	return (
