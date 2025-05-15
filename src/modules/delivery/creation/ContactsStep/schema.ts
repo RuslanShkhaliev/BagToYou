@@ -1,3 +1,4 @@
+import { MessengerType } from '@shared/enums';
 import { z } from 'zod';
 const contactSchema = z.object({
 	name: z.string().min(1, {
@@ -19,6 +20,8 @@ const contactSchema = z.object({
 			},
 			{ message: 'Неверный формат телефона' },
 		),
+
+	messenger: z.array(z.nativeEnum(MessengerType)),
 });
 export const formContactsSchema = z.object({
 	senderInfo: contactSchema,

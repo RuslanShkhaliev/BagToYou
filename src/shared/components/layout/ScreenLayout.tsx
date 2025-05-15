@@ -7,6 +7,7 @@ export interface ScreenLayoutProps {
 	footer?: React.ReactNode;
 	navbar?: React.ReactNode;
 	withBottomSafeArea?: boolean;
+	tabBarSafeArea?: boolean;
 }
 
 export const ScreenLayout = ({
@@ -15,12 +16,13 @@ export const ScreenLayout = ({
 	navbar,
 	withBottomSafeArea = true,
 	px = 12,
+	tabBarSafeArea = false,
 	...props
 }: PropsWithChildren<ScreenLayoutProps> & YStackProps) => {
-	const { tabBarHeight } = useLayoutInsetsContext();
 	const insets = useSafeAreaInsets();
+	const { tabBarHeight } = useLayoutInsetsContext();
 
-	const bottomOffset = withBottomSafeArea ? tabBarHeight : insets.bottom;
+	const bottomOffset = tabBarSafeArea ? tabBarHeight : insets.bottom;
 
 	return (
 		<View

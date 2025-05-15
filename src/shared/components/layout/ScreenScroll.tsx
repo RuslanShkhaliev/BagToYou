@@ -20,6 +20,7 @@ export const ScreenScroll = forwardRef<ScrollView, ScreenWrapperProps>(
 				setRefreshing(false);
 			}
 		}, [onRefresh]);
+
 		return (
 			<ScrollView
 				ref={ref}
@@ -33,8 +34,8 @@ export const ScreenScroll = forwardRef<ScrollView, ScreenWrapperProps>(
 						/>
 					) : undefined
 				}
-				automaticallyAdjustKeyboardInsets
 				bg={'$bg'}
+				automaticallyAdjustKeyboardInsets
 				{...props}
 			>
 				{children}

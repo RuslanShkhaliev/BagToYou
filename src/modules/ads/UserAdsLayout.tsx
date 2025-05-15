@@ -46,6 +46,7 @@ export const UserAdsLayout = ({
 		<ScreenLayout
 			pt={30}
 			navbar={<Navbar title='Объявления' />}
+			tabBarSafeArea
 			footer={
 				<FloatAction>
 					<ButtonStyled onPress={openModal}>Создать объявление</ButtonStyled>

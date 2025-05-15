@@ -2,6 +2,7 @@ import { FloatAction } from '@components/FloatAction';
 import { ScreenLayout } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
 import { parcelInfoSchema } from '@shared/schema';
+import { useNavbar } from '@widgets/Navbar';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -10,16 +11,23 @@ import { useWindowDimensions } from 'tamagui';
 import { parseErrors } from '../shared/utils';
 import { DeliveryStore, useDeliveryStore } from '../store';
 import { CustomSizes } from './CustomSizes';
-import { PresetsList } from './PresetsList';
+import { PresetsList } from './PresetList/PresetsList';
 
 export const ParcelStepPage = () => {
 	const router = useRouter();
 	const { updateState } = useDeliveryStore();
-	const {
-		handleSubmit,
-		setError,
-		formState: { errors },
-	} = useFormContext<DeliveryStore>();
+	const { handleSubmit, setError } = useFormContext<DeliveryStore>();
+
+	useNavbar({
+		right: (
+			<ButtonStyled
+				onPress={() => console.log('save')}
+				variant={'ghost'}
+			>
+				Сохранить и выйти
+			</ButtonStyled>
+		),
+	});
 
 	const onSubmit = (formData: DeliveryStore) => {
 		const { success, data, error } = parcelInfoSchema.safeParse(
@@ -30,8 +38,10 @@ export const ParcelStepPage = () => {
 			console.log(errors);
 
 			errors.forEach(([key, value]) => {
-				setError(`parcelInfo.${key}`, { message: value });
+				setError(`parcelInfo.${key}` as never, { message: value });
 			});
+
+			return;
 		}
 		updateState({
 			parcelInfo: data,
@@ -57,11 +67,14 @@ export const ParcelStepPage = () => {
 			flex={1}
 			footer={
 				<FloatAction>
-					<ButtonStyled onPress={handleSubmit(onSubmit)}>Далее</ButtonStyled>
+					<ButtonStyled onPress={handleSubmit(onSubmit)}>
+						Далее
+					</ButtonStyled>
 				</FloatAction>
 			}
 		>
 			<TabView
+				style={{ flex: 1 }}
 				navigationState={{ index, routes }}
 				renderScene={renderScene}
 				onIndexChange={setIndex}

@@ -1,79 +1,15 @@
-import { ButtonStyled, FormInput, TextThemed } from '@components/ui-kit';
-import { Minus, Plus } from '@tamagui/lucide-icons';
-import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { FormInput, IncrementControl, TextThemed } from '@components/ui-kit';
+import { useEffect } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 import { View, XStack, YStack } from 'tamagui';
 import { DeliveryStore } from '../store';
-
-interface IncrementControlProps {
-	onChange: (value: number) => void;
-	value: string;
-	step?: number;
-	max?: number;
-	min?: number;
-}
-const IncrementControl = ({
-	onChange,
-	value,
-	step = 1,
-	max = Infinity,
-	min = 0,
-}: IncrementControlProps) => {
-	const [counter, setCounter] = useState(Number(value));
-
-	useEffect(() => {
-		setCounter(Number(value));
-	}, [value]);
-	const handleIncrement = () => {
-		setCounter((counter) => {
-			const nextVal = Math.min(counter + step, max);
-			onChange(nextVal);
-			return nextVal;
-		});
-	};
-
-	const handleDecrement = () => {
-		setCounter((counter) => {
-			const value = Math.max(counter - step, min);
-			onChange(value);
-			return value;
-		});
-	};
-	return (
-		<XStack gap={10}>
-			<ButtonStyled
-				onPress={handleDecrement}
-				variant={'outlined'}
-				disabled={Number(counter) <= min}
-				disabledStyle={{
-					opacity: 0.5,
-				}}
-			>
-				<Minus color={'$textPrimary'} />
-			</ButtonStyled>
-			<ButtonStyled
-				onPress={handleIncrement}
-				variant={'outlined'}
-				disabled={Number(counter) >= max}
-			>
-				<Plus color={'$textPrimary'} />
-			</ButtonStyled>
-		</XStack>
-	);
-};
-
 export const CustomSizes = () => {
-	const { control, setValue, getValues, setFocus } =
-		useFormContext<DeliveryStore>();
+	const { control, setFocus } = useFormContext<DeliveryStore>();
 
 	useEffect(() => {
 		setFocus('parcelInfo.weight');
 	}, []);
 
-	const onWeightChange = (value: number) => {
-		console.log(value, 'value');
-		setValue('parcelInfo.weight', value);
-	};
 	return (
 		<View
 			gap={30}
@@ -102,10 +38,16 @@ export const CustomSizes = () => {
 							autoFocus
 						/>
 					</View>
-					<IncrementControl
-						step={0.5}
-						onChange={onWeightChange}
-						value={getValues('parcelInfo.weight')}
+					<Controller
+						control={control}
+						name='parcelInfo.weight'
+						render={({ field }) => (
+							<IncrementControl
+								step={0.5}
+								value={field.value}
+								onChange={field.onChange}
+							/>
+						)}
 					/>
 				</XStack>
 			</View>

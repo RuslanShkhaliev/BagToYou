@@ -1,5 +1,4 @@
-import { ViewProps } from 'react-native-svg/lib/typescript/fabric/utils';
-import { View } from 'tamagui';
+import { View, ViewProps } from 'tamagui';
 
 export const FloatAction = ({ children, ...props }: ViewProps) => {
 	return (

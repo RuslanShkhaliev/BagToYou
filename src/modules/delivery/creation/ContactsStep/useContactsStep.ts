@@ -25,9 +25,6 @@ export const useContactsStep = ({
 			return;
 		}
 
-		// первый шаг - на входе объект с _error массивом и полями объектов
-		// нужно пройтись по всем полям и если это _error то записать в rootPath,
-
 		const errors = parseErrors(error.format());
 
 		errors.forEach(([path, error]) => {

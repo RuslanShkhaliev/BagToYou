@@ -24,7 +24,6 @@ export const FormInput = memo(
 	<T extends FieldValues>({
 		label,
 		hint,
-		error,
 		required,
 		labelStyles,
 		labelSize = 16,
@@ -36,7 +35,7 @@ export const FormInput = memo(
 		const generatedId = useId();
 		const inputId =
 			inputProps.id ?? (label ? `input-${generatedId}` : undefined);
-		const showError = Boolean(error);
+		const showError = Boolean(inputProps.error);
 
 		return (
 			<YStack gap={8}>
@@ -59,7 +58,7 @@ export const FormInput = memo(
 						field: { onChange, ...field },
 						fieldState: { error },
 					}) => (
-						<YStack>
+						<YStack gap={6}>
 							<InputField
 								id={inputId}
 								inValid={Boolean(error?.message)}
@@ -74,7 +73,9 @@ export const FormInput = memo(
 							<TextThemed
 								fontSize={12}
 								lineHeight={12}
-								color={error?.message ? '$error' : '$textSecondary'}
+								color={
+									error?.message ? '$error' : '$textSecondary'
+								}
 							>
 								{error?.message ?? hint}
 							</TextThemed>

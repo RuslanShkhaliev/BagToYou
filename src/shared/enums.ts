@@ -40,6 +40,14 @@ export enum MessagePlatform {
 	Fb,
 }
 
+export enum MessengerType {
+	fb = 'Facebook',
+	wa = 'Whatsapp',
+	tg = 'Telegram',
+	vb = 'Viber',
+	ig = 'Instagram',
+}
+
 export enum Direction {
 	From = 'from',
 	To = 'to',

@@ -34,7 +34,6 @@ export const RouteStepPage = () => {
 	return (
 		<ScreenLayout
 			flex={1}
-			modalView
 			pt={30}
 			footer={
 				<FloatAction>
@@ -46,23 +45,19 @@ export const RouteStepPage = () => {
 				<Controller
 					control={control}
 					name={'route'}
-					render={({ field, fieldState: { error } }) => {
-						console.log(error);
-
-						return (
-							<RoutePicker
-								onChange={(route) => {
-									onSelectRoute({ ...field.value, ...route });
-								}}
-								route={field.value}
-								error={error?.message}
-								errors={{
-									from: error?.from?.message,
-									to: error?.to?.message,
-								}}
-							/>
-						);
-					}}
+					render={({ field, fieldState: { error } }) => (
+						<RoutePicker
+							onChange={(route) => {
+								onSelectRoute({ ...field.value, ...route });
+							}}
+							route={field.value}
+							error={error?.message}
+							errors={{
+								from: error?.from?.message,
+								to: error?.to?.message,
+							}}
+						/>
+					)}
 				/>
 				<Controller
 					name={'dates'}

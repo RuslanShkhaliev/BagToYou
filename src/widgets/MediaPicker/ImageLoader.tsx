@@ -13,8 +13,8 @@ export const ImageLoader = ({ loading, onPress }: ImageLoaderProps) => {
 			onPress={onPress}
 			items='center'
 			justify='center'
-			minW={120}
-			minH={120}
+			minW={150}
+			minH={150}
 			rounded={16}
 			bg='$bgContent'
 		>

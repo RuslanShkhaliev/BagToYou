@@ -1,16 +1,11 @@
-import {
-	FormInput,
-	FormInputProps,
-	LabelStyled,
-	TextThemed,
-} from '@components/ui-kit';
-import { Check } from '@tamagui/lucide-icons';
-import { useId } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { Checkbox, Heading, XStack, YStack } from 'tamagui';
+import { FormInput, FormInputProps } from '@components/ui-kit';
+import { Controller, useFormContext } from 'react-hook-form';
+import { Heading, YStack } from 'tamagui';
+import { SocialSelector } from './SocialSelector';
 
 interface ContactsFieldsLayout {
 	title: string;
+	name: 'recipientInfo' | 'senderInfo';
 	fields: FormInputProps[];
 	isChecked?: boolean;
 	onCheckedChange?: (isChecked: boolean) => void;
@@ -18,15 +13,15 @@ interface ContactsFieldsLayout {
 export const ContactsFieldsLayout = ({
 	title,
 	fields,
-	isChecked,
-	onCheckedChange,
+	name,
 }: ContactsFieldsLayout) => {
 	const { control } = useFormContext();
-	const checkboxId = `checkbox-${useId()}`;
+
 	return (
 		<YStack flex={1}>
 			<Heading
-				fontSize={18}
+				fontSize={20}
+				fontWeight={600}
 				color='$textPrimary'
 			>
 				{title}
@@ -40,39 +35,20 @@ export const ContactsFieldsLayout = ({
 							control={control}
 							clearable
 							{...field}
+							name={`${name}.${field.name}`}
 						/>
 					))}
 				</YStack>
-				<XStack
-					gap='$3'
-					items='stretch'
-				>
-					<Checkbox
-						id={checkboxId}
-						size='$4'
-						checked={isChecked}
-						defaultChecked={isChecked}
-						onCheckedChange={onCheckedChange}
-					>
-						<Checkbox.Indicator>
-							<Check color='$textPrimary' />
-						</Checkbox.Indicator>
-					</Checkbox>
-					<LabelStyled
-						fontSize={14}
-						htmlFor={checkboxId}
-					>
-						<YStack>
-							<TextThemed>Я {title.toLowerCase()}</TextThemed>
-							<TextThemed
-								color='$textSecondary'
-								fontSize={10}
-							>
-								заполнить данными профиля
-							</TextThemed>
-						</YStack>
-					</LabelStyled>
-				</XStack>
+				<Controller
+					control={control}
+					name={`${name}.messenger`}
+					render={({ field }) => (
+						<SocialSelector
+							selected={field.value}
+							onChange={field.onChange}
+						/>
+					)}
+				/>
 			</YStack>
 		</YStack>
 	);

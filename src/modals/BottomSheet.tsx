@@ -1,13 +1,20 @@
-import { TextThemed } from '@components/ui-kit';
 import { useKeyboard } from '@hooks/useKeyboard';
 import { X } from '@tamagui/lucide-icons';
-import React, { forwardRef, useEffect, useState } from 'react';
-import { Button, Sheet, SheetProps, View, XStack, YStack } from 'tamagui';
+import React, { forwardRef, useState } from 'react';
+import {
+	Button,
+	Heading,
+	Sheet,
+	SheetProps,
+	View,
+	XStack,
+	YStack,
+} from 'tamagui';
 
 export interface BottomSheetProps extends SheetProps {
 	children: React.ReactNode;
 	header?: React.ReactNode;
-	title?: string;
+	title?: React.ReactNode;
 	onOpen?: () => void;
 	onClose?: () => void;
 	scroll?: boolean;
@@ -32,38 +39,27 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 			unmountChildrenWhenHidden = true,
 			keyboardShouldPersistTaps = 'handled',
 			scroll = true,
+			modal = true,
+			snapPoints = [95, 0],
+			snapPointsMode = 'percent',
 			...props
 		},
 		ref,
 	) => {
 		const [pos, setPos] = useState<number>(0);
 
-		useEffect(() => {
-			if (!open) {
-				onClose?.();
-			} else {
-				setPos(0);
-			}
-		}, [open]);
-
 		const { keyboardHeight } = useKeyboard();
 		return (
 			<Sheet
-				modal
+				modal={modal}
 				animation={'200ms'}
-				snapPointsMode='percent'
-				snapPoints={[95, 0]}
+				snapPointsMode={snapPointsMode}
+				snapPoints={snapPoints}
 				position={pos}
 				zIndex={100_000}
 				open={open}
-				dismissOnSnapToBottom={false}
 				moveOnKeyboardChange
-				onPositionChange={(pos) => {
-					setPos(pos);
-					if (pos === 1) {
-						onOpenChange?.(false);
-					}
-				}}
+				onPositionChange={setPos}
 				onOpenChange={onOpenChange}
 				forceRemoveScrollEnabled={open}
 				unmountChildrenWhenHidden={unmountChildrenWhenHidden}
@@ -73,12 +69,8 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 				<Sheet.Handle />
 				<Sheet.Frame
 					rounded='$7'
-					shadowColor='$black'
-					shadowRadius={10}
-					shadowOffset={{ height: -4, width: 0 }}
-					shadowOpacity={0.2}
 					pb={keyboardHeight}
-					bg='$bgContent'
+					bg='$bg'
 					flex={1}
 					adjustPaddingForOffscreenContent
 				>
@@ -88,7 +80,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 							items={'center'}
 							height={48}
 						>
-							<TextThemed>{title}</TextThemed>
+							<Heading>{title}</Heading>
 							<Button
 								position={'absolute'}
 								width={28}
@@ -118,7 +110,9 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 							bounces={false}
 							automaticallyAdjustKeyboardInsets
 							automaticallyAdjustContentInsets
-							keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+							keyboardShouldPersistTaps={
+								keyboardShouldPersistTaps
+							}
 						>
 							{children}
 						</Sheet.ScrollView>

@@ -11,8 +11,8 @@ export const ImagePreview = ({ onRemove, ...asset }: ImagePreviewProps) => {
 	return (
 		<View
 			key={asset.uri + useId()}
-			minW={120}
-			height={120}
+			minW={150}
+			height={150}
 			overflow='hidden'
 			rounded={16}
 			bg='$bgContent'

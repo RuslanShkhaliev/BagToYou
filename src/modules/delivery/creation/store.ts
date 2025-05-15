@@ -1,6 +1,6 @@
 import { zustandStorage } from '@lib/storage';
-import { TransportType } from '@shared/enums';
-import { Location, ParcelInfo } from '@shared/schema';
+import { MessengerType, TransportType } from '@shared/enums';
+import { Location, MediaAsset, ParcelInfo } from '@shared/schema';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
 
@@ -15,6 +15,7 @@ interface ContactInfo {
 	name: string;
 	surname: string;
 	phone: string;
+	messenger: MessengerType[];
 }
 
 export interface DeliveryStore {
@@ -29,7 +30,7 @@ export interface DeliveryStore {
 
 	description: string;
 	rewards: string;
-	media: string[];
+	media: MediaAsset[];
 }
 
 interface Actions {
@@ -53,11 +54,13 @@ const defaultState = (): DeliveryStore => {
 			name: '',
 			surname: '',
 			phone: '',
+			messenger: [MessengerType.fb],
 		},
 		recipientInfo: {
 			name: '',
 			surname: '',
 			phone: '',
+			messenger: [MessengerType.fb],
 		},
 		parcelInfo: {
 			weight: '',

@@ -10,6 +10,7 @@ import { ImagePreview } from './ImagePreview';
 interface ImagePickerProps extends ImgPicker.ImagePickerOptions {
 	maxImageCount?: number;
 	media?: MediaAsset[];
+	label?: string;
 	onPicked?: (files: MediaAsset[]) => void;
 	onRemove?: (file: MediaAsset) => void;
 	onUpdate?: (files: MediaAsset[]) => void;
@@ -23,6 +24,7 @@ export const MediaPicker = ({
 	mediaTypes = ['images'],
 	onPicked,
 	onRemove,
+	label,
 	onUpdate,
 	...props
 }: ImagePickerProps) => {
@@ -64,15 +66,17 @@ export const MediaPicker = ({
 
 	return (
 		<YStack>
-			<LabelStyled
-				px={12}
-				fontSize={20}
-				mb={10}
-			>
-				Выбрать изображения
-			</LabelStyled>
+			{label && (
+				<LabelStyled
+					px={12}
+					fontSize={20}
+					mb={10}
+				>
+					{label}
+				</LabelStyled>
+			)}
 			<XStack
-				gap='$2'
+				gap='$3'
 				flexWrap={'wrap'}
 			>
 				<ImageLoader

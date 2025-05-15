@@ -59,7 +59,7 @@ export const FormTextarea = memo(
 						field: { onChange, ...field },
 						fieldState: { error },
 					}) => (
-						<YStack>
+						<YStack gap={6}>
 							<TextareaStyled
 								id={inputId}
 								inValid={Boolean(error?.message)}
@@ -74,7 +74,9 @@ export const FormTextarea = memo(
 							<TextThemed
 								fontSize={12}
 								lineHeight={12}
-								color={error?.message ? '$error' : '$textSecondary'}
+								color={
+									error?.message ? '$error' : '$textSecondary'
+								}
 							>
 								{error?.message ?? hint}
 							</TextThemed>

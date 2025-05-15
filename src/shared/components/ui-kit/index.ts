@@ -2,6 +2,7 @@ export * from './Badge';
 export * from './buttons';
 export * from './Divider';
 export * from './ErrorMessage';
+export * from './IncrementControl';
 export * from './inputs';
 export * from './LabelStyled';
 export * from './PageTitle';
