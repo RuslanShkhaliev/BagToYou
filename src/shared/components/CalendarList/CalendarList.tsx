@@ -5,7 +5,6 @@ import {
 	CalendarProps,
 	DateData,
 } from 'react-native-calendars';
-import { DayProps } from 'react-native-calendars/src/calendar/day';
 import { useTheme } from 'tamagui';
 import { CalendarDay } from './CalendarDay';
 
@@ -13,10 +12,22 @@ interface CalendarListProps extends Omit<CalendarProps, 'onDayPress'> {
 	onDayPress: (date: DateData) => void;
 }
 
+interface Marking {
+	selected?: boolean;
+	marked?: boolean;
+	startingDay?: boolean;
+	endingDay?: boolean;
+}
+
+interface DayProps {
+	date: DateData;
+	marking: Marking;
+}
+
 export const CalendarList = memo(
 	({ onDayPress, ...props }: CalendarListProps) => {
 		const theme = useTheme();
-		const today = new Date().toISOString().split('T')[0];
+		const today = new Date().toISOString().split('T')[0]!;
 
 		const handleDayPress = useCallback(
 			(day: DateData) => {
@@ -26,21 +37,16 @@ export const CalendarList = memo(
 		);
 
 		const renderDay = useCallback(
-			({ date, marking, state, ...props }: DayProps) => {
-				const isDisabled =
-					state === 'disabled' ||
-					(date?.dateString && date.dateString < today);
-
+			({ date, marking }: DayProps) => {
 				return (
 					<CalendarDay
-						date={date as DateData}
-						marking={marking}
-						disabled={isDisabled}
+						date={date}
+						{...marking}
 						onPress={handleDayPress}
 					/>
 				);
 			},
-			[today, handleDayPress],
+			[handleDayPress],
 		);
 
 		return (

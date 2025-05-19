@@ -8,7 +8,9 @@ import { z } from 'zod';
 
 export const deliveryCreationSchema = z.object({
 	route: routeCreationSchema,
-	dates: dateRangeSchema,
+	dates: dateRangeSchema.refine((data) => data.startDate && data.endDate, {
+		message: 'Пожалуйста, укажите даты поездки',
+	}),
 	transport: z.nativeEnum(TransportType),
 	rewards: z.string(),
 	description: z.string(),

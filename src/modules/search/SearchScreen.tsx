@@ -47,7 +47,7 @@ export const SearchScreen = () => {
 					errors={errors}
 				/>
 				<DateRangeSelector
-					mode='range'
+					range
 					date={dates}
 					onChange={(dates) => setDates(dates)}
 				/>

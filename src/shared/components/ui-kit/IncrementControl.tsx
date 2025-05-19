@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { XStack } from 'tamagui';
 import { ButtonStyled } from './buttons/ButtonStyled';
 interface IncrementControlProps {
-	onChange: (value: number) => void;
+	onChange: (value: string) => void;
 	value: string;
 	step?: number;
 	max?: number;
@@ -28,7 +28,7 @@ export const IncrementControl = ({
 	const handleIncrement = () => {
 		setCounter((counter) => {
 			const nextVal = Math.min(counter + step, max);
-			onChange(nextVal);
+			onChange(nextVal.toString());
 			return nextVal;
 		});
 	};
@@ -36,7 +36,7 @@ export const IncrementControl = ({
 	const handleDecrement = () => {
 		setCounter((counter) => {
 			const value = Math.max(counter - step, min);
-			onChange(value);
+			onChange(value.toString());
 			return value;
 		});
 	};

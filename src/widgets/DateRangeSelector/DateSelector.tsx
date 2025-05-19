@@ -1,3 +1,4 @@
+import { TextThemed } from '@components/ui-kit';
 import { ModalWrapper } from '@modals/ModalWrapper';
 import { DateISOSchema, DateRangeSchema } from '@shared/schema';
 import React, { useState } from 'react';
@@ -5,16 +6,15 @@ import { View } from 'tamagui';
 import { CalendarRange } from './CalendarRange/CalendarRange';
 import { CalendarSingle } from './CalendarSingle';
 import { DateControl, DateControlProps } from './DateControl';
-import { DateSelectorMode } from './enums';
 
 interface DateRangeProps {
 	date: DateRangeSchema;
-	mode: DateSelectorMode.RANGE;
+	range?: true;
 	onChange: (date: DateRangeSchema) => void;
 }
 interface DateSingleProps {
 	date?: DateISOSchema;
-	mode?: DateSelectorMode.SINGLE;
+	range?: false;
 	onChange: (date: DateISOSchema) => void;
 }
 
@@ -24,7 +24,7 @@ type DateSelectorProps = {
 
 export const DateRangeSelector = ({
 	date,
-	mode = DateSelectorMode.SINGLE,
+	range = false,
 	onChange,
 	controlStyles,
 }: DateSelectorProps) => {
@@ -52,7 +52,7 @@ export const DateRangeSelector = ({
 		<View>
 			<DateControl
 				height={44}
-				mode={mode}
+				range={range}
 				placeholder={'Select dates'}
 				rounded={8}
 				value={date}
@@ -61,19 +61,30 @@ export const DateRangeSelector = ({
 			/>
 			<ModalWrapper
 				visible={isOpen}
+				title={
+					<TextThemed
+						fontSize={20}
+						fontWeight={600}
+					>
+						Календарь
+					</TextThemed>
+				}
 				onClose={() => setIsOpen(false)}
 			>
-				<View px={16}>
-					{mode === DateSelectorMode.SINGLE && (
-						<CalendarSingle
-							date={date as DateISOSchema}
-							onDaySelect={handleSingleSelect}
-						/>
-					)}
-					{mode === DateSelectorMode.RANGE && (
+				<View
+					px={16}
+					flex={1}
+					pb={100}
+				>
+					{range ? (
 						<CalendarRange
 							initialDates={date as DateRangeSchema}
 							onRangeSelect={handleRangeSelect}
+						/>
+					) : (
+						<CalendarSingle
+							date={date as DateISOSchema}
+							onDaySelect={handleSingleSelect}
 						/>
 					)}
 				</View>

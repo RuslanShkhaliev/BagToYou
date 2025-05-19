@@ -1,19 +1,19 @@
 import { FloatAction } from '@components/FloatAction';
 import { ScreenLayout } from '@components/layout';
-import { ButtonStyled, ErrorMessage } from '@components/ui-kit';
+import { ButtonStyled } from '@components/ui-kit';
 import { RouteSchema } from '@shared/schema';
-import { DateRangeSelector } from '@widgets/DateRangeSelector';
 import { LocationSelector } from '@widgets/LocationSelector';
 import { useNavbar } from '@widgets/Navbar';
 import React from 'react';
 import { useController } from 'react-hook-form';
-import { Heading, View } from 'tamagui';
-import { SelectTransport } from './components/SelectTransport';
+import { View } from 'tamagui';
+import { DateSelectorParty } from './DateSelectorParty';
+import { SelectTransport } from './SelectTransport';
 import { useRouteForm } from './hooks/useRouteForm';
 
 export const RouteStepPage = () => {
 	useNavbar({
-		title: 'Заполните данные о маршруте',
+		title: 'Шаг 1: Укажите маршрут',
 	});
 
 	const {
@@ -65,20 +65,12 @@ export const RouteStepPage = () => {
 						to: errors?.route?.to?.message,
 					}}
 				/>
-				<View>
-					<Heading
-						color={'$textPrimary'}
-						fontSize={18}
-					>
-						Выберите даты поездки
-					</Heading>
-					<DateRangeSelector
-						dates={[datesField.value.from, datesField.value.to]}
-						onChange={onSelectDates}
-					/>
-					<ErrorMessage message={errors?.dates?.message} />
-				</View>
 
+				<DateSelectorParty
+					date={datesField.value}
+					onChange={onSelectDates}
+					error={errors?.dates?.message}
+				/>
 				<SelectTransport
 					selected={transportField.value}
 					onSelect={onSelectTransport}

@@ -6,7 +6,7 @@ import { LocationSelector } from '@widgets/LocationSelector';
 import { useNavbar } from '@widgets/Navbar';
 import { useController } from 'react-hook-form';
 import { View } from 'tamagui';
-import { DatePartySelector } from './components/DatePartySelector';
+import { DatePartySelector } from './DatePartySelector';
 import { useFormRouteStep } from './hooks/useFormRoute';
 
 export const RouteStep = () => {

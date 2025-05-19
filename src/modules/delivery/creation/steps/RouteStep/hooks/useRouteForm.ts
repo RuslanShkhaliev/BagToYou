@@ -3,12 +3,12 @@ import { ROUTES_DELIVERY } from '@modules/delivery/routes';
 import { deliveryCreationSchema } from '@modules/delivery/schema';
 import { useDeliveryStore } from '@modules/delivery/store';
 import { TransportType } from '@shared/enums';
-import { DateSchema, RouteSchema } from '@shared/schema';
+import { DateRangeSchema, RouteSchema } from '@shared/schema';
 import { useRouter } from 'expo-router';
 
 const formRouteSchema = deliveryCreationSchema.pick({
 	route: true,
-	// dates: true,
+	dates: true,
 	transport: true,
 });
 export const useRouteForm = () => {
@@ -20,25 +20,32 @@ export const useRouteForm = () => {
 			schema: formRouteSchema,
 			onSuccess: (data) => {
 				updateState(data);
+				console.log(data);
+
 				router.push(ROUTES_DELIVERY.CREATE.DETAILS);
 			},
 		});
 
 	const onSelectRoute = (route: RouteSchema) => {
-		setValue('route', route);
 		clearErrors();
+
+		setValue('route', route, {
+			shouldValidate: true,
+		});
 	};
 
-	const onSelectDates = (dates: DateSchema[]) => {
-		setValue('dates', {
-			from: dates[0] || '',
-			to: dates[1] || '',
-		});
+	const onSelectDates = (dates: DateRangeSchema) => {
 		clearErrors();
+		console.log(dates);
+
+		setValue('dates', dates, {
+			shouldValidate: true,
+		});
 	};
 	const onSelectTransport = (transport: TransportType) => {
-		setValue('transport', transport);
-		clearErrors();
+		setValue('transport', transport, {
+			shouldValidate: true,
+		});
 	};
 	return {
 		onSelectRoute,

@@ -1,5 +1,6 @@
 import { useFormValidate } from '@hooks/useFormValidate';
 import { useShipmentStore } from '@modules/shipment';
+import { DateType } from '@modules/shipment/creation/interfaces';
 import { shipmentCreationSchema } from '@modules/shipment/creation/schema';
 import { ROUTES_SHIPMENT } from '@modules/shipment/routes';
 import { DateISOSchema } from '@shared/schema';
@@ -33,22 +34,25 @@ export const useFormRouteStep = () => {
 	};
 
 	const onSelectDate = (date: DateISOSchema) => {
+		clearErrors();
+
 		setValue('date.value', date, {
 			shouldValidate: true,
 		});
-
-		clearErrors();
 	};
 
-	const onChangeDateType = (type: 'asap' | 'byDate') => {
-		if (type === 'asap') {
-			setValue('date.value', '');
+	const onChangeDateType = (type: DateType) => {
+		clearErrors();
+
+		if (type === DateType.ASAP) {
+			setValue('date.value', undefined, {
+				shouldValidate: true,
+			});
 		}
 
 		setValue('date.type', type, {
 			shouldValidate: true,
 		});
-		clearErrors();
 	};
 
 	return {

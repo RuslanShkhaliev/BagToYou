@@ -4,20 +4,19 @@ import { NBSP } from '@shared/unicodes';
 import { Calendar } from '@tamagui/lucide-icons';
 import { useMemo } from 'react';
 import { View } from 'tamagui';
-import { DateSelectorMode } from './enums';
 import { formatDate } from './utils';
 export interface DateControlProps extends Omit<InputFieldProps, 'value'> {
 	value?: DateISOSchema | DateRangeSchema;
-	mode: DateSelectorMode;
+	range?: boolean;
 }
 
 export const DateControl = ({
 	value = '',
-	mode = DateSelectorMode.SINGLE,
+	range,
 	...props
 }: DateControlProps) => {
 	const displayDate = useMemo(() => {
-		if (mode === DateSelectorMode.RANGE) {
+		if (range) {
 			const { startDate, endDate } = value as DateRangeSchema;
 
 			const labelStart = startDate ? formatDate(startDate) : '';
@@ -39,7 +38,7 @@ export const DateControl = ({
 		const singleLabel = formatDate(value as DateISOSchema) || '';
 
 		return singleLabel;
-	}, [value, mode]);
+	}, [value, range]);
 	return (
 		<View position='relative'>
 			<InputField

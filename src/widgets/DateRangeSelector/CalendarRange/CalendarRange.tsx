@@ -1,8 +1,11 @@
 import { CalendarList } from '@components/CalendarList/CalendarList';
 import { DateRangeSchema } from '@shared/schema';
+import { eachDayOfInterval } from 'date-fns';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { DateData } from 'react-native-calendars';
+import { MarkedDates } from 'react-native-calendars/src/types';
 import { View } from 'tamagui';
+import { fromISOString, toISOString } from '../utils';
 import { ActiveTab, DateRangeTabs } from './DateRangeTabs/DateRangeTabs';
 import { useDateRangeReducer } from './useDateRangeReducer';
 
@@ -32,24 +35,48 @@ export const CalendarRange = ({
 			isFirstRender.current = false;
 			return;
 		}
-		onRangeSelect(dates);
+		onRangeSelect({
+			startDate: toISOString(dates.startDate),
+			endDate: toISOString(dates.endDate),
+		});
 	}, [dates]);
 
 	const marked = useMemo(() => {
-		return {
-			[dates.startDate]: {
+		const startDate = fromISOString(dates.startDate);
+		const endDate = fromISOString(dates.endDate);
+		const markedDates: MarkedDates = {
+			[startDate]: {
 				selected: true,
 				selectedColor: '$accent',
 				startingDay: true,
-				endingDay: true,
+				marked: true,
 			},
-			[dates.endDate]: {
+			[endDate]: {
 				selected: true,
 				selectedColor: '$accent',
-				startingDay: true,
 				endingDay: true,
+				marked: true,
 			},
 		};
+
+		if (startDate && endDate) {
+			const days = eachDayOfInterval({
+				start: startDate,
+				end: endDate,
+			});
+
+			days.forEach((day, i) => {
+				if (i === 0 || i === days.length - 1) {
+					return;
+				} else {
+					markedDates[fromISOString(day.toISOString())] = {
+						marked: true,
+					};
+				}
+			});
+		}
+
+		return markedDates;
 	}, [dates]);
 
 	const handleTabChange = (tab: ActiveTab) => {
