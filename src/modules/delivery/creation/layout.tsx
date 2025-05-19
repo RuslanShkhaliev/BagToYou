@@ -1,9 +1,10 @@
-import { DeliveryState, useDeliveryStore } from '@modules/delivery/store';
+import { useDeliveryStore } from '@modules/delivery/store';
 import { Stack } from 'expo-router';
 import { FormProvider, useForm } from 'react-hook-form';
+import { DeliveryCreationSchema } from '../schema';
 
 export const DeliveryCreationLayout = () => {
-	const form = useForm<DeliveryState>({
+	const form = useForm<DeliveryCreationSchema>({
 		defaultValues: useDeliveryStore.getState(),
 	});
 	return (

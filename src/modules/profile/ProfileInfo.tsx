@@ -1,29 +1,25 @@
+import { ScreenLayout } from '@components/layout/ScreenLayout';
 import { ButtonLink, ButtonStyled } from '@components/ui-kit';
-import { useNavigation } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { Modal, Pressable, StyleSheet } from 'react-native';
+import { ModalWrapper } from '@modals/ModalWrapper';
+import { useNavbar } from '@widgets/Navbar';
+import { useState } from 'react';
+import { Pressable, StyleSheet } from 'react-native';
 import Animated, { FadeIn, SlideInDown } from 'react-native-reanimated';
-import { Text, useTheme, View } from 'tamagui';
+import { Text, useTheme } from 'tamagui';
 
 export const ProfileInfo = () => {
 	const [open, setModalVisible] = useState(false);
 	const theme = useTheme();
 
-	const navigation = useNavigation();
-
-	useEffect(() => {
-		navigation.setOptions({
-			headerShown: true,
-			headerTitle: 'Hellow',
-		});
-	}, [navigation]);
+	useNavbar({
+		title: 'Мой профиль',
+	});
 	return (
-		<View>
-			<ButtonLink href={'/profile/index'}>Назад</ButtonLink>
+		<ScreenLayout>
 			<ButtonStyled onPress={() => setModalVisible(true)}>
 				Открыть модалку
 			</ButtonStyled>
-			<Modal
+			<ModalWrapper
 				visible={open}
 				animationType={'slide'}
 				presentationStyle={'formSheet'}
@@ -60,29 +56,7 @@ export const ProfileInfo = () => {
 						</ButtonLink>
 					</Animated.View>
 				</Animated.View>
-			</Modal>
-		</View>
-		// <ScreenLayout
-		// 	title='Профиль'
-		// 	hideHeader
-		// 	navBar={<PageTitle>Мой профиль</PageTitle>}
-		// 	stickyAction={
-		// 		<ButtonLink
-		// 			ghost
-		// 			justify={'flex-start'}
-		// 			rounded={0}
-		// 			href={'/profile/settings'}
-		// 		>
-		// 			Настройки профиля
-		// 			<ChevronRight />
-		// 		</ButtonLink>
-		// 	}
-		// >
-		// 	<XStack>
-		// 		<ListItem color={'$textPrimary'}>
-		// 			<TextThemed>Имя</TextThemed>
-		// 		</ListItem>
-		// 	</XStack>
-		// </ScreenLayout>
+			</ModalWrapper>
+		</ScreenLayout>
 	);
 };

@@ -1,6 +1,8 @@
+import { InputField } from '@components/ui-kit/inputs';
+import { LabelStyled } from '@components/ui-kit/LabelStyled';
+import { TextThemed } from '@components/ui-kit/TextThemed';
 import { BottomSheet } from '@modals/BottomSheet';
-import { InputField, LabelStyled, TextThemed } from '@shared/components/ui-kit';
-import { Check } from '@tamagui/lucide-icons';
+import { Check, ChevronDown } from '@tamagui/lucide-icons';
 import { useState } from 'react';
 import { ListItem, View, YGroup } from 'tamagui';
 
@@ -79,6 +81,10 @@ export function SelectWithBottomSheet<T>(props: SelectWithBottomSheetProps<T>) {
 		return selected.map((item) => item.label).join(', ');
 	};
 
+	const InputIcon =
+		!Array.isArray(value) &&
+		options.find((option) => option.value === value)?.Icon;
+
 	const displayValue = getDisplayValue();
 
 	const handleToggle = () => setIsOpen(!isOpen);
@@ -113,15 +119,41 @@ export function SelectWithBottomSheet<T>(props: SelectWithBottomSheetProps<T>) {
 		selectedValues.includes(option.value);
 
 	return (
-		<View gap={8}>
+		<View>
 			{label && <LabelStyled fontSize={18}>{label}</LabelStyled>}
-			<InputField
-				rounded={10}
-				value={displayValue || ''}
-				placeholder={placeholder}
-				readOnly
-				onPress={handleToggle}
-			/>
+			<View>
+				<InputField
+					rounded={10}
+					value={displayValue || ''}
+					placeholder={placeholder}
+					readOnly
+					onPress={handleToggle}
+					icon={
+						InputIcon && (
+							<InputIcon
+								size={20}
+								color={'$accent'}
+							/>
+						)
+					}
+				/>
+				<View
+					position='absolute'
+					t={0}
+					r={0}
+					height={'100%'}
+					justify={'center'}
+					items={'center'}
+					px={10}
+				>
+					<ChevronDown
+						color={'$textPrimary'}
+						size={20}
+						rotate={isOpen ? '180deg' : '0deg'}
+						animation={'quicker'}
+					/>
+				</View>
+			</View>
 			<BottomSheet
 				open={isOpen}
 				onOpenChange={setIsOpen}

@@ -13,7 +13,7 @@ export const ParcelStep = () => {
 	const { handleSubmit } = useFormParcelStep();
 
 	useNavbar({
-		title: 'Заполните данные о посылке',
+		title: 'Шаг 2: Посылка',
 		right: (
 			<ButtonStyled
 				onPress={() => console.log('save')}

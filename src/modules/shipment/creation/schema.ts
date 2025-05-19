@@ -1,12 +1,13 @@
 import { MessengerType } from '@shared/enums';
 import {
-	dateSchema,
+	dateISOSchema,
 	mediaAssetSchema,
 	parcelInfoSchema,
 	phoneSchema,
-	routeSchema,
+	routeCreationSchema,
 } from '@shared/schema';
 import { z } from 'zod';
+import { DateType } from './interfaces';
 
 const MESSAGES = {
 	REQUIRED: (field: string) => `${field} обязателен`,
@@ -25,16 +26,20 @@ const contactSchema = z.object({
 	messenger: z.array(z.nativeEnum(MessengerType)),
 });
 
+const dateShipmentSchema = z.object({
+	type: z.nativeEnum(DateType).default(DateType.BY_DATE),
+	value: dateISOSchema.optional(),
+});
+
+export type DateShipmentSchema = z.infer<typeof dateShipmentSchema>;
+
 export const shipmentCreationSchema = z.object({
-	route: routeSchema,
+	route: routeCreationSchema,
 	parcelInfo: parcelInfoSchema,
+	date: dateShipmentSchema,
 	media: z.array(mediaAssetSchema),
-	dates: z.object({
-		from: dateSchema.optional(),
-		to: dateSchema.optional(),
-	}),
 	description: z.string().optional(),
-	rewards: z.number().optional(),
+	rewards: z.string().optional().default(''),
 	senderInfo: contactSchema,
 	recipientInfo: contactSchema,
 });

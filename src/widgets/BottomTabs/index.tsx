@@ -1,6 +1,6 @@
 import { useLayoutInsetsContext } from '@context/layout-insets.context';
 import { IconProps } from '@tamagui/helpers-icon';
-import { ClipboardList, Search, Settings } from '@tamagui/lucide-icons';
+import { ClipboardList, Search, User } from '@tamagui/lucide-icons';
 import { Href } from 'expo-router';
 import { TabList, Tabs, TabSlot, TabTrigger } from 'expo-router/ui';
 import { NamedExoticComponent } from 'react';
@@ -25,9 +25,9 @@ const tabBarButtons: TabButtonItem[] = [
 		IconComponent: ClipboardList,
 	},
 	{
-		href: '/settings',
-		name: 'Settings',
-		IconComponent: Settings,
+		href: '/profile',
+		name: 'Profile',
+		IconComponent: User,
 	},
 ];
 export const BottomTabsLayout = () => {

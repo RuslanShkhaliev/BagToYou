@@ -2,13 +2,13 @@ import { useFormValidate } from '@hooks/useFormValidate';
 import { useShipmentStore } from '@modules/shipment';
 import { shipmentCreationSchema } from '@modules/shipment/creation/schema';
 import { ROUTES_SHIPMENT } from '@modules/shipment/routes';
-import { DateSchema } from '@shared/schema';
+import { DateISOSchema } from '@shared/schema';
 import { RouteSchema } from '@shared/schema/location';
 import { useRouter } from 'expo-router';
 import { z } from 'zod';
 const formRouteStep = shipmentCreationSchema.pick({
 	route: true,
-	// dates: true,
+	date: true,
 });
 
 export type FormRouteStep = z.infer<typeof formRouteStep>;
@@ -17,7 +17,7 @@ export const useFormRouteStep = () => {
 	const { updateState } = useShipmentStore();
 	const router = useRouter();
 
-	const { control, handleSubmit, setValue, clearErrors, errors } =
+	const { control, handleSubmit, setValue, clearErrors, ...rest } =
 		useFormValidate({
 			schema: formRouteStep,
 			onSuccess: (data) => {
@@ -32,10 +32,21 @@ export const useFormRouteStep = () => {
 		clearErrors();
 	};
 
-	const onSelectDates = (dates: DateSchema[]) => {
-		setValue('dates', {
-			from: dates[0],
-			to: dates[1],
+	const onSelectDate = (date: DateISOSchema) => {
+		setValue('date.value', date, {
+			shouldValidate: true,
+		});
+
+		clearErrors();
+	};
+
+	const onChangeDateType = (type: 'asap' | 'byDate') => {
+		if (type === 'asap') {
+			setValue('date.value', '');
+		}
+
+		setValue('date.type', type, {
+			shouldValidate: true,
 		});
 		clearErrors();
 	};
@@ -44,8 +55,10 @@ export const useFormRouteStep = () => {
 		control,
 		handleSubmit,
 		setValue,
-		errors,
+		clearErrors,
+		...rest,
 		onSelectRoute,
-		onSelectDates,
+		onSelectDate,
+		onChangeDateType,
 	};
 };

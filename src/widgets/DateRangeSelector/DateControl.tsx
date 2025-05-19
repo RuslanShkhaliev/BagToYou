@@ -1,26 +1,65 @@
 import { InputField, InputFieldProps } from '@components/ui-kit';
-import { DateValue } from '@shared/interface';
-import { format } from 'date-fns';
+import { DateISOSchema, DateRangeSchema } from '@shared/schema';
+import { NBSP } from '@shared/unicodes';
+import { Calendar } from '@tamagui/lucide-icons';
 import { useMemo } from 'react';
-
-interface Props extends Omit<InputFieldProps, 'value'> {
-	value?: DateValue | undefined;
+import { View } from 'tamagui';
+import { DateSelectorMode } from './enums';
+import { formatDate } from './utils';
+export interface DateControlProps extends Omit<InputFieldProps, 'value'> {
+	value?: DateISOSchema | DateRangeSchema;
+	mode: DateSelectorMode;
 }
 
-export const DateControl = ({ value = '', ...props }: Props) => {
-	const val = useMemo(() => {
-		if (!value) {
+export const DateControl = ({
+	value = '',
+	mode = DateSelectorMode.SINGLE,
+	...props
+}: DateControlProps) => {
+	const displayDate = useMemo(() => {
+		if (mode === DateSelectorMode.RANGE) {
+			const { startDate, endDate } = value as DateRangeSchema;
+
+			const labelStart = startDate ? formatDate(startDate) : '';
+			const labelEnd = endDate ? formatDate(endDate) : '';
+
+			if (labelStart && labelEnd) {
+				return `${labelStart}${NBSP}—${NBSP}${labelEnd}`;
+			}
+			if (labelStart) {
+				return labelStart;
+			}
+			if (labelEnd) {
+				return labelEnd;
+			}
+
 			return '';
 		}
 
-		return format(new Date(value), 'dd MMM');
-	}, [value]);
+		const singleLabel = formatDate(value as DateISOSchema) || '';
+
+		return singleLabel;
+	}, [value, mode]);
 	return (
-		<InputField
-			borderWidth={0}
-			value={val}
-			readOnly
-			{...props}
-		/>
+		<View position='relative'>
+			<InputField
+				borderWidth={0}
+				value={displayDate}
+				readOnly
+				fontWeight={700}
+				{...props}
+			/>
+			<View
+				position='absolute'
+				r={0}
+				t={0}
+				b={0}
+				pr={16}
+				height={'100%'}
+				justify={'center'}
+			>
+				<Calendar color={'$accent'} />
+			</View>
+		</View>
 	);
 };

@@ -68,15 +68,15 @@ export const CardDelivery = (props: DeliveryInfo) => {
 									fontSize={16}
 									shrink={1}
 								>
-									{props.route.at(-1)?.to?.city}
+									{props.route.at(-1)?.destination?.city}
 								</Text>
-								{props.route[1]?.to?.country && (
+								{props.route[1]?.destination?.country && (
 									<Badge
 										containerProps={{
 											height: '100%',
 										}}
 									>
-										{props.route[1].to.country}
+										{props.route[1].destination.country}
 									</Badge>
 								)}
 							</XStack>
@@ -178,7 +178,8 @@ export const CardDelivery = (props: DeliveryInfo) => {
 										lineHeight={14}
 										fontSize={12}
 									>
-										{props.parcelInfo.length}x{props.parcelInfo.width}x
+										{props.parcelInfo.length}x
+										{props.parcelInfo.width}x
 										{props.parcelInfo.height}
 										см
 									</Text>

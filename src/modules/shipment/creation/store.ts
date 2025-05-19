@@ -2,6 +2,7 @@ import { zustandStorage } from '@lib/storage';
 import { MessengerType } from '@shared/enums';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
+import { DateType } from './interfaces';
 import { ShipmentCreationSchema } from './schema';
 
 export const STORAGE_SHIPMENT_KEY = 'shipment_offer';
@@ -17,8 +18,9 @@ const defaultState = (): ShipmentCreationSchema => {
 			from: { city: '' },
 			to: { city: '' },
 		},
-		dates: {
-			from: new Date().toISOString(),
+		date: {
+			type: DateType.BY_DATE,
+			value: undefined,
 		},
 		senderInfo: {
 			name: '',
@@ -39,7 +41,7 @@ const defaultState = (): ShipmentCreationSchema => {
 			height: 0,
 		},
 		description: '',
-		rewards: 0,
+		rewards: '',
 		media: [],
 	};
 };

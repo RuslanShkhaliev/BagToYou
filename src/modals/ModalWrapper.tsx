@@ -51,7 +51,9 @@ export const ModalWrapper = forwardRef<Modal, ModalWrapperProps>(
 							onBack={onBack}
 							closable={!!onClose}
 						>
-							{title && <TextThemed fontSize={18}>{title}</TextThemed>}
+							{title && (
+								<TextThemed fontSize={18}>{title}</TextThemed>
+							)}
 						</Navbar>
 					)}
 					{children}

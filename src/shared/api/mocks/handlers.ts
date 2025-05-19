@@ -12,7 +12,6 @@ const http = createOpenApiHttp<ApiPaths>({
 export const handlers = [
 	http.get('/locations', ({ query, params }) => {
 		const city = query.get('city');
-		console.log(city, 'ciyt');
 
 		const filtered = filterCities(city, locations);
 		return HttpResponse.json(filtered, { status: 200 });

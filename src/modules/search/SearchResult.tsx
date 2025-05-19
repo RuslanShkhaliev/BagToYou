@@ -1,23 +1,16 @@
-import { DeliveryInfo } from '@shared/interfaces';
-import { CardDelivery } from '@modules/shipment/components/CardDelivery';
 import { ScreenLayout } from '@components/layout';
+import { CardDelivery } from '@modules/shipment/components/CardDelivery';
+import { DeliveryInfo } from '@shared/interfaces';
 import { useState } from 'react';
 import { FlatList } from 'react-native';
 
 export const ListScreen = () => {
 	const [data, setData] = useState<DeliveryInfo[]>([]);
 	return (
-		<ScreenLayout>
+		<ScreenLayout px={0}>
 			<FlatList
-				ListHeaderComponent={() => (
- 
-				)}
 				data={data}
-				renderItem={
-					({item, index}) => (
-						<CardDelivery {...item}/>
-					)
-				}
+				renderItem={({ item, index }) => <CardDelivery {...item} />}
 			/>
 		</ScreenLayout>
 	);

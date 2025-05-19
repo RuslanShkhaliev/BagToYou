@@ -8,7 +8,6 @@ export const ToggleGroupItem = styled(ToggleGroup.Item, {
 	focusStyle: {
 		borderColor: '$orange500',
 	},
-	height: 32,
 	variants: {
 		active: {
 			true: {

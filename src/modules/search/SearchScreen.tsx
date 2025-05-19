@@ -1,11 +1,10 @@
 import { ScreenLayout } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
 import { createMockRequests } from '@shared/api/seed/helpers';
-import { RouteSchema } from '@shared/schema';
+import { DateRangeSchema, RouteSchema } from '@shared/schema';
 import { DateRangeSelector } from '@widgets/DateRangeSelector';
 import { LocationSelector } from '@widgets/LocationSelector';
-import { useNavigation } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { YStack } from 'tamagui';
 
 export const SearchScreen = () => {
@@ -14,19 +13,17 @@ export const SearchScreen = () => {
 		to: '',
 	});
 	const [route, setRoute] = useState<RouteSchema>({
-		from: null,
-		to: null,
+		from: {
+			city: '',
+		},
+		to: {
+			city: '',
+		},
 	});
-	const [dates, setDates] = useState({ from: '', to: '' });
-
-	const navigation = useNavigation();
-	useEffect(() => {
-		console.log(navigation);
-		navigation.setOptions({
-			headerShown: true,
-			headerTitle: 'Search true',
-		});
-	}, [navigation]);
+	const [dates, setDates] = useState<DateRangeSchema>({
+		startDate: '',
+		endDate: '',
+	});
 
 	const resetErrors = () => {
 		setErrors(() => ({ from: '', to: '' }));
@@ -50,7 +47,8 @@ export const SearchScreen = () => {
 					errors={errors}
 				/>
 				<DateRangeSelector
-					dates={dates}
+					mode='range'
+					date={dates}
 					onChange={(dates) => setDates(dates)}
 				/>
 			</YStack>

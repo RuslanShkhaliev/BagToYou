@@ -68,7 +68,7 @@ export const RouteStepPage = () => {
 				<View>
 					<Heading
 						color={'$textPrimary'}
-						fontSize={20}
+						fontSize={18}
 					>
 						Выберите даты поездки
 					</Heading>

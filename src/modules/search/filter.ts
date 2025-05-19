@@ -1,14 +1,17 @@
 import { DeliveryInfo } from '@shared/interfaces';
-import { DateRange, RouteSchema } from '@shared/schema';
+import { DateRangeSchema } from '@shared/schema/date';
+import { RouteBaseSchema } from '@shared/schema/location';
 import { isSameDay } from 'date-fns';
 
 interface FilterOptions {
-	route?: RouteSchema;
-	dates?: DateRange;
+	route?: RouteBaseSchema;
+	dates?: DateRangeSchema;
 }
 
-const matched = (source1: string, source2: string) => {
-	return source1.toLowerCase().includes(source2.toLowerCase());
+// Безопасное сравнение городов
+const cityMatches = (city1?: string, city2?: string): boolean => {
+	if (!city1 || !city2) return false;
+	return city1.toLowerCase().includes(city2.toLowerCase());
 };
 
 export function filterDeliveries(
@@ -19,26 +22,40 @@ export function filterDeliveries(
 
 	return deliveries.filter((delivery) => {
 		const firstRoute = delivery.route[0];
+		if (!firstRoute) return false;
 
-		if (!firstRoute) {
-			return false;
+		// Проверка города отправления
+		let matchesFromCity = true;
+		if (route?.from?.city) {
+			matchesFromCity = cityMatches(
+				firstRoute.from?.city,
+				route.from.city,
+			);
 		}
 
-		const matchesFromCity =
-			route?.from?.city && matched(firstRoute.from.city, route.from.city);
+		// Проверка города назначения
+		let matchesToCity = true;
+		if (route?.destination?.city) {
+			matchesToCity = cityMatches(
+				firstRoute.destination?.city,
+				route.destination.city,
+			);
+		}
 
-		const matchesToCity = route?.to.city
-			? matched(firstRoute.to.city, route.to.city)
-			: true;
+		// Проверка дат
+		const matchesFromDate =
+			!dates?.from ||
+			isSameDay(
+				new Date(delivery.dates.from || ''),
+				new Date(dates.from),
+			);
 
-		const matchesFromDate = dates?.from
-			? isSameDay(new Date(delivery.dates.from), new Date(dates.from))
-			: true;
+		const matchesToDate =
+			!dates?.to ||
+			isSameDay(new Date(delivery.dates.to || ''), new Date(dates.to));
 
-		const matchesToDate = dates?.to
-			? isSameDay(new Date(delivery.dates.to), new Date(dates.to))
-			: true;
-
-		return matchesFromCity && matchesToCity && matchesFromDate && matchesToDate;
+		return (
+			matchesFromCity && matchesToCity && matchesFromDate && matchesToDate
+		);
 	});
 }

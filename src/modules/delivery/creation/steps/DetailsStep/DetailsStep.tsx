@@ -3,8 +3,11 @@ import { ScreenLayout, ScreenScroll } from '@components/layout';
 import { ButtonStyled, FormInput } from '@components/ui-kit';
 import { FormTextarea } from '@components/ui-kit/inputs/FormTextarea';
 import { useFormValidate } from '@hooks/useFormValidate';
+import { ROUTES_DELIVERY } from '@modules/delivery/routes';
 import { deliveryCreationSchema } from '@modules/delivery/schema';
+import { useDeliveryStore } from '@modules/delivery/store';
 import { useNavbar } from '@widgets/Navbar';
+import { useRouter } from 'expo-router';
 import { Heading, View } from 'tamagui';
 
 const formDetailsSchema = deliveryCreationSchema.pick({
@@ -14,6 +17,9 @@ const formDetailsSchema = deliveryCreationSchema.pick({
 });
 
 export const DetailsStepPage = () => {
+	const router = useRouter();
+	const { updateState } = useDeliveryStore();
+
 	useNavbar({
 		title: 'Детали поездки',
 	});
@@ -21,7 +27,8 @@ export const DetailsStepPage = () => {
 	const { control, handleSubmit } = useFormValidate({
 		schema: formDetailsSchema,
 		onSuccess: (data) => {
-			console.log(data);
+			updateState(data);
+			router.push(ROUTES_DELIVERY.CREATE.CONTACTS);
 		},
 	});
 	return (
@@ -37,13 +44,16 @@ export const DetailsStepPage = () => {
 				px={12}
 				flex={1}
 			>
-				<View gap={10}>
+				<View
+					gap={10}
+					pt={30}
+				>
 					<Heading
 						color={'$textPrimary'}
 						fontSize={20}
 						fontWeight={600}
 					>
-						Подробности
+						Габариты посылки
 					</Heading>
 					<View gap={8}>
 						<FormInput
@@ -73,6 +83,13 @@ export const DetailsStepPage = () => {
 					</View>
 				</View>
 				<View>
+					<Heading
+						color={'$textPrimary'}
+						fontSize={20}
+						fontWeight={600}
+					>
+						Вознаграждение
+					</Heading>
 					<FormInput
 						control={control}
 						name={'rewards'}

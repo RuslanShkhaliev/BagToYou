@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 export const ProfileSettings = () => {
 	const router = useRouter();
 	return (
-		<ModalLayout onClose={() => router.dismissAll()}>
+		<ModalLayout>
 			<TextThemed>Profile settings</TextThemed>
 		</ModalLayout>
 	);

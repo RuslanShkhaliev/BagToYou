@@ -69,7 +69,9 @@ export default function RootLayout() {
 								}}
 							>
 								<Stack.Screen name='(tabs)' />
-								<Stack.Screen name='delivery/create' />
+								{/* <Stack.Screen name='delivery' /> */}
+								<Stack.Screen name='register/index' />
+								<Stack.Screen name='login/index' />
 							</Stack>
 						</View>
 					</TamaguiProvider>

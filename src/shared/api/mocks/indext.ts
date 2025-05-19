@@ -8,20 +8,15 @@ export async function initializeMSW() {
 	}
 
 	if (isNative) {
-		console.log('isNative');
-
 		await import('./msw.polyfills');
 		const { server } = await import('./server.native');
-		console.log('server', server);
 
 		server.listen({ onUnhandledRequest: 'bypass' });
-		console.log('🔶 MSW Server started (Native)');
 	}
 
 	if (isBrowser) {
 		// Для браузера
 		const { worker } = await import('./server.web');
-		console.log('🔶 MSW Server started (Browser)');
 		worker.start();
 	}
 }

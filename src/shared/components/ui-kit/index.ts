@@ -1,5 +1,6 @@
 export * from './Badge';
 export * from './buttons';
+export * from './Checkbox';
 export * from './Divider';
 export * from './ErrorMessage';
 export * from './Heading';

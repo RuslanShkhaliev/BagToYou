@@ -1,10 +1,11 @@
 import { TransportType } from '@shared/enums';
 import { DateSelection, Profile } from '@shared/interface';
-import { ParcelInfo, RouteSchema } from '@shared/schema';
+import { ParcelInfo } from '@shared/schema';
+import { RouteBaseSchema } from '@shared/schema/location';
 
 export interface DeliveryInfo {
 	id: number;
-	route: RouteSchema[];
+	route: RouteBaseSchema[];
 	rewards: number;
 	parcelInfo: ParcelInfo;
 	media: string[];

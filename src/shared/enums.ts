@@ -20,14 +20,13 @@ export enum TransportType {
 	Bus,
 }
 
-export enum RequestStatus {
+export enum AdStatus {
 	Draft,
 	Moderation,
 	Active,
-	Progress,
 	Expired,
 	Completed,
-	Hidden,
+	Archived,
 	Rejected,
 	Cancelled,
 }

@@ -1,1 +1,1 @@
-export * from './DateRangeSelector';
+export * from './DateSelector';
