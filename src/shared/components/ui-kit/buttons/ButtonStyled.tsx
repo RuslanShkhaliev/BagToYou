@@ -1,4 +1,4 @@
-import { GetProps, styled, Button as TButton } from 'tamagui';
+import { Button as TButton, GetProps, Spinner, styled } from 'tamagui';
 
 export const StyledButton = styled(TButton, {
 	name: 'Button',
@@ -7,6 +7,11 @@ export const StyledButton = styled(TButton, {
 	color: '$btnText',
 	fontSize: 16,
 	variants: {
+		loading: {
+			true: {
+				bg: '$bgCard',
+			},
+		},
 		variant: {
 			ghost: {
 				color: '$textPrimary',
@@ -74,6 +79,9 @@ export type ButtonStyledProps = GetProps<typeof StyledButton>;
 export const ButtonStyled = StyledButton.styleable((props, ref) => (
 	<StyledButton
 		{...props}
+		disabled={props.loading || props.disabled}
 		ref={ref}
-	/>
+	>
+		{props.loading ? <Spinner size={'small'} /> : props.children}
+	</StyledButton>
 ));

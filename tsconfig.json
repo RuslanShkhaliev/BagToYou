@@ -1,37 +1,58 @@
 {
-	"extends": "expo/tsconfig.base",
-	"include": [
-		"./src/**/*.ts",
-		"./src/**/*.tsx",
-		".expo/types/**/*.ts",
-		"expo-env.d.ts",
-		"tamagui.config.ts"
-	],
-	"compilerOptions": {
-		"strict": true,
-		"noUncheckedIndexedAccess": true,
-		"jsx": "react-native",
-		"module": "ESNext",
-		"baseUrl": ".",
-		"paths": {
-			"@components/*": ["./src/shared/components/*"],
-			"@icons": ["./src/shared/components/icons/*"],
-
-			"@modules/*": ["./src/modules/*"],
-			"@widgets/*": ["./src/widgets/*"],
-			"@modals/*": ["./src/modals/*"],
-
-			"@hooks/*": ["./src/hooks/*"],
-			"@context/*": ["./src/context/*"],
-			"@lib/*": ["./src/lib/*"],
-
-			"@shared/*": ["./src/shared/*"],
-			"@utils/*": ["./src/shared/utils/*"],
-
-			"@localization/*": ["./src/localization/*"],
-
-			"@/*": ["./src/*"],
-			"@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
-		}
-	}
+  "extends": "expo/tsconfig.base",
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "tamagui.config.ts"
+  ],
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "jsx": "react-native",
+    "module": "ESNext",
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@components/*": [
+        "./src/shared/components/*"
+      ],
+      "@icons": [
+        "./src/shared/components/icons/*"
+      ],
+      "@modules/*": [
+        "./src/modules/*"
+      ],
+      "@widgets/*": [
+        "./src/widgets/*"
+      ],
+      "@modals/*": [
+        "./src/modals/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@context/*": [
+        "./src/context/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
+      ],
+      "@utils/*": [
+        "./src/shared/utils/*"
+      ],
+      "@localization/*": [
+        "./src/localization/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  }
 }

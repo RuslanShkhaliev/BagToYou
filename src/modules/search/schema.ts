@@ -1,4 +1,4 @@
-import { routeCreationSchema } from '@shared/schema/location';
+import { routeCreationSchema } from '@shared/schemas/common/location';
 import { z } from 'zod';
 
 export const routeSearchForSenderSchema = z.object({

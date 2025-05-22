@@ -1,6 +1,6 @@
-import { MediaAssetSchema } from '@shared/schema';
 import { Trash } from '@tamagui/lucide-icons';
 import { useId } from 'react';
+import { MediaAssetSchema } from 'src/shared/schemas';
 import { Button, Image, View } from 'tamagui';
 
 interface ImagePreviewProps extends MediaAssetSchema {

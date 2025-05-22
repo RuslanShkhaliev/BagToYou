@@ -4,9 +4,9 @@ import {
 } from '@components/ui-kit/inputs/InputField';
 import React, { memo, useId } from 'react';
 import {
-	Controller,
 	FieldPath,
 	FieldValues,
+	useController,
 	UseControllerProps,
 } from 'react-hook-form';
 import { GetProps, Text, YStack } from 'tamagui';
@@ -48,6 +48,16 @@ export const FormInput = memo(
 			inputProps.id ?? (label ? `input-${generatedId}` : undefined);
 		const showError = Boolean(inputProps.error);
 
+		const {
+			field,
+			fieldState: { error },
+		} = useController({
+			rules,
+			defaultValue,
+			name,
+			control,
+		});
+
 		return (
 			<YStack gap={8}>
 				{label && (
@@ -56,46 +66,33 @@ export const FormInput = memo(
 						htmlFor={inputId}
 						fontSize={labelSize}
 						color={showError ? '$error' : '$textPrimary'}
-						mb={4}
+						fontWeight={500}
 						{...labelStyles}
 					>
 						{label} {required && <Text color='$error'>*</Text>}
 					</LabelStyled>
 				)}
-				<Controller<TFieldValues, TName>
-					control={control}
-					name={name}
-					defaultValue={defaultValue}
-					rules={rules}
-					render={({
-						field: { onChange, value, ...field },
-						fieldState: { error },
-					}) => (
-						<YStack gap={6}>
-							<InputField
-								id={inputId}
-								inValid={Boolean(error?.message)}
-								rounded={10}
-								value={String(value ?? '')}
-								onChangeText={(text) => {
-									onChange(text);
-									onChangeText?.(text);
-								}}
-								{...inputProps}
-								{...field}
-							/>
-							<TextThemed
-								fontSize={12}
-								lineHeight={12}
-								color={
-									error?.message ? '$error' : '$textSecondary'
-								}
-							>
-								{error?.message ?? hint}
-							</TextThemed>
-						</YStack>
-					)}
-				/>
+				<YStack gap={6}>
+					<InputField
+						id={inputId}
+						inValid={Boolean(error?.message)}
+						rounded={10}
+						value={String(field.value)}
+						onChangeText={(text) => {
+							field.onChange(text);
+							onChangeText?.(text);
+						}}
+						{...inputProps}
+						{...field}
+					/>
+					<TextThemed
+						fontSize={12}
+						lineHeight={12}
+						color={error?.message ? '$error' : '$textSecondary'}
+					>
+						{error?.message ?? hint}
+					</TextThemed>
+				</YStack>
 
 				{required && !label && (
 					<Text

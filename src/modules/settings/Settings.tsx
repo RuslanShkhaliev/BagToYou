@@ -1,4 +1,4 @@
-import { ScreenLayout } from '@components/layout';
+import { LayoutScreen } from '@components/layout';
 import { Surface } from '@components/Surface';
 import { ButtonStyled } from '@components/ui-kit';
 import { useRouter } from 'expo-router';
@@ -10,10 +10,10 @@ export const SettingsScreen = () => {
 		router.push('/profile');
 	};
 	return (
-		<ScreenLayout>
+		<LayoutScreen>
 			<Surface>
 				<ButtonStyled onPress={open}>Мой профиль</ButtonStyled>
 			</Surface>
-		</ScreenLayout>
+		</LayoutScreen>
 	);
 };

@@ -1,10 +1,10 @@
-import { ScreenLayout } from '@components/layout';
+import { LayoutScreen } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
 import { createMockRequests } from '@shared/api/seed/helpers';
-import { DateRangeSchema, RouteSchema } from '@shared/schema';
 import { DateRangeSelector } from '@widgets/DateRangeSelector';
 import { LocationSelector } from '@widgets/LocationSelector';
 import { useState } from 'react';
+import { DateRangeSchema, RouteSchema } from 'src/shared/schemas';
 import { YStack } from 'tamagui';
 
 export const SearchScreen = () => {
@@ -36,7 +36,7 @@ export const SearchScreen = () => {
 	};
 	const similarRequests = createMockRequests(10);
 	return (
-		<ScreenLayout
+		<LayoutScreen
 			gap={20}
 			pt={50}
 		>
@@ -58,6 +58,6 @@ export const SearchScreen = () => {
 			>
 				Найти маршруты
 			</ButtonStyled>
-		</ScreenLayout>
+		</LayoutScreen>
 	);
 };

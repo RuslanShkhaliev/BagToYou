@@ -17,6 +17,7 @@ export const useFormValidate = <S extends z.ZodTypeAny>({
 		setError,
 		clearErrors,
 		formState: { errors, isDirty, isValid },
+		getValues,
 		...rest
 	} = useFormContext<z.infer<S>>();
 
@@ -43,6 +44,7 @@ export const useFormValidate = <S extends z.ZodTypeAny>({
 		errors,
 		isValid,
 		isDirty,
+		getFormValues: getValues,
 		...rest,
 	};
 };

@@ -1,7 +1,9 @@
-import { ScreenLayout } from '@components/layout/ScreenLayout';
+import { LayoutScreen } from '@components/layout/LayoutScreen';
 import { ButtonLink, ButtonStyled } from '@components/ui-kit';
+import { auth } from '@lib/firebase';
 import { ModalWrapper } from '@modals/ModalWrapper';
 import { useNavbar } from '@widgets/Navbar';
+import { signOut } from 'firebase/auth';
 import { useState } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import Animated, { FadeIn, SlideInDown } from 'react-native-reanimated';
@@ -11,14 +13,17 @@ export const ProfileInfo = () => {
 	const [open, setModalVisible] = useState(false);
 	const theme = useTheme();
 
+	const handleSignOut = () => {
+		signOut(auth);
+	};
+
 	useNavbar({
 		title: 'Мой профиль',
 	});
 	return (
-		<ScreenLayout>
-			<ButtonStyled onPress={() => setModalVisible(true)}>
-				Открыть модалку
-			</ButtonStyled>
+		<LayoutScreen>
+			<ButtonLink href={'/login'}>Auth</ButtonLink>
+			<ButtonStyled onPress={handleSignOut}>Exit</ButtonStyled>
 			<ModalWrapper
 				visible={open}
 				animationType={'slide'}
@@ -57,6 +62,6 @@ export const ProfileInfo = () => {
 					</Animated.View>
 				</Animated.View>
 			</ModalWrapper>
-		</ScreenLayout>
+		</LayoutScreen>
 	);
 };

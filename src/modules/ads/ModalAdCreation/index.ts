@@ -1,1 +1,0 @@
-export { ModalCreateAd } from './Modal';

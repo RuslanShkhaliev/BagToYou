@@ -1,15 +1,14 @@
-import { Heading } from 'tamagui';
-
 import { ErrorMessage } from '@components/ui-kit/ErrorMessage';
-import { DateRangeSchema } from '@shared/schema';
 import { DateRangeSelector } from '@widgets/DateRangeSelector/DateSelector';
-import { View } from 'tamagui';
+import { DateRangeSchema } from 'src/shared/schemas';
+import { Heading, View } from 'tamagui';
 
 interface DatePartyProps {
 	date: DateRangeSchema;
 	onChange: (date: DateRangeSchema) => void;
 	error?: string;
 }
+
 export const DateSelectorParty = ({
 	date,
 	onChange,

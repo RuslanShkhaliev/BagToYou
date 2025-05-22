@@ -1,5 +1,5 @@
-import { RouteSchema } from '@shared/schema';
 import React from 'react';
+import { RouteSchema } from 'src/shared/schemas';
 import { View } from 'tamagui';
 import {
 	ModalSearchLocation,
@@ -7,6 +7,7 @@ import {
 } from './components/ModalSearchLocation';
 import { RouteFieldsGroup } from './components/RouteFieldsGroup';
 import { RouteTargetType } from './types';
+
 interface LocationSelectorProps {
 	route: RouteSchema;
 	errors: {

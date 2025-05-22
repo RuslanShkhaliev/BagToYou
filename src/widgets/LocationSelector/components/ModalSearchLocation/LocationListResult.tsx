@@ -1,7 +1,7 @@
-import { LocationSchema } from '@shared/schema';
 import { MapPin } from '@tamagui/lucide-icons';
 import React from 'react';
 import { FlatList, FlatListProps } from 'react-native';
+import { LocationSchema } from 'src/shared/schemas';
 import { ListItem, YStack } from 'tamagui';
 
 interface LocationsListProps

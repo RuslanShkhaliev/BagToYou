@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { TransportType } from '@shared/enums';
 import { DeliveryInfo } from '@shared/interfaces';
-import { LocationSchema, ParcelInfo, RouteSchema } from '@shared/schema';
+import { LocationSchema, ParcelInfo, RouteSchema } from 'src/shared/schemas';
 
 function randomEnumValue<T extends object>(anEnum: T): number {
 	const values = Object.values(anEnum).filter(

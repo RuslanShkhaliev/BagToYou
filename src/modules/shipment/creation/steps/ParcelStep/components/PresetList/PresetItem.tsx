@@ -1,5 +1,5 @@
 import { TextThemed } from '@components/ui-kit';
-import { ParcelInfo } from '@shared/schema';
+import { ParcelInfo } from 'src/shared/schemas';
 import { XStack, XStackProps, YStack } from 'tamagui';
 
 export interface PresetItemProps {
@@ -8,6 +8,7 @@ export interface PresetItemProps {
 	parcel: ParcelInfo;
 	selected?: boolean;
 }
+
 export const PresetItem = ({
 	icon,
 	size,

@@ -1,18 +1,29 @@
 import { zustandStorage } from '@lib/storage';
+import { AdStatus, AdType } from '@shared/api/models/ad';
 import { MessengerType, TransportType } from '@shared/enums';
+import { AdDelivery } from '@shared/schemas/adDelivery';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
-import { DeliveryCreationSchema } from './schema';
 
 interface Actions {
-	updateState: (value: Partial<DeliveryCreationSchema>) => void;
+	updateState: (value: Partial<AdDelivery>) => void;
 	reset: () => void;
 }
 
 const STORAGE_DELIVERY_KEY = 'delivery_request';
 
-const defaultState = (): DeliveryCreationSchema => {
+const defaultState = (): AdDelivery => {
 	return {
+		name: '',
+		status: AdStatus.Draft,
+		metrics: {
+			comments: 0,
+			likes: 0,
+			views: 0,
+		},
+		type: AdType.Shipment,
+		media: [],
+		responses: [],
 		route: {
 			from: { city: '' },
 			to: { city: '' },
@@ -34,7 +45,7 @@ const defaultState = (): DeliveryCreationSchema => {
 	};
 };
 
-type DeliveryStore = DeliveryCreationSchema & Actions;
+type DeliveryStore = AdDelivery & Actions;
 
 export const useDeliveryStore = create<
 	DeliveryStore,

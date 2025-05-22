@@ -1,7 +1,7 @@
 import { TextThemed } from '@components/ui-kit';
 import { ModalWrapper } from '@modals/ModalWrapper';
-import { DateISOSchema, DateRangeSchema } from '@shared/schema';
 import React, { useState } from 'react';
+import { DateISOSchema, DateRangeSchema } from 'src/shared/schemas';
 import { View } from 'tamagui';
 import { CalendarRange } from './CalendarRange/CalendarRange';
 import { CalendarSingle } from './CalendarSingle';
@@ -12,8 +12,9 @@ interface DateRangeProps {
 	range?: true;
 	onChange: (date: DateRangeSchema) => void;
 }
+
 interface DateSingleProps {
-	date?: DateISOSchema;
+	date?: DateISOSchema | null;
 	range?: false;
 	onChange: (date: DateISOSchema) => void;
 }

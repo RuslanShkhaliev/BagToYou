@@ -1,18 +1,15 @@
 import { FloatAction } from '@components/FloatAction';
-import { ScreenLayout } from '@components/layout';
-import { ButtonStyled } from '@components/ui-kit';
-import { RouteSchema } from '@shared/schema/location';
+import { LayoutScreen } from '@components/layout';
+import { RouteSchema } from '@shared/schemas/common/location';
 import { LocationSelector } from '@widgets/LocationSelector';
 import { useNavbar } from '@widgets/Navbar';
 import { useController } from 'react-hook-form';
 import { View } from 'tamagui';
 import { DatePartySelector } from './DatePartySelector';
-import { useFormRouteStep } from './hooks/useFormRoute';
+import { useFormRouteStep } from './useFormRoute';
 
 export const RouteStep = () => {
-	useNavbar({
-		title: 'Шаг 1: Маршрут',
-	});
+	useNavbar();
 	const {
 		control,
 		handleSubmit,
@@ -33,12 +30,17 @@ export const RouteStep = () => {
 	});
 
 	return (
-		<ScreenLayout
+		<LayoutScreen
 			flex={1}
 			pt={30}
 			footer={
-				<FloatAction px={20}>
-					<ButtonStyled onPress={handleSubmit}>Далее</ButtonStyled>
+				<FloatAction
+					containerProps={{
+						px: 20,
+					}}
+					onPress={handleSubmit}
+				>
+					Продолжить
 				</FloatAction>
 			}
 		>
@@ -65,6 +67,6 @@ export const RouteStep = () => {
 					onSelectDate={onSelectDate}
 				/>
 			</View>
-		</ScreenLayout>
+		</LayoutScreen>
 	);
 };

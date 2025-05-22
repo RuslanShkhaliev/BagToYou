@@ -1,4 +1,3 @@
-import { TextThemed } from '@components/ui-kit';
 import { ChevronLeft, X } from '@tamagui/lucide-icons';
 import { XStack, XStackProps } from 'tamagui';
 import { NavButton } from './NavButton';
@@ -20,7 +19,6 @@ export const Navbar = ({
 	showBackButton,
 	closable,
 	children,
-	title,
 
 	left,
 	right,
@@ -61,14 +59,7 @@ export const Navbar = ({
 				flex={2}
 				justify={'center'}
 			>
-				{children ?? (
-					<TextThemed
-						fontSize={18}
-						fontWeight={600}
-					>
-						{title}
-					</TextThemed>
-				)}
+				{children}
 			</XStack>
 			<XStack
 				minW={60}

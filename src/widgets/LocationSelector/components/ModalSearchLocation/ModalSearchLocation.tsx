@@ -1,6 +1,6 @@
 import { ModalWrapper } from '@modals/ModalWrapper';
-import { RouteSchema } from '@shared/schema';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import { RouteSchema } from 'src/shared/schemas';
 import { Input, useDebounce, View } from 'tamagui';
 import { fromIsActive, toIsActive } from '../../helpers';
 import { RouteTargetType } from '../../types';
@@ -15,6 +15,7 @@ export interface ModalWrapperRef {
 	open: (target?: RouteTargetType) => void;
 	close: () => void;
 }
+
 export interface ModalSearchLocationProps {
 	route: RouteSchema;
 	onlyTo?: boolean;
@@ -84,7 +85,7 @@ export const ModalSearchLocation = forwardRef<
 		<ModalWrapper
 			onClose={close}
 			onBack={onBack}
-			title='Search for a location'
+			title='Search location'
 			visible={visible}
 		>
 			<View

@@ -1,6 +1,6 @@
 import { DeliveryInfo } from '@shared/interfaces';
-import { DateRangeSchema } from '@shared/schema/date';
-import { RouteBaseSchema } from '@shared/schema/location';
+import { DateRangeSchema } from '@shared/schemas/common/date';
+import { RouteBaseSchema } from '@shared/schemas/common/location';
 import { isSameDay } from 'date-fns';
 
 interface FilterOptions {
@@ -10,7 +10,9 @@ interface FilterOptions {
 
 // Безопасное сравнение городов
 const cityMatches = (city1?: string, city2?: string): boolean => {
-	if (!city1 || !city2) return false;
+	if (!city1 || !city2) {
+		return false;
+	}
 	return city1.toLowerCase().includes(city2.toLowerCase());
 };
 
@@ -22,7 +24,9 @@ export function filterDeliveries(
 
 	return deliveries.filter((delivery) => {
 		const firstRoute = delivery.route[0];
-		if (!firstRoute) return false;
+		if (!firstRoute) {
+			return false;
+		}
 
 		// Проверка города отправления
 		let matchesFromCity = true;

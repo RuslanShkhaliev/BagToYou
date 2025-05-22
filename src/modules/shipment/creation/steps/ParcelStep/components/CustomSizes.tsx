@@ -1,8 +1,9 @@
 import { FormInput, IncrementControl, TextThemed } from '@components/ui-kit';
-import { useFormParcelStep } from '@modules/shipment/creation/steps/ParcelStep/hooks';
 import { useEffect } from 'react';
 import { useController } from 'react-hook-form';
 import { View, XStack, YStack } from 'tamagui';
+import { useFormParcelStep } from '../useFormParcelStep';
+
 export const CustomSizes = () => {
 	const { control, setFocus } = useFormParcelStep();
 

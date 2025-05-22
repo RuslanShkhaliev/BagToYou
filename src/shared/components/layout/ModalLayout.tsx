@@ -1,15 +1,18 @@
 import { PropsWithChildren } from 'react';
-import { ScreenLayout, ScreenLayoutProps } from './ScreenLayout';
+import {
+	LayoutScreen,
+	LayoutScreenProps,
+} from 'src/shared/components/layout/LayoutScreen';
 
-export type ModalLayoutProps = Omit<ScreenLayoutProps, 'modal'>;
+export type ModalLayoutProps = Omit<LayoutScreenProps, 'modal'>;
 
 export const ModalLayout = (props: PropsWithChildren<ModalLayoutProps>) => {
 	return (
-		<ScreenLayout
+		<LayoutScreen
 			modalView
 			{...props}
 		>
 			{props.children}
-		</ScreenLayout>
+		</LayoutScreen>
 	);
 };

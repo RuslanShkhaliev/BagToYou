@@ -7,8 +7,16 @@ module.exports = function (api) {
 				'module-resolver',
 				{
 					root: ['./src'],
-					extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
+					extensions: [
+						'.ios.js',
+						'.android.js',
+						'.js',
+						'.ts',
+						'.tsx',
+						'.json',
+					],
 					alias: {
+						'@assets': ['./src/assets'],
 						'@components': './src/shared/components',
 						'@icons': './src/shared/components/icons',
 						'@shared': './src/shared',
@@ -22,8 +30,6 @@ module.exports = function (api) {
 						'@localization': './src/localization',
 						'@modals': './src/modals',
 						'@': './src',
-						'@firebase/auth':
-							'./node_modules/@firebase/auth/dist/index.rn.d.ts',
 					},
 				},
 			],

@@ -1,3 +1,4 @@
+import { useNavbar } from '@widgets/Navbar';
 import React from 'react';
 import { Card, H4, Paragraph, View } from 'tamagui';
 
@@ -7,12 +8,14 @@ interface AuthLayoutProps {
 	children: React.ReactNode;
 	footer: React.ReactNode;
 }
+
 export const AuthLayout = ({
 	children,
 	title,
 	description,
 	footer,
 }: AuthLayoutProps) => {
+	useNavbar();
 	return (
 		<View
 			bg={'$bg'}
@@ -26,7 +29,9 @@ export const AuthLayout = ({
 			>
 				<Card.Header>
 					<H4 color={'$textPrimary'}>{title}</H4>
-					<Paragraph color={'$textSecondary'}>{description}</Paragraph>
+					<Paragraph color={'$textSecondary'}>
+						{description}
+					</Paragraph>
 				</Card.Header>
 				{children}
 				<Card.Footer

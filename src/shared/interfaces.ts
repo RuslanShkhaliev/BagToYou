@@ -1,7 +1,7 @@
 import { TransportType } from '@shared/enums';
 import { DateSelection, Profile } from '@shared/interface';
-import { ParcelInfo } from '@shared/schema';
-import { RouteBaseSchema } from '@shared/schema/location';
+import { RouteBaseSchema } from '@shared/schemas/common/location';
+import { ParcelInfo } from 'src/shared/schemas';
 
 export interface DeliveryInfo {
 	id: number;

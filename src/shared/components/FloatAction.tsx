@@ -1,12 +1,21 @@
+import { ButtonStyled, ButtonStyledProps } from '@components/ui-kit';
 import { View, ViewProps } from 'tamagui';
 
-export const FloatAction = ({ children, ...props }: ViewProps) => {
+interface FloatActionProps extends ButtonStyledProps {
+	containerProps?: ViewProps;
+}
+
+export const FloatAction = ({
+	children,
+	containerProps,
+	...props
+}: FloatActionProps) => {
 	return (
 		<View
 			p={12}
-			{...props}
+			{...containerProps}
 		>
-			{children}
+			<ButtonStyled {...props}>{children}</ButtonStyled>
 		</View>
 	);
 };

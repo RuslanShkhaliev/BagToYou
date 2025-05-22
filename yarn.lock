@@ -6688,8 +6688,10 @@ __metadata:
     react-native: "npm:0.76.9"
     react-native-calendars: "npm:^1.1311.0"
     react-native-gesture-handler: "npm:~2.20.2"
+    react-native-keyboard-accessory: "npm:^0.1.16"
     react-native-pager-view: "npm:6.5.1"
     react-native-reanimated: "npm:^3.17.5"
+    react-native-reanimated-carousel: "npm:^4.0.2"
     react-native-safe-area-context: "npm:4.12.0"
     react-native-screens: "npm:~4.4.0"
     react-native-svg: "npm:^15.11.2"
@@ -14249,6 +14251,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-keyboard-accessory@npm:^0.1.16":
+  version: 0.1.16
+  resolution: "react-native-keyboard-accessory@npm:0.1.16"
+  peerDependencies:
+    prop-types: ">= 15"
+    react: ">= 16"
+    react-native: ">= 0.46"
+  checksum: 10c0/609f2ca140de08979277be582b813deb5ba3b0f801211faaf70a84cf9be8c4d3635505886ac0483b586416f3b7e4ac5799fda3d3a638ee26a8b031d2469eb5b6
+  languageName: node
+  linkType: hard
+
 "react-native-pager-view@npm:6.5.1":
   version: 6.5.1
   resolution: "react-native-pager-view@npm:6.5.1"
@@ -14256,6 +14269,18 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/2c6a1cdd30151252f7ee31ce039246c59308ddd4ff6d4dbf44b0d64387338e51cfc432a68795cd80f2f7a1c77617c259462de48c2f4cd24d98805290d70ec02f
+  languageName: node
+  linkType: hard
+
+"react-native-reanimated-carousel@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "react-native-reanimated-carousel@npm:4.0.2"
+  peerDependencies:
+    react: ">=18.0.0"
+    react-native: ">=0.70.3"
+    react-native-gesture-handler: ">=2.9.0"
+    react-native-reanimated: ">=3.0.0"
+  checksum: 10c0/9768de933565266202282db4c383932a60f8ca7eaf83b94aa70f8f82837932ba28f521ef1c0e8c95e77c97dd9019111da1aab9dabde39164f5c2e9d0cd34a415
   languageName: node
   linkType: hard
 

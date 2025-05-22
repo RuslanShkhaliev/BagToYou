@@ -136,10 +136,14 @@ export const InputThemed = styled(Input, {
 		},
 		inValid: {
 			true: {
-				color: '$error',
-				borderColor: '$error',
+				color: '$white',
+				borderColor: 'transparent',
+				pressStyle: {
+					bg: '#371519',
+				},
+				bg: '#371519',
 				outlineColor: '$error',
-				placeholderTextColor: '$error',
+				placeholderTextColor: '$white',
 			},
 		},
 	} as const,

@@ -1,5 +1,5 @@
 import { FloatAction } from '@components/FloatAction';
-import { ScreenLayout, ScreenScroll } from '@components/layout';
+import { LayoutScreen, ScreenScroll } from '@components/layout';
 import {
 	ButtonStyled,
 	ErrorMessage,
@@ -26,19 +26,18 @@ export const DetailsStep = () => {
 	});
 
 	return (
-		<ScreenLayout
+		<LayoutScreen
 			px={0}
 			footer={
 				<FloatAction
-					px={16}
-					bg={'transparent'}
+					containerProps={{
+						px: 16,
+						bg: 'transparent',
+					}}
+					height={50}
+					onPress={handleSubmit}
 				>
-					<ButtonStyled
-						height={50}
-						onPress={handleSubmit}
-					>
-						Разместить объявление
-					</ButtonStyled>
+					Продолжить
 				</FloatAction>
 			}
 		>
@@ -91,7 +90,7 @@ export const DetailsStep = () => {
 								color={'$textSecondary'}
 								fontSize={'$5'}
 							>
-								Исполнитель увидит эту ценну рядом с названием
+								Исполнитель увидит эту цену рядом с названием
 								объявления
 							</TextThemed>
 						</View>
@@ -104,6 +103,6 @@ export const DetailsStep = () => {
 					</YStack>
 				</View>
 			</ScreenScroll>
-		</ScreenLayout>
+		</LayoutScreen>
 	);
 };

@@ -1,5 +1,5 @@
 import { FloatAction } from '@components/FloatAction';
-import { ScreenLayout } from '@components/layout';
+import { LayoutScreen } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
 import { useNavbar } from '@widgets/Navbar';
 import React from 'react';
@@ -7,7 +7,7 @@ import { SceneMap, TabView } from 'react-native-tab-view';
 import { useWindowDimensions } from 'tamagui';
 import { CustomSizes } from './components/CustomSizes';
 import { PresetsList } from './components/PresetList';
-import { useFormParcelStep } from './hooks';
+import { useFormParcelStep } from './useFormParcelStep';
 
 export const ParcelStep = () => {
 	const { handleSubmit } = useFormParcelStep();
@@ -38,12 +38,10 @@ export const ParcelStep = () => {
 	const [index, setIndex] = React.useState(0);
 
 	return (
-		<ScreenLayout
+		<LayoutScreen
 			flex={1}
 			footer={
-				<FloatAction>
-					<ButtonStyled onPress={handleSubmit}>Далее</ButtonStyled>
-				</FloatAction>
+				<FloatAction onPress={handleSubmit}>Продолжить</FloatAction>
 			}
 		>
 			<TabView
@@ -53,6 +51,6 @@ export const ParcelStep = () => {
 				onIndexChange={setIndex}
 				initialLayout={{ width: layout.width }}
 			/>
-		</ScreenLayout>
+		</LayoutScreen>
 	);
 };

@@ -18,6 +18,7 @@ export interface BottomSheetProps extends SheetProps {
 	onOpen?: () => void;
 	onClose?: () => void;
 	scroll?: boolean;
+	closable?: boolean;
 	toggleOpen?: (open: boolean) => void;
 	keyboardShouldPersistTaps?: 'always' | 'handled' | 'never' | boolean;
 }
@@ -36,6 +37,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 			title,
 			onOpenChange,
 			onClose,
+			closable = true,
 			unmountChildrenWhenHidden = true,
 			keyboardShouldPersistTaps = 'handled',
 			scroll = true,
@@ -67,14 +69,26 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 				{...props}
 			>
 				<Sheet.Overlay bg='$black40' />
-				<Sheet.Handle />
 				<Sheet.Frame
-					rounded='$7'
+					borderTopEndRadius={24}
+					borderTopStartRadius={24}
 					pb={keyboardHeight}
+					pt={16}
 					bg='$bg'
 					flex={1}
 					adjustPaddingForOffscreenContent
 				>
+					<Sheet.Handle
+						position='absolute'
+						top={0}
+						height={4}
+						width={40}
+						bg='$graphite600'
+						self='center'
+						rounded={2}
+						my={8}
+					/>
+					{header}
 					<YStack px={12}>
 						<XStack
 							justify={'center'}
@@ -82,28 +96,29 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 							height={48}
 						>
 							<Heading>{title}</Heading>
-							<Button
-								position={'absolute'}
-								width={28}
-								height={28}
-								bg='$white16'
-								rounded='$12'
-								shrink={0}
-								p={0}
-								r={0}
-								z={1}
-								items='center'
-								justify='center'
-								onPress={() => onOpenChange?.(false)}
-								tabIndex={1}
-							>
-								<X
-									size={16}
-									color='$white'
-								/>
-							</Button>
+							{closable && (
+								<Button
+									position={'absolute'}
+									width={28}
+									height={28}
+									bg='$white16'
+									rounded='$12'
+									shrink={0}
+									p={0}
+									r={0}
+									z={1}
+									items='center'
+									justify='center'
+									onPress={() => onOpenChange?.(false)}
+									tabIndex={1}
+								>
+									<X
+										size={16}
+										color='$white'
+									/>
+								</Button>
+							)}
 						</XStack>
-						{header}
 					</YStack>
 					{scroll ? (
 						<Sheet.ScrollView

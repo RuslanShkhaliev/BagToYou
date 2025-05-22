@@ -21,7 +21,7 @@ export const useNavbar = ({
 	onBack,
 	left,
 	right,
-}: UseCustomHeaderProps) => {
+}: UseCustomHeaderProps = {}) => {
 	const navigation = useNavigation();
 
 	const handleBack = useCallback(() => {
@@ -40,17 +40,18 @@ export const useNavbar = ({
 					closable={closable}
 					left={left}
 					right={right}
-					title={title}
 					onBack={handleBack}
 					onClose={onClose}
 				>
-					<TextThemed
-						fontSize={18}
-						fontWeight={600}
-						text='center'
-					>
-						{title}
-					</TextThemed>
+					{title && (
+						<TextThemed
+							fontSize={18}
+							fontWeight={600}
+							text='center'
+						>
+							{title}
+						</TextThemed>
+					)}
 				</Navbar>
 			),
 		});

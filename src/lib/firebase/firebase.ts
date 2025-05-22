@@ -1,5 +1,5 @@
-import { initializeAuth } from '@firebase/auth';
 import { getApp, getApps, initializeApp } from 'firebase/app';
+import { getAuth, initializeAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { getPersistence } from './persistance';
@@ -14,10 +14,12 @@ const firebaseConfig = {
 	measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const firebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
-export const auth = initializeAuth(app, {
+const auth = initializeAuth(firebaseApp, {
 	persistence: getPersistence(),
 });
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+const firestore = getFirestore(firebaseApp);
+const storage = getStorage(firebaseApp);
+
+export { getAuth, getApp, auth, firebaseApp, firestore, storage };

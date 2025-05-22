@@ -3,10 +3,18 @@ import { isWeb } from '@utils/platform';
 import {
 	browserLocalPersistence,
 	getReactNativePersistence,
+	inMemoryPersistence,
 } from 'firebase/auth';
 
 export const getPersistence = () => {
-	return isWeb
-		? browserLocalPersistence
-		: getReactNativePersistence(AsyncStorage);
+	if (isWeb) {
+		return browserLocalPersistence;
+	}
+
+	try {
+		return getReactNativePersistence(AsyncStorage);
+	} catch (error) {
+		console.error('Error setting up persistence:', error);
+		return inMemoryPersistence;
+	}
 };

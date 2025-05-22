@@ -1,19 +1,30 @@
 import { zustandStorage } from '@lib/storage';
+import { AdStatus, AdType } from '@shared/api/models/ad';
 import { MessengerType } from '@shared/enums';
+import { AdShipmentCreate } from '@shared/schemas/adShipment';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
 import { DateType } from './interfaces';
-import { ShipmentCreationSchema } from './schema';
 
 export const STORAGE_SHIPMENT_KEY = 'shipment_offer';
 
 interface Actions {
-	updateState: (patch: Partial<ShipmentCreationSchema>) => void;
+	updateState: (patch: Partial<AdShipmentCreate>) => void;
 	reset: () => void;
 }
 
-const defaultState = (): ShipmentCreationSchema => {
+type ShipmentCreateStore = AdShipmentCreate & Actions;
+const defaultState = (): AdShipmentCreate => {
 	return {
+		name: '',
+		status: AdStatus.Draft,
+		type: AdType.Shipment,
+		metrics: {
+			comments: 0,
+			likes: 0,
+			views: 0,
+		},
+		responses: [],
 		route: {
 			from: { city: '' },
 			to: { city: '' },
@@ -47,7 +58,7 @@ const defaultState = (): ShipmentCreationSchema => {
 };
 
 export const useShipmentStore = create<
-	ShipmentCreationSchema & Actions,
+	ShipmentCreateStore,
 	[['zustand/persist', unknown]]
 >(
 	persist(

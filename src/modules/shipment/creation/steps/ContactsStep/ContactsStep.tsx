@@ -1,18 +1,18 @@
 import { FloatAction } from '@components/FloatAction';
-import { ScreenLayout, ScreenScroll } from '@components/layout';
+import { LayoutScreen, ScreenScroll } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
 import { useNavbar } from '@widgets/Navbar';
 import React, { useEffect, useState } from 'react';
 import { View } from 'tamagui';
 import { ContactPartyForm } from './components/ContactPartyForm';
 import { generateProfileInfo } from './constants';
-import { useContactsStep } from './hooks/useContactsStep';
+import { useContactsStep } from './useContactsStep';
 
 export const ContactsStep = () => {
 	const [isMeSender, setIsMeSender] = useState(false);
 	const [isMeRecipient, setIsMeRecipient] = useState(false);
 
-	const { handleSubmit, setValue } = useContactsStep();
+	const { handleSubmit, setValue, isPending } = useContactsStep();
 
 	useNavbar({
 		right: (
@@ -38,12 +38,15 @@ export const ContactsStep = () => {
 	}, [isMeRecipient]);
 
 	return (
-		<ScreenLayout
+		<LayoutScreen
 			pt={20}
 			px={0}
 			footer={
-				<FloatAction>
-					<ButtonStyled onPress={handleSubmit}>Далее</ButtonStyled>
+				<FloatAction
+					onPress={handleSubmit}
+					loading={isPending}
+				>
+					Разместить объявление
 				</FloatAction>
 			}
 		>
@@ -73,6 +76,6 @@ export const ContactsStep = () => {
 					/>
 				</View>
 			</ScreenScroll>
-		</ScreenLayout>
+		</LayoutScreen>
 	);
 };

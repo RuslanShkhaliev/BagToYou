@@ -1,7 +1,6 @@
 import { FloatAction } from '@components/FloatAction';
-import { ScreenLayout } from '@components/layout';
-import { ButtonStyled } from '@components/ui-kit';
-import { RouteSchema } from '@shared/schema';
+import { LayoutScreen } from '@components/layout';
+import { RouteSchema } from '@shared/schemas';
 import { LocationSelector } from '@widgets/LocationSelector';
 import { useNavbar } from '@widgets/Navbar';
 import React from 'react';
@@ -9,7 +8,7 @@ import { useController } from 'react-hook-form';
 import { View } from 'tamagui';
 import { DateSelectorParty } from './DateSelectorParty';
 import { SelectTransport } from './SelectTransport';
-import { useRouteForm } from './hooks/useRouteForm';
+import { useRouteForm } from './useRouteForm';
 
 export const RouteStepPage = () => {
 	useNavbar({
@@ -41,14 +40,10 @@ export const RouteStepPage = () => {
 	});
 
 	return (
-		<ScreenLayout
+		<LayoutScreen
 			flex={1}
 			pt={30}
-			footer={
-				<FloatAction>
-					<ButtonStyled onPress={handleSubmit}>Далее</ButtonStyled>
-				</FloatAction>
-			}
+			footer={<FloatAction onPress={handleSubmit}>Далее</FloatAction>}
 		>
 			<View gap={16}>
 				<LocationSelector
@@ -76,6 +71,6 @@ export const RouteStepPage = () => {
 					onSelect={onSelectTransport}
 				/>
 			</View>
-		</ScreenLayout>
+		</LayoutScreen>
 	);
 };

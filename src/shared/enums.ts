@@ -1,16 +1,3 @@
-/**
- * Типы объявлений, которые может создать пользователь
- */
-export enum AdType {
-	DELIVERY = 'delivery',
-	PICKUP = 'pickup',
-}
-
-export enum RequestRole {
-	Sender,
-	Deliver,
-}
-
 export enum TransportType {
 	Car,
 	Plane,
@@ -18,17 +5,6 @@ export enum TransportType {
 	Ship,
 	Train,
 	Bus,
-}
-
-export enum AdStatus {
-	Draft,
-	Moderation,
-	Active,
-	Expired,
-	Completed,
-	Archived,
-	Rejected,
-	Cancelled,
 }
 
 export enum MessagePlatform {

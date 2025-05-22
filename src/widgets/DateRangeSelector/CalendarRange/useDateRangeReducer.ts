@@ -1,5 +1,5 @@
-import { DateRangeSchema } from '@shared/schema';
 import { useReducer } from 'react';
+import { DateRangeSchema } from 'src/shared/schemas';
 
 type DateRangeAction =
 	| { type: 'setStartDate'; date: string }

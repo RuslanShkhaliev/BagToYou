@@ -1,12 +1,13 @@
 import { InputField, InputFieldProps } from '@components/ui-kit';
-import { DateISOSchema, DateRangeSchema } from '@shared/schema';
 import { NBSP } from '@shared/unicodes';
 import { Calendar } from '@tamagui/lucide-icons';
 import { useMemo } from 'react';
+import { DateISOSchema, DateRangeSchema } from 'src/shared/schemas';
 import { View } from 'tamagui';
 import { formatDate } from './utils';
+
 export interface DateControlProps extends Omit<InputFieldProps, 'value'> {
-	value?: DateISOSchema | DateRangeSchema;
+	value?: DateISOSchema | DateRangeSchema | null;
 	range?: boolean;
 }
 
@@ -17,7 +18,7 @@ export const DateControl = ({
 }: DateControlProps) => {
 	const displayDate = useMemo(() => {
 		if (range) {
-			const { startDate, endDate } = value as DateRangeSchema;
+			const { startDate, endDate } = (value as DateRangeSchema) || {};
 
 			const labelStart = startDate ? formatDate(startDate) : '';
 			const labelEnd = endDate ? formatDate(endDate) : '';
@@ -35,9 +36,7 @@ export const DateControl = ({
 			return '';
 		}
 
-		const singleLabel = formatDate(value as DateISOSchema) || '';
-
-		return singleLabel;
+		return formatDate(value as DateISOSchema) || '';
 	}, [value, range]);
 	return (
 		<View position='relative'>

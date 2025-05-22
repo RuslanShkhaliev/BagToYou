@@ -1,21 +1,21 @@
 import { useDeliveryStore } from '@modules/delivery/store';
+import { AdDelivery } from '@shared/schemas/adDelivery';
 import { Stack } from 'expo-router';
 import { FormProvider, useForm } from 'react-hook-form';
-import { DeliveryCreationSchema } from '../schema';
 
 export const DeliveryCreationLayout = () => {
-	const form = useForm<DeliveryCreationSchema>({
+	const form = useForm<AdDelivery>({
 		defaultValues: useDeliveryStore.getState(),
 	});
 	return (
 		<FormProvider {...form}>
 			<Stack
-				initialRouteName={'route'}
+				initialRouteName={'name'}
 				screenOptions={{ headerShown: false }}
 			>
+				<Stack.Screen name='name' />
 				<Stack.Screen name='route' />
 				<Stack.Screen name='details' />
-				<Stack.Screen name='contacts' />
 			</Stack>
 		</FormProvider>
 	);
