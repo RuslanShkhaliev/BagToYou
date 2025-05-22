@@ -1,6 +1,6 @@
 import { ModalWrapper } from '@modals/ModalWrapper';
+import { RouteSchema } from '@shared/schemas';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { RouteSchema } from 'src/shared/schemas';
 import { Input, useDebounce, View } from 'tamagui';
 import { fromIsActive, toIsActive } from '../../helpers';
 import { RouteTargetType } from '../../types';

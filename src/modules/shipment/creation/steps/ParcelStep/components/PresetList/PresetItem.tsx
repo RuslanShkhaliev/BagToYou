@@ -1,5 +1,5 @@
 import { TextThemed } from '@components/ui-kit';
-import { ParcelInfo } from 'src/shared/schemas';
+import { ParcelInfo } from '@shared/schemas';
 import { XStack, XStackProps, YStack } from 'tamagui';
 
 export interface PresetItemProps {

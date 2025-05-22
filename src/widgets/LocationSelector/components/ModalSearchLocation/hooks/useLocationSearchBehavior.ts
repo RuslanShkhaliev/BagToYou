@@ -1,6 +1,6 @@
+import { RouteSchema } from '@shared/schemas';
 import { fromIsActive, toIsActive } from '@widgets/LocationSelector/helpers';
 import { RouteTargetType } from '@widgets/LocationSelector/types';
-import { RouteSchema } from 'src/shared/schemas';
 import { Input } from 'tamagui';
 
 export interface UseLocationSearchBehaviorProps {

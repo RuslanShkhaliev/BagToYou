@@ -1,6 +1,6 @@
+import { RouteSchema } from '@shared/schemas';
 import { RouteTargetType } from '@widgets/LocationSelector/types';
 import { useEffect, useState } from 'react';
-import { RouteSchema } from 'src/shared/schemas';
 
 export const useLocationSearchState = (route: RouteSchema) => {
 	const [searchText, setSearchText] = useState('');

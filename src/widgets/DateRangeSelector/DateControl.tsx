@@ -1,8 +1,8 @@
 import { InputField, InputFieldProps } from '@components/ui-kit';
+import { DateISOSchema, DateRangeSchema } from '@shared/schemas';
 import { NBSP } from '@shared/unicodes';
 import { Calendar } from '@tamagui/lucide-icons';
 import { useMemo } from 'react';
-import { DateISOSchema, DateRangeSchema } from 'src/shared/schemas';
 import { View } from 'tamagui';
 import { formatDate } from './utils';
 

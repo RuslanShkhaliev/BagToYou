@@ -1,10 +1,10 @@
 import { LayoutScreen } from '@components/layout';
 import { ButtonStyled } from '@components/ui-kit';
 import { createMockRequests } from '@shared/api/seed/helpers';
+import { DateRangeSchema, RouteSchema } from '@shared/schemas';
 import { DateRangeSelector } from '@widgets/DateRangeSelector';
 import { LocationSelector } from '@widgets/LocationSelector';
 import { useState } from 'react';
-import { DateRangeSchema, RouteSchema } from 'src/shared/schemas';
 import { YStack } from 'tamagui';
 
 export const SearchScreen = () => {

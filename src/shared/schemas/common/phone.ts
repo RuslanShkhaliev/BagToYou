@@ -1,4 +1,4 @@
-import { MESSAGES } from 'src/shared/schemas/common/validation-messages';
+import { MESSAGES } from '@shared/schemas/common/validation-messages';
 import { z } from 'zod';
 
 // Регулярное выражение для международных номеров телефона

@@ -1,1 +1,1 @@
-export * from 'src/modules/ads/UserAdDetails/AdDetails';
+export * from './AdDetails';

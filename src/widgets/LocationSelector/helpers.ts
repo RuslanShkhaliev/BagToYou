@@ -1,5 +1,5 @@
+import { LocationSchema } from '@shared/schemas';
 import { RouteTargetType } from '@widgets/LocationSelector/types';
-import { LocationSchema } from 'src/shared/schemas';
 
 export const filterCities = (
 	text: string,

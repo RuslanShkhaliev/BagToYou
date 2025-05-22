@@ -1,9 +1,9 @@
 import { TextThemed } from '@components/ui-kit';
 import { ROUTES } from '@shared/constants/routes';
 import { Link } from 'expo-router';
-import { AuthLayout } from 'src/modules/auth/auth.layout';
-import { RegisterForm } from 'src/modules/auth/register/register.form';
 import { XStack } from 'tamagui';
+import { AuthLayout } from '../auth.layout';
+import { RegisterForm } from './register.form';
 
 export const Register = () => {
 	return (

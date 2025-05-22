@@ -1,5 +1,5 @@
+import { RouteSchema } from '@shared/schemas';
 import React from 'react';
-import { RouteSchema } from 'src/shared/schemas';
 import { View } from 'tamagui';
 import {
 	ModalSearchLocation,

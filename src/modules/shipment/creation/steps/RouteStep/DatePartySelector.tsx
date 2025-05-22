@@ -1,10 +1,10 @@
 import { SegmentedControl } from '@components/SegmentedControl';
 import { ErrorMessage } from '@components/ui-kit';
 import { DateType } from '@modules/shipment/creation/interfaces';
+import { DateISOSchema } from '@shared/schemas';
 import { DateShipmentSchema } from '@shared/schemas/adShipment';
 import { DateRangeSelector } from '@widgets/DateRangeSelector';
 import React from 'react';
-import { DateISOSchema } from 'src/shared/schemas';
 import { View } from 'tamagui';
 
 interface DatePartySelectorProps extends DateShipmentSchema {

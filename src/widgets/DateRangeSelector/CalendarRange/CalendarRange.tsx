@@ -1,9 +1,9 @@
 import { CalendarList } from '@components/CalendarList/CalendarList';
+import { DateRangeSchema } from '@shared/schemas';
 import { eachDayOfInterval } from 'date-fns';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { DateData } from 'react-native-calendars';
 import { MarkedDates } from 'react-native-calendars/src/types';
-import { DateRangeSchema } from 'src/shared/schemas';
 import { View } from 'tamagui';
 import { parseISO, toISO } from '../utils';
 import { ActiveTab, DateRangeTabs } from './DateRangeTabs/DateRangeTabs';

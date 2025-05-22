@@ -1,8 +1,8 @@
+import { ParcelInfo } from '@shared/schemas';
 import { useMemo } from 'react';
 import { Pressable } from 'react-native';
-import { useFormParcelStep } from 'src/modules/shipment/creation/steps/ParcelStep/useFormParcelStep';
-import { ParcelInfo } from 'src/shared/schemas';
 import { Card, View } from 'tamagui';
+import { useFormParcelStep } from '../../useFormParcelStep';
 import { PresetItem } from './PresetItem';
 import { presets } from './presets';
 

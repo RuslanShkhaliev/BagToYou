@@ -1,6 +1,6 @@
 import { ErrorMessage } from '@components/ui-kit/ErrorMessage';
+import { DateRangeSchema } from '@shared/schemas';
 import { DateRangeSelector } from '@widgets/DateRangeSelector/DateSelector';
-import { DateRangeSchema } from 'src/shared/schemas';
 import { Heading, View } from 'tamagui';
 
 interface DatePartyProps {

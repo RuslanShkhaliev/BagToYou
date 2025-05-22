@@ -1,8 +1,8 @@
 import { LabelStyled } from '@components/ui-kit';
 import { useMediaPicker } from '@hooks/useMediaPicker';
+import { MediaAssetSchema, mediaAssetSchema } from '@shared/schemas';
 import * as ImgPicker from 'expo-image-picker';
 import { useEffect, useMemo, useState } from 'react';
-import { MediaAssetSchema, mediaAssetSchema } from 'src/shared/schemas';
 import { XStack, YStack } from 'tamagui';
 import { ImageLoader } from './ImageLoader';
 import { ImagePreview } from './ImagePreview';

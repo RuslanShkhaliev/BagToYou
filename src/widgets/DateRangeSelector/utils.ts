@@ -1,5 +1,5 @@
+import { DateISOSchema } from '@shared/schemas';
 import { format } from 'date-fns';
-import { DateISOSchema } from 'src/shared/schemas';
 
 export const formatDate = (date?: DateISOSchema) => {
 	if (!date) {

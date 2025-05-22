@@ -1,8 +1,8 @@
-import { PropsWithChildren } from 'react';
 import {
 	LayoutScreen,
 	LayoutScreenProps,
-} from 'src/shared/components/layout/LayoutScreen';
+} from '@components/layout/LayoutScreen';
+import { PropsWithChildren } from 'react';
 
 export type ModalLayoutProps = Omit<LayoutScreenProps, 'modal'>;
 

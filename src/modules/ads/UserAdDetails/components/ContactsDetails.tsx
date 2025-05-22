@@ -1,6 +1,6 @@
 import { DetailsCard } from '@components/DetailsCard';
+import { ContactSchema } from '@shared/schemas';
 import { MessageCircleMore, Phone, User } from '@tamagui/lucide-icons';
-import { ContactSchema } from 'src/shared/schemas';
 
 interface ContactsDetailsProps {
 	title: string;
