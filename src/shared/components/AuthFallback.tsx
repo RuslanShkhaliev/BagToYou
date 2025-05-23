@@ -75,7 +75,7 @@ export const AuthFallback = ({
 			>
 				Войти или зарегистрироваться
 			</ButtonStyled>
-			<AuthBottomSheet ref={authSheetRef} />
+			<AuthBottomSheet ref={authSheetRef as never} />
 		</YStack>
 	);
 };

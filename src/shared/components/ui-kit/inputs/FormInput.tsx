@@ -77,13 +77,13 @@ export const FormInput = memo(
 						id={inputId}
 						inValid={Boolean(error?.message)}
 						rounded={10}
-						value={String(field.value)}
 						onChangeText={(text) => {
 							field.onChange(text);
 							onChangeText?.(text);
 						}}
 						{...inputProps}
 						{...field}
+						value={String(field.value)}
 					/>
 					<TextThemed
 						fontSize={12}

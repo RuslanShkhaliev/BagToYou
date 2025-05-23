@@ -1,7 +1,7 @@
 import { InputField, InputFieldProps } from '@components/ui-kit';
 import { DateISOSchema, DateRangeSchema } from '@shared/schemas';
 import { NBSP } from '@shared/unicodes';
-import { Calendar } from '@tamagui/lucide-icons';
+import { CalendarDays } from '@tamagui/lucide-icons';
 import { useMemo } from 'react';
 import { View } from 'tamagui';
 import { formatDate } from './utils';
@@ -44,7 +44,7 @@ export const DateControl = ({
 				borderWidth={0}
 				value={displayDate}
 				readOnly
-				fontWeight={700}
+				fontWeight={400}
 				{...props}
 			/>
 			<View
@@ -56,7 +56,7 @@ export const DateControl = ({
 				height={'100%'}
 				justify={'center'}
 			>
-				<Calendar color={'$accent'} />
+				<CalendarDays color={'$accent'} />
 			</View>
 		</View>
 	);

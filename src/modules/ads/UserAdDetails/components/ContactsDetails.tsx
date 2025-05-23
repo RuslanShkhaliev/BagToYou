@@ -13,7 +13,7 @@ export const ContactsDetails = ({ title, data }: ContactsDetailsProps) => {
 		<DetailsCard.Layout title={title}>
 			{(name || surname) && (
 				<DetailsCard.Item
-					icon={
+					left={
 						<User
 							size={20}
 							color='$accent'
@@ -25,7 +25,7 @@ export const ContactsDetails = ({ title, data }: ContactsDetailsProps) => {
 			)}
 			{phone && (
 				<DetailsCard.Item
-					icon={
+					left={
 						<Phone
 							size={20}
 							color='$accent'
@@ -37,7 +37,7 @@ export const ContactsDetails = ({ title, data }: ContactsDetailsProps) => {
 			)}
 			{messenger && (
 				<DetailsCard.Item
-					icon={
+					left={
 						<MessageCircleMore
 							size={20}
 							color='$accent'

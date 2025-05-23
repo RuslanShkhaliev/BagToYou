@@ -1,7 +1,7 @@
 import { AdMetrics } from '@components/AdMetrics/AdMetrics';
+import { CarouselMedia } from '@components/CarouselMedia';
 import { RewardsDetails } from '@components/RewardsDetails';
 import { TextThemed } from '@components/ui-kit';
-import { AdMediaCarousel } from '@modules/ads/UserAdDetails/components/AdMediaCarousel';
 import { AdModel } from '@shared/schemas';
 import { Header, View } from 'tamagui';
 
@@ -10,7 +10,7 @@ type AdHeaderProps = Pick<AdModel, 'metrics' | 'rewards' | 'name' | 'media'>;
 export const AdHeader = ({ name, rewards, metrics, media }: AdHeaderProps) => {
 	return (
 		<View gap={8}>
-			<AdMediaCarousel data={media} />
+			<CarouselMedia data={media} />
 			<AdMetrics
 				metrics={metrics}
 				px={10}

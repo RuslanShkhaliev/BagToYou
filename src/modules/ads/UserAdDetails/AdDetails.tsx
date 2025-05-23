@@ -10,8 +10,7 @@ import { AdHeader } from '@modules/ads/UserAdDetails/components/AdHeader';
 import { AdMeta } from '@modules/ads/UserAdDetails/components/AdMeta';
 import { ContactsDetails } from '@modules/ads/UserAdDetails/components/ContactsDetails';
 import { ParcelDetails } from '@modules/ads/UserAdDetails/components/ParcelDetails';
-import { RouteDeliveryDetails } from '@modules/ads/UserAdDetails/components/RouteDeliveryDetails';
-import { RouteShipmentDetails } from '@modules/ads/UserAdDetails/components/RouteShipmentDetails';
+import { RouteDetails } from '@modules/ads/UserAdDetails/components/RouteDetails';
 import { getUserInfo } from '@modules/ads/UserAdDetails/constants';
 import { AdType } from '@shared/api/models/ad';
 import { AdDelivery } from '@shared/schemas/adDelivery';
@@ -31,9 +30,6 @@ export const AdDetails = () => {
 	const { id } = useLocalSearchParams<{ id: string }>();
 	const { data: adData, isLoading } = useAdQuery(id);
 	const router = useRouter();
-
-	console.log(adData?.createdAt, 'createdAt');
-
 	const userInfo = useMemo(() => getUserInfo(), []);
 
 	if (isLoading) {
@@ -86,19 +82,19 @@ export const AdDetails = () => {
 						metrics={adData.metrics}
 						media={adData.media}
 					/>
-					{isShipmentAd(adData.type) ? (
-						<RouteShipmentDetails
-							route={adData.route}
-							date={(adData as AdShipment).date}
-						/>
-					) : (
-						<RouteDeliveryDetails
-							route={adData.route}
-							dates={(adData as AdDelivery).dates}
-							transport={(adData as AdDelivery).transport}
-						/>
-					)}
-
+					<RouteDetails
+						route={adData.route}
+						dates={
+							isShipmentAd(adData.type)
+								? {
+										startDate: null,
+										endDate: (adData as AdShipment).date
+											.value,
+									}
+								: (adData as AdDelivery).dates
+						}
+						transport={(adData as AdDelivery).transport}
+					/>
 					<ParcelDetails
 						title={
 							isShipmentAd(adData.type)

@@ -1,5 +1,5 @@
-import { Surface } from '@components/Surface';
 import { IconBaggage, IconKg, IconTransport } from '@components/icons';
+import { Surface } from '@components/Surface';
 import { Badge, Divider } from '@components/ui-kit';
 import { DeliveryInfo } from '@shared/interfaces';
 import { NBSP } from '@shared/unicodes';
@@ -48,7 +48,7 @@ export const CardDelivery = (props: DeliveryInfo) => {
 									fontSize={16}
 									shrink={1}
 								>
-									{props.route[0].from.city}
+									{props.route[0]?.from.city}
 								</Text>
 							</XStack>
 

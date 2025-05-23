@@ -1,6 +1,7 @@
 import { firestore } from '@lib/firebase';
 import { AdStatus } from '@shared/api/models/ad';
 import { AdRequestModel } from '@shared/api/models/ad/types';
+import { addMonths } from 'date-fns';
 import { getAuth } from 'firebase/auth';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 
@@ -16,6 +17,7 @@ export const createAdRequest = async <T>(ad: T): Promise<AdRequestModel<T>> => {
 			status: AdStatus.Created,
 			createdAt: serverTimestamp(),
 			updatedAt: serverTimestamp(),
+			expirationAt: addMonths(new Date(), 1).toISOString(),
 		};
 		const adsRef = await addDoc(
 			collection(firestore, 'ads'),

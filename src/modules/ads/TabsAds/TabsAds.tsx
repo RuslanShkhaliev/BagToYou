@@ -7,7 +7,7 @@ import { useMemo, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { SceneMap, TabView } from 'react-native-tab-view';
 import type { SceneRendererProps } from 'react-native-tab-view/lib/typescript/src/types';
-import { useWindowDimensions, View } from 'tamagui';
+import { useWindowDimensions, View, ViewProps } from 'tamagui';
 
 // Константы для меток вкладок
 const TAB_LABELS = {
@@ -23,7 +23,7 @@ interface TabsLayoutProps {
 	onChange?: (tab: AdStatus) => void;
 }
 
-export const TabsAds = ({ activeTab, onChange }: TabsLayoutProps) => {
+export const TabsAds = ({ activeTab = 0, onChange }: TabsLayoutProps) => {
 	const { data } = useUserAdsQuery();
 	const layout = useWindowDimensions();
 
@@ -35,7 +35,7 @@ export const TabsAds = ({ activeTab, onChange }: TabsLayoutProps) => {
 		return Object.entries(data).reduce((tabs, [status, ads]) => {
 			if (TAB_LABELS[status as never]) {
 				tabs.push({
-					key: status,
+					key: status as unknown as AdStatus,
 					title: TAB_LABELS[status as never],
 					data: ads,
 					count: ads.length,
@@ -57,13 +57,13 @@ export const TabsAds = ({ activeTab, onChange }: TabsLayoutProps) => {
 	// Обработчик изменения вкладки
 	const handleIndexChange = (index: number) => {
 		setIndex(index);
-		const newTab = routes[index].key;
+		const newTab = routes[index]!.key;
 		onChange?.(newTab);
 	};
 
 	// Создаем сцены для каждого статуса
 	const renderScene = useMemo(() => {
-		const scenes: Record<string, React.ComponentType<any>> = {};
+		const scenes: Record<AdStatus, React.ComponentType<ViewProps>> = {};
 
 		routes.forEach((route) => {
 			scenes[route.key] = () => (

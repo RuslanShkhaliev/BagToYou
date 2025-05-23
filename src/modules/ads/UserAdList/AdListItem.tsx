@@ -1,7 +1,7 @@
-import ImagePlaceholder from '@assets/images/placeholder-image.jpg';
 import { AdMetrics } from '@components/AdMetrics';
 import { TextThemed } from '@components/ui-kit';
 import { UserAdModel } from '@modules/ads/api';
+import { MediaAssetSchema } from '@shared/schemas';
 import { Banknote, MapPin } from '@tamagui/lucide-icons';
 import { getAdMetadata } from '@utils/getAdMetadata';
 import { useMemo } from 'react';
@@ -9,10 +9,9 @@ import { Image, View, XStack, YStack } from 'tamagui';
 
 interface AdListItemProps {
 	data: UserAdModel;
-	onPress: (id: string) => void;
 }
 
-export const AdListItem = ({ data, onPress }: AdListItemProps) => {
+export const AdListItem = ({ data }: AdListItemProps) => {
 	const { rewards, route, createdAt, media, name, metrics } = data;
 	const { daysLeft } = useMemo(
 		() => getAdMetadata({ createdAt }),
@@ -20,7 +19,10 @@ export const AdListItem = ({ data, onPress }: AdListItemProps) => {
 	);
 
 	const imagePreview = useMemo(() => {
-		return media[0] || ImagePlaceholder;
+		if (media.length) {
+			return media[0];
+		}
+		return require('@assets/images/placeholder-image.jpg') as MediaAssetSchema;
 	}, [media]);
 
 	const displayRoute = useMemo(() => {
@@ -29,11 +31,6 @@ export const AdListItem = ({ data, onPress }: AdListItemProps) => {
 		}
 		return '';
 	}, [route]);
-
-	const handlePress = () => {
-		console.log(data.id);
-		onPress(data.id);
-	};
 
 	return (
 		<XStack

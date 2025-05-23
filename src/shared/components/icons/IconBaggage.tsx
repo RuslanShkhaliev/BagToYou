@@ -1,14 +1,11 @@
-import type { IconProps } from '@tamagui/helpers-icon';
-import { themed } from '@tamagui/helpers-icon';
-import type { NamedExoticComponent } from 'react';
-import { memo } from 'react';
 import { G, Path, Rect, Svg } from 'react-native-svg';
 
-interface Props extends IconProps {
+interface Props {
 	color: string;
 	size: number;
 }
-const Icon = (props: Props) => {
+
+export const IconBaggage = (props: Props) => {
 	const { color = 'black', size = 24, ...otherProps } = props;
 	return (
 		<Svg
@@ -41,9 +38,3 @@ const Icon = (props: Props) => {
 		</Svg>
 	);
 };
-
-Icon.displayName = 'IconBaggage';
-
-export const IconBaggage: NamedExoticComponent<IconProps> = memo<IconProps>(
-	themed(Icon),
-);

@@ -67,7 +67,7 @@ export const EmptyState = ({
 				>
 					<Icon
 						size={iconSize}
-						color={iconColor}
+						color={iconColor as never}
 					/>
 				</View>
 			)}

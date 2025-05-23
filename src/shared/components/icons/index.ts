@@ -6,3 +6,4 @@ export * from './IconS';
 export * from './IconTransport';
 export * from './IconXL';
 export * from './IconXS';
+export * from './CirclePoint';

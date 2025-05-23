@@ -1,23 +1,19 @@
 import { TextThemed } from '@components/ui-kit';
 import { XStack, YStack } from 'tamagui';
 
-interface RouteDetailsItemProps {
+interface DetailsItemProps {
 	label?: string;
 	description?: string;
-	icon?: React.ReactNode;
+	left?: React.ReactNode;
 }
 
-export const DetailsItem = ({
-	label,
-	description,
-	icon,
-}: RouteDetailsItemProps) => {
+export const DetailsItem = ({ label, description, left }: DetailsItemProps) => {
 	return (
 		<XStack
-			gap={16}
+			gap={10}
 			items='center'
 		>
-			{icon}
+			{left}
 			<YStack gap={6}>
 				{label && (
 					<TextThemed
@@ -29,7 +25,12 @@ export const DetailsItem = ({
 					</TextThemed>
 				)}
 				{description && (
-					<TextThemed fontSize={16}>{description}</TextThemed>
+					<TextThemed
+						fontWeight={600}
+						fontSize={16}
+					>
+						{description}
+					</TextThemed>
 				)}
 			</YStack>
 		</XStack>
